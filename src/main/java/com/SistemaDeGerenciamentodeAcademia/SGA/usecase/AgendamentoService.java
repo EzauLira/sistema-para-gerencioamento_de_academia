@@ -11,7 +11,7 @@ public class AgendamentoService {
 
     private static final AgendamentoJdbcDaoImpl agendamentoJdbcDao = new AgendamentoJdbcDaoImpl();
 
-    public static void listarTreinos() {
+    public void listarTreinos() {
 
         List<Treino> treinos = agendamentoJdbcDao.listarTreinos();
 
@@ -19,7 +19,7 @@ public class AgendamentoService {
             System.out.println(t.getId() + " - " + t.getNome() + " - " + t.getDescricao());
         }
     }
-    public static void criarAgendamento(String nome, int treino, String data, String hora ) {
+    public void criarAgendamento(String nome, int treino, String data, String hora ) {
 
         AgendamentoDto agendamentoDto = new AgendamentoDto(nome, treino, data, hora);
 

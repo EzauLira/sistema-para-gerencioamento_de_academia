@@ -7,15 +7,15 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorRelatoiroUtils.Va
 public class RelatorioService {
 
     private static final PegarEstatisticaJdbcDaoImpl pegarEstatisticaJdbcDaoImpl = new PegarEstatisticaJdbcDaoImpl();
-    public static void gerarRelatorioAcademia() {
+    public void gerarRelatorioAcademia() {
 
         pegarEstatisticaJdbcDaoImpl.gerarRelatorioAcademia();
     }
-    public static void gerarRelatorioDeTodosClientes() {
+    public void gerarRelatorioDeTodosClientes() {
 
         pegarEstatisticaJdbcDaoImpl.gerarRelatorioTodosClientes();
     }
-    public static void gerarRelatorioClienteEspecifico(String nome) {
+    public void gerarRelatorioClienteEspecifico(String nome) {
 
         ColetarRelatorioDto coletarRelatorioDto = new ColetarRelatorioDto(nome);
 

@@ -13,7 +13,7 @@ public class ClienteService {
     private static final CadastroClienteJdbcDaoImpl cadastroClienteJdbcDaoImpl = new CadastroClienteJdbcDaoImpl();
     private static final PlanoJdbcDaoImpl planoJdbcDaoImpl = new PlanoJdbcDaoImpl();
 
-    public static void listarplanos() {
+    public void listarplanos() {
 
         List<PlanosDto> planos = planoJdbcDaoImpl.listarPlanos();
 

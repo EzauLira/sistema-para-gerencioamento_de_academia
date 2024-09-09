@@ -10,6 +10,7 @@ public enum ErroBancoDados {
     TELEFONE_JA_CADASTRADO("Erro: Telefone já cadastrado.", "Telefone já está cadastrado."),
     EMAIL_JA_CADASTRADO("Erro: Email já cadastrado.", "Email já está cadastrado."),
     SUCESSO("Cliente cadastrado com sucesso.", "Cliente cadastrado com sucesso."),
+    NOME_NAO_ENCONTRADO("Nome não encontrado", "Cliente não encontrado. Verifique se o nome está correto ou talvez essa pessoa não esteja cadastrada."),
     OUTRO_ERRO("Outro erro", "Erro desconhecido");
 
     private final String mensagem;

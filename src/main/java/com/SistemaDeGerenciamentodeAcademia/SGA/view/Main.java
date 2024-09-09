@@ -88,7 +88,7 @@ public class Main {
                     cadastroCliente();
                     break;
                 case 2:
-                    listarClientes();
+                    buscarClientePeloNome();
                     break;
                 case 0:
                     menuPrincipal();
@@ -102,7 +102,7 @@ public class Main {
     /**
      * Método que possuí um menu infinito para cadastro de cliente.
      */
-    public static void cadastroCliente() {
+    public static void cadastroCliente() throws SQLException {
 
         System.out.println("\n|| CADASTRAR CLIENTE || ");
         System.out.println("\nOBS: Siga as instruções do cadastro. Caso queira voltar ao menu, digite 0 a qualquer momento.\n");
@@ -173,8 +173,22 @@ public class Main {
 
     }
 
-    public static void listarClientes() {
-        System.out.println("Volta uma lista de clientes");
+    public static void buscarClientePeloNome() {
+        System.out.println("\n|| BUSCAR CLIENTE PELO NOME ||\n");
+        System.out.println("\nOBS: Siga as instruções para buscar o cliente. Caso queira voltar ao menu, digite 0 a qualquer momento.\n");
+
+        while (true) {
+            String nome;
+            input.nextLine();
+            System.out.println("INFORME O NOME DO CLIENTE A SER PROCURADO.");
+            nome = input.nextLine();
+            if (nome.equals("0") || nome.equals("00") || nome.equals("000")) {
+                break;
+            }
+
+            clienteService.buscarClientePeloPrimeiroNome(nome);
+            break;
+        }
     }
 
     /**
@@ -194,7 +208,7 @@ public class Main {
             do {
                 System.out.println("INFORME o NOME. O nome deve conter no mínimo 10 caracteres e não pode haver numeros.");
                 nome = input.nextLine();
-                if (nome.equals("0"))
+                if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
                     break;
             } while (agendamentoService.validarNome(nome));
 

@@ -24,7 +24,7 @@ public class ClienteService {
         }
     }
 
-    public void cadastrarCliente(String nome, int idade, String cpf, String genero, String telefone, String email, int plano) throws SQLException {
+    public void cadastrarCliente(String nome, int idade, String cpf, String genero, String telefone, String email, int plano) {
 
         ValidarNomeUtils.validarNome(nome);
         ValidarIDadeUtils.validarIdade(idade);

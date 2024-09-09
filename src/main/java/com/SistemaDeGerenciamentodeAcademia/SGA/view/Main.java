@@ -20,7 +20,7 @@ public class Main {
     private static final AgendamentoService agendamentoService = new AgendamentoService();
     private static final RelatorioService relatorioService = new RelatorioService();
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         menuPrincipal();
 

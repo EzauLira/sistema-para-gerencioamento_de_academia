@@ -231,6 +231,7 @@ public class Main {
                 break;
 
             agendamentoService.criarAgendamento(nome, treino, data, hora);
+            System.out.println(MensagemSucesso.AGENDAMENTO_EFETUADO.getMensagem());
             break;
         }
     }

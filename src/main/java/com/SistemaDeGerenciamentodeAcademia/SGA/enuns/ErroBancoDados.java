@@ -4,7 +4,7 @@ public enum ErroBancoDados {
 
     MESMO_TREINO("O mesmo treino já está agendado", "O mesmo treino já está agendado para este cliente nesta data."),
     JA_EXISTE_TREINO("Já existe um treino agendado", "Já existe um treino agendado para este cliente nesta data e hora. Deve haver pelo menos 30 minutos de diferença entre os treinos."),
-    CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", "Cliente não encontrado. Por favor cadastre o cliente ou reveja o nome digitado."),
+    CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", "Cliente não encontrado. Por favor cadastre o clien1te ou reveja o nome digitado."),
     NOME_JA_CADASTRADO("Erro: Nome já cadastrado.", "Nome já está cadastrado."),
     CPF_JA_CADASTRADO("Erro: CPF já cadastrado.", "CPF já está cadastrado."),
     TELEFONE_JA_CADASTRADO("Erro: Telefone já cadastrado.", "Telefone já está cadastrado."),

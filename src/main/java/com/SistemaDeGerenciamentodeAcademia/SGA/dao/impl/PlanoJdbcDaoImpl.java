@@ -3,7 +3,6 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IPlanoJdbcDao;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.PlanosDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,11 +14,11 @@ import java.util.List;
 public class PlanoJdbcDaoImpl implements IPlanoJdbcDao {
 
     @Override
-    public List<PlanosDto> listarPlanos() {
+    public List<PlanosDto> listarPlanos() throws SQLException {
 
         List<PlanosDto> listarPlanos = new ArrayList<>();
 
-        try (Connection connection = BancoDadosConfig.getConnection()) {
+        Connection connection = BancoDadosConfig.getConnection();
 
             String sql = "SELECT * FROM plano";
 
@@ -37,10 +36,8 @@ public class PlanoJdbcDaoImpl implements IPlanoJdbcDao {
                 listarPlanos.add(planosDto);
             }
 
+            connection.close();
 
-        }catch (SQLException e ){
-            SqlException.sqlException(e);
-        }
         return listarPlanos;
     }
 }

@@ -1,7 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErro;
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecao;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.IdadeException;
 
 public class ValidarIDadeUtils {

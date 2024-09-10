@@ -2,7 +2,6 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErro;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.CpfException;
-import com.SistemaDeGerenciamentodeAcademia.SGA.exception.NomeException;
 
 public class ValidarCpfUtils {
 

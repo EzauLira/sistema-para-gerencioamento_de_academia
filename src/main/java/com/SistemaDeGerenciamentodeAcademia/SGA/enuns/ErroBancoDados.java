@@ -9,9 +9,8 @@ public enum ErroBancoDados {
     CPF_JA_CADASTRADO("Erro: CPF já cadastrado.", "CPF já está cadastrado."),
     TELEFONE_JA_CADASTRADO("Erro: Telefone já cadastrado.", "Telefone já está cadastrado."),
     EMAIL_JA_CADASTRADO("Erro: Email já cadastrado.", "Email já está cadastrado."),
-    SUCESSO("Cliente cadastrado com sucesso.", "Cliente cadastrado com sucesso."),
     NOME_NAO_ENCONTRADO("Nome não encontrado", "Cliente não encontrado. Verifique se o nome está correto ou talvez essa pessoa não esteja cadastrada."),
-    OUTRO_ERRO("Outro erro", "Erro desconhecido");
+    OUTRO_ERRO("Outro erro", "Erro não catalogado. Entre em contato com nosso suporte técnico.");
 
     private final String mensagem;
     private final String mensagemCustom;
@@ -22,9 +21,9 @@ public enum ErroBancoDados {
     }
 
     public static ErroBancoDados novaMensagem(String message) {
-        for (ErroBancoDados code : ErroBancoDados.values()) {
-            if (message.contains(code.mensagem)) {
-                return code;
+        for (ErroBancoDados mensagem : ErroBancoDados.values()) {
+            if (message.contains(mensagem.mensagem)) {
+                return mensagem;
             }
         }
         return OUTRO_ERRO;

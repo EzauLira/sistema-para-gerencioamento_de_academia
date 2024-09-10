@@ -1,10 +1,8 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
-
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IAgendamentoJdbcDao;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 
 import java.sql.Connection;
@@ -17,10 +15,10 @@ import java.util.List;
 public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
 
     @Override
-    public List<Treino> listarTreinos() {
+    public List<Treino> listarTreinos() throws SQLException {
         List<Treino> listarTreinos = new ArrayList<>();
 
-        try(Connection connection = BancoDadosConfig.getConnection()) {
+        Connection connection = BancoDadosConfig.getConnection();
 
         String sql = "SELECT * FROM treino";
 
@@ -35,17 +33,15 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
 
             listarTreinos.add(treino);
         }
-        }catch (SQLException e){
-            SqlException.sqlException(e);
-        }
 
+        connection.close();
         return listarTreinos;
     }
 
     @Override
-    public void agendarTreino(AgendamentoDto agendamento) {
+    public void agendarTreino(AgendamentoDto agendamento) throws SQLException {
 
-        try (Connection connection = BancoDadosConfig.getConnection()) {
+        Connection connection = BancoDadosConfig.getConnection();
 
 
             String sql = "SELECT * FROM agendar_treino(?, ?, ?, ?)";
@@ -58,9 +54,7 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
             ps.setString(4, agendamento.getHora());
 
             ps.execute();
-        }catch (SQLException e){
-            SqlException.sqlException(e);
-        }
-    }
 
+            connection.close();
+    }
 }

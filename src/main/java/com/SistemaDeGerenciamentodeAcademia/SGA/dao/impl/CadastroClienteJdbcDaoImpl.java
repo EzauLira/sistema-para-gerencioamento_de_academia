@@ -4,7 +4,6 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.ICadastroClienteJdbcDao;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.BuscarClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,12 +28,16 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
             ps.setString(6, clienteDto.getEmail());
             ps.setInt(7, clienteDto.getIdPlano());
             ps.execute();
+
+            connection.close();
     }
 
     @Override
-    public void buscarPessoaPeloPrimeiroNome(BuscarClienteDto buscarClienteDto) {
-        try (Connection connection = BancoDadosConfig.getConnection()) {
+    public void buscarPessoaPeloPrimeiroNome(BuscarClienteDto buscarClienteDto) throws SQLException{
+        Connection connection = BancoDadosConfig.getConnection();
+
             String sql = "SELECT * FROM buscar_pessoa_pelo_primeiro_nome(?)";
+
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setString(1, buscarClienteDto.getNome());
@@ -50,8 +53,6 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
                 System.out.println("-------------------------------------");
             }
 
-        }catch (SQLException e){
-            SqlException.sqlException(e);
-        }
+            connection.close();
     }
 }

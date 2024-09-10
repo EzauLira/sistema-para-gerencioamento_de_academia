@@ -9,9 +9,9 @@ import java.sql.*;
 
 public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
     @Override
-    public void gerarRelatorioAcademia() {
+    public void gerarRelatorioAcademia() throws SQLException {
 
-        try (Connection connection = BancoDadosConfig.getConnection()) {
+        Connection connection = BancoDadosConfig.getConnection();
 
             String sql = "SELECT * FROM gerar_relatorio_academia()";
 
@@ -33,16 +33,13 @@ public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
                 System.out.println("-------------------------------------------");
             }
 
-        } catch (SQLException e) {
-            SqlException.sqlException(e);
-        }
-
+            connection.close();
     }
 
     @Override
-    public void gerarRelatorioClienteEspecifico(ColetarRelatorioDto nome) {
+    public void gerarRelatorioClienteEspecifico(ColetarRelatorioDto nome) throws SQLException {
 
-        try (Connection connection = BancoDadosConfig.getConnection()) {
+        Connection connection = BancoDadosConfig.getConnection();
 
             String sql = "SELECT * FROM gerar_relatorio_cliente_especifico(?)";
 
@@ -68,16 +65,14 @@ public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
                 System.out.println("Hora do treino: " + horaTreino);
                 System.out.println("-------------------------------------");
             }
-        } catch (SQLException e) {
-            SqlException.sqlException(e);
-        }
-
+            connection.close();
     }
 
     @Override
-    public void gerarRelatorioTodosClientes() {
+    public void gerarRelatorioTodosClientes() throws SQLException{
 
-        try (Connection connection = BancoDadosConfig.getConnection()) {
+        Connection connection = BancoDadosConfig.getConnection();
+
             String sql = "SELECT * FROM gerar_relatorio_cliente()";
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -99,8 +94,7 @@ public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
                 System.out.println("Hora do treino: " + horaTreino);
                 System.out.println("-------------------------------------");
             }
-        } catch (SQLException e) {
-            SqlException.sqlException(e);
-        }
+
+        connection.close();
     }
 }

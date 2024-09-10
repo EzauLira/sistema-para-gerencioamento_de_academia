@@ -6,6 +6,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.PlanoJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.BuscarClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.PlanosDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente.*;
 
 import java.sql.SQLException;
@@ -34,8 +35,12 @@ public class ClienteService {
         ValidarEmailUtils.validarEmail(email);
 
        ClienteDto clienteDto = new ClienteDto(nome, idade, cpf, genero, telefone, email, plano);
+        try {
+            cadastroClienteJdbcDaoImpl.cadastrarCliente(clienteDto);
+        }catch (SQLException e){
+            SqlException.sqlException(e);
+        }
 
-        cadastroClienteJdbcDaoImpl.cadastrarCliente(clienteDto);
     }
 
     public void buscarClientePeloPrimeiroNome(String nome){

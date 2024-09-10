@@ -11,7 +11,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.RelatorioService;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+//remover as thrwos da main
 public class Main {
 
     private static final Scanner input = new Scanner(System.in);
@@ -102,7 +102,7 @@ public class Main {
     /**
      * Método que possuí um menu infinito para cadastro de cliente.
      */
-    public static void cadastroCliente() throws SQLException {
+    public static void cadastroCliente() {
 
         System.out.println("\n|| CADASTRAR CLIENTE || ");
         System.out.println("\nOBS: Siga as instruções do cadastro. Caso queira voltar ao menu, digite 0 a qualquer momento.\n");

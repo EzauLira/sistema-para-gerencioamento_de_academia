@@ -13,8 +13,9 @@ import java.sql.SQLException;
 
 public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
 
-    public void cadastrarCliente(ClienteDto clienteDto) {
-        try (Connection connection = BancoDadosConfig.getConnection()) {
+    public void cadastrarCliente(ClienteDto clienteDto) throws SQLException {
+
+        Connection connection = BancoDadosConfig.getConnection();
 
             String sql = "SELECT * FROM cadastrar_cliente(?, ?, ?, ?, ?, ?, ?)";
 
@@ -28,9 +29,6 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
             ps.setString(6, clienteDto.getEmail());
             ps.setInt(7, clienteDto.getIdPlano());
             ps.execute();
-        } catch (SQLException e) {
-            SqlException.sqlException(e);
-        }
     }
 
     @Override

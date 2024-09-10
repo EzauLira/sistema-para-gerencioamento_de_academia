@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public interface ICadastroClienteJdbcDao {
 
-    void cadastrarCliente(ClienteDto clienteDto);
+    void cadastrarCliente(ClienteDto clienteDto) throws SQLException;
 
-    void buscarPessoaPeloPrimeiroNome(BuscarClienteDto buscarClienteDto);
+    void buscarPessoaPeloPrimeiroNome(BuscarClienteDto buscarClienteDto) throws SQLException;
 
 }

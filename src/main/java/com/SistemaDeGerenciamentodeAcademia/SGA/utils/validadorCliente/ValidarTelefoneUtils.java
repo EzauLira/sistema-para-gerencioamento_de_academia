@@ -7,7 +7,7 @@ public class ValidarTelefoneUtils {
 
     public static void validarTelefone(String telefone){
 
-        if (telefone.trim().isEmpty() || telefone.length() != 12){
+        if (telefone.trim().isEmpty() || telefone.length() != 11){
             throw new TelefoneException(MensagemErro.TELEFONE_INVALIDO.getMensagem());
         }
     }

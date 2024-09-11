@@ -1,18 +1,14 @@
--- Table: public.plano
+-- Criação da tabela plano
+CREATE TABLE plano (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    descricao TEXT NOT NULL,
+    duracao_meses INT NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL
+);
 
--- DROP TABLE IF EXISTS public.plano;
-
-CREATE TABLE IF NOT EXISTS public.plano
-(
-    id integer NOT NULL DEFAULT nextval('plano_id_seq'::regclass),
-    nome character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    descricao text COLLATE pg_catalog."default",
-    duracao integer NOT NULL,
-    preco numeric(10,2) NOT NULL,
-    CONSTRAINT plano_pkey PRIMARY KEY (id)
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.plano
-    OWNER to postgres;
+-- Inserção dos valores fixos
+INSERT INTO plano (nome, descricao, duracao_meses, preco) VALUES
+('Mensal', 'Plano mensal sem fidelidade', 1, 100.00),
+('Trimestral', 'Plano trimestral com desconto', 3, 270.00),
+('Anual', 'Plano anual com maior desconto', 12, 900.00);

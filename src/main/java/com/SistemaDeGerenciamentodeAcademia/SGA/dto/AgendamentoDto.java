@@ -1,5 +1,10 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
 
+
+/**
+ * Data Transfer Object (DTO) para representar os dados de um agendamento de treino na academia.
+ * Este objeto é utilizado para transferir as informações necessárias para agendar um treino.
+ */
 public class AgendamentoDto {
 
     private String nome;

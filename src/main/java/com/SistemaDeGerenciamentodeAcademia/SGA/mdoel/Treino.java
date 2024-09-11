@@ -1,5 +1,10 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.mdoel;
 
+
+/**
+ * Classe para representar um treino na academia.
+ * Esta classe é usada para armazenar as informações de um treino.
+ */
 public class Treino {
 
     private int id;

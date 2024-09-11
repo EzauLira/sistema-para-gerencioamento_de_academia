@@ -1,19 +1,23 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
 
+/**
+ * Data Transfer Object (DTO) para representar os dados de um cliente na academia.
+ * Este objeto é utilizado para transferir as informações necessárias para cadastrar ou atualizar um cliente.
+ */
 public class ClienteDto {
 
     private String nome;
     private int idade;
-    private String cfp;
+    private String cpf;
     private String genero;
     private String telefone;
     private String email;
     private int idPlano;
 
-    public ClienteDto(String nome, int idade, String cfp, String genero, String telefone, String email, int idPlano) {
+    public ClienteDto(String nome, int idade, String cpf, String genero, String telefone, String email, int idPlano) {
         this.nome = nome;
         this.idade = idade;
-        this.cfp = cfp;
+        this.cpf = cpf;
         this.genero = genero;
         this.telefone = telefone;
         this.email = email;
@@ -36,12 +40,12 @@ public class ClienteDto {
         this.nome = nome;
     }
 
-    public String getCfp() {
-        return cfp;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCfp(String cfp) {
-        this.cfp = cfp;
+    public void setCpf(String cfp) {
+        this.cpf = cpf;
     }
 
     public String getGenero() {

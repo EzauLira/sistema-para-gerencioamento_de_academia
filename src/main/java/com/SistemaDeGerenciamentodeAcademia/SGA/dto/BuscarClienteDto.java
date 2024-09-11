@@ -1,5 +1,9 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
 
+/**
+ * Data Transfer Object (DTO) para representar a busca de um cliente pelo nome.
+ * Este objeto é utilizado para transferir o nome do cliente que está sendo buscado.
+ */
 public class BuscarClienteDto {
 
     private String nome;

@@ -13,18 +13,23 @@ import java.util.List;
 
 public class PlanoJdbcDaoImpl implements IPlanoJdbcDao {
 
+    /**
+     * Este método executa a consulta SQL "SELECT * FROM plano" para listar todos os planos disponíveis no banco de dados.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     * Para cada plano encontrado na base de dados, um objeto (PlanosDto) é criado e adicionado a uma lista, que é retornada ao final.
+     *
+     * @return Uma lista de objetos (PlanosDto), onde cada objeto representa um plano com detalhes como ID, nome, descrição, duração e preço.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public List<PlanosDto> listarPlanos() throws SQLException {
-
         List<PlanosDto> listarPlanos = new ArrayList<>();
 
-        Connection connection = BancoDadosConfig.getConnection();
+        String sql = "SELECT * FROM plano";
 
-            String sql = "SELECT * FROM plano";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            ResultSet rs = ps.executeQuery();
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 PlanosDto planosDto = new PlanosDto(rs.getInt("id")
@@ -35,9 +40,7 @@ public class PlanoJdbcDaoImpl implements IPlanoJdbcDao {
 
                 listarPlanos.add(planosDto);
             }
-
-            connection.close();
-
+        }
         return listarPlanos;
     }
 }

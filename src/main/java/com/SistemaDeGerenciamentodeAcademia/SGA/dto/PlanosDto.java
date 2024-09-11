@@ -1,5 +1,10 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
 
+
+/**
+ * Data Transfer Object (DTO) para representar os dados de um plano na academia.
+ * Este objeto é utilizado para transferir informações sobre planos disponíveis.
+ */
 public class PlanosDto {
 
     private int id;

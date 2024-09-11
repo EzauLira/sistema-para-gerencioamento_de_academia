@@ -1,5 +1,9 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
 
+/**
+ * Enumeração para representar mensagens de exceção relacionadas a entradas inválidas
+ * e outras condições de erro específicas no sistema. Cada tipo de exceção tem uma mensagem associada.
+ */
 public enum MensagemExcecao {
 
     ENTRADA_INVALIDA("Entrada inválida. Necessário que seja um número."),
@@ -12,10 +16,20 @@ public enum MensagemExcecao {
 
     private final String mensagem;
 
+    /**
+     * Construtor para criar uma nova instância {@link MensagemExcecao}.
+     *
+     * @param mensagem A mensagem associada à exceção.
+     */
     MensagemExcecao(String mensagem){
         this.mensagem = mensagem;
     }
 
+    /**
+     * Obtém a mensagem associada à exceção.
+     *
+     * @return A mensagem da exceção.
+     */
     public String getMensagem(){
         return mensagem;
     }

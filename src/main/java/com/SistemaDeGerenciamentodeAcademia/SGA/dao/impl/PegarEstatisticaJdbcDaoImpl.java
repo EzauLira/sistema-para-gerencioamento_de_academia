@@ -3,20 +3,26 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IPegarEstatisticaJdbcDao;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ColetarRelatorioDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 
 import java.sql.*;
 
 public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
+
+    /**
+     * Este método executa a consulta SQL "SELECT * FROM gerar_relatorio_academia" para gerar um relatório geral da academia.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     * O relatório exibe o total de clientes cadastrados e a quantidade de planos vendidos (mensal, anual e trimestral).
+     *
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public void gerarRelatorioAcademia() throws SQLException {
 
-        Connection connection = BancoDadosConfig.getConnection();
+        String sql = "SELECT * FROM gerar_relatorio_academia()";
 
-            String sql = "SELECT * FROM gerar_relatorio_academia()";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 int totalClientes = rs.getInt(1);
@@ -33,22 +39,28 @@ public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
                 System.out.println("-------------------------------------------");
             }
 
-            connection.close();
+        }
     }
 
+    /**
+     * Este método executa a consulta SQL "SELECT * FROM gerar_relatorio_cliente_especifico" para gerar um relatório específico de um cliente com base no nome fornecido.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     * O relatório inclui informações sobre o plano escolhido, o último treino feito, e a data e hora desse treino.
+     *
+     * @param nome Objeto (ColetarRelatorioDto) que contém o nome do cliente para gerar o relatório específico.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public void gerarRelatorioClienteEspecifico(ColetarRelatorioDto nome) throws SQLException {
 
-        Connection connection = BancoDadosConfig.getConnection();
+        String sql = "SELECT * FROM gerar_relatorio_cliente_especifico(?)";
 
-            String sql = "SELECT * FROM gerar_relatorio_cliente_especifico(?)";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, nome.getNome());
-            ps.execute();
-
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 String nomeCliente = rs.getString(1);
                 String nomePlano = rs.getString(2);
@@ -65,18 +77,24 @@ public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
                 System.out.println("Hora do treino: " + horaTreino);
                 System.out.println("-------------------------------------");
             }
-            connection.close();
+        }
     }
 
+    /**
+     * Este método executa a consulta SQL "SELECT * FROM gerar_relatorio_cliente()" para gerar um relatório com informações de todos os clientes.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     * O relatório inclui o nome do cliente, o plano escolhido, o último treino feito, e a data e hora desse treino.
+     *
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
-    public void gerarRelatorioTodosClientes() throws SQLException{
+    public void gerarRelatorioTodosClientes() throws SQLException {
 
-        Connection connection = BancoDadosConfig.getConnection();
+        String sql = "SELECT * FROM gerar_relatorio_cliente()";
 
-            String sql = "SELECT * FROM gerar_relatorio_cliente()";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 String nomeCliente = rs.getString(1);
@@ -95,6 +113,6 @@ public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
                 System.out.println("-------------------------------------");
             }
 
-        connection.close();
+        }
     }
 }

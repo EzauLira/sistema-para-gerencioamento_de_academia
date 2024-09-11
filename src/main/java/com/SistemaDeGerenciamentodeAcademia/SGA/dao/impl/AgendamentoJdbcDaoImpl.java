@@ -14,39 +14,50 @@ import java.util.List;
 
 public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
 
+    /**
+     *  Este método executa a consulta SQL "SELECT * FROM treino" para listar todos os treinos armazenados no banco de dados.
+     *  Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     *  A consulta é executada e através do (while) os resultados são iterados para criar objetos (Treino) com os dados de ID, nome e descrição de cada treino.
+     *  Esses objetos são adicionados a uma lista, que é então retornada para o chamador do método.
+     *
+     * @return Retorna uma lista de objetos {@link Treino} representando todos os treinos encontrados no banco de dados.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public List<Treino> listarTreinos() throws SQLException {
         List<Treino> listarTreinos = new ArrayList<>();
 
-        Connection connection = BancoDadosConfig.getConnection();
-
         String sql = "SELECT * FROM treino";
 
-        PreparedStatement ps = connection.prepareStatement(sql);
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-        ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Treino treino = new Treino(rs.getInt("id")
+                        , rs.getString("nome")
+                        , rs.getString("descricao"));
 
-        while (rs.next()) {
-            Treino treino = new Treino(rs.getInt("id")
-                    , rs.getString("nome")
-                    , rs.getString("descricao"));
-
-            listarTreinos.add(treino);
+                listarTreinos.add(treino);
+            }
         }
-
-        connection.close();
         return listarTreinos;
     }
 
+    /**
+     * Agenda um treino na academia chamando a função (SELECT * FROM agendar_treino) no banco de dados.
+     * A função recebe os dados do usuário e os insere conforme os parâmetros especificados.
+     *
+     * @param agendamento Parâmetro que pega os dados do usuário para agendar um treino na academia.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public void agendarTreino(AgendamentoDto agendamento) throws SQLException {
 
-        Connection connection = BancoDadosConfig.getConnection();
+        String sql = "SELECT * FROM agendar_treino(?, ?, ?, ?)";
 
-
-            String sql = "SELECT * FROM agendar_treino(?, ?, ?, ?)";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, agendamento.getNome());
             ps.setInt(2, agendamento.getTreino());
@@ -54,7 +65,6 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
             ps.setString(4, agendamento.getHora());
 
             ps.execute();
-
-            connection.close();
+        }
     }
 }

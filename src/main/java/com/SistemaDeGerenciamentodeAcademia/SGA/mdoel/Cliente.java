@@ -1,20 +1,23 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.mdoel;
 
-
+/**
+ * Classe para representar um cliente na academia.
+ * Esta classe é usada para armazenar as informações do cliente.
+ */
 public class Cliente {
 
     private String nome;
     private int idade;
-    private String cfp;
+    private String cpf;
     private String genero;
     private String telefone;
     private String email;
     private int idPlano;
 
-    public Cliente( String nome, int idade, String cfp, String genero, String telefone, String email, int idPlano) {
+    public Cliente( String nome, int idade, String cpf, String genero, String telefone, String email, int idPlano) {
         this.nome = nome;
         this.idade = idade;
-        this.cfp = cfp;
+        this.cpf = cpf;
         this.genero = genero;
         this.telefone = telefone;
         this.email = email;
@@ -37,12 +40,12 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getCfp() {
-        return cfp;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCfp(String cfp) {
-        this.cfp = cfp;
+    public void setCpf(String cfp) {
+        this.cpf = cpf;
     }
 
     public String getGenero() {

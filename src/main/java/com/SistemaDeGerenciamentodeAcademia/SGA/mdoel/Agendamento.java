@@ -1,5 +1,9 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.mdoel;
 
+/**
+ * Classe para representar um agendamento de treino na academia.
+ * Esta classe é usada para armazenar as informações do agendamento.
+ */
 public class Agendamento {
 
     private String nome;

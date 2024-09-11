@@ -9,7 +9,7 @@ public class BancoDadosConfig {
     private BancoDadosConfig(){}
 
     /**
-     * Construtor privado para impedir criação de instâncias.
+     * Método que conecta e abre uma única conexão com o banco de dados.
      */
     public static Connection getConnection() {
         try {

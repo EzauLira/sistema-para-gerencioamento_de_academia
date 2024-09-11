@@ -1,8 +1,16 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.exception;
 
-public class TelefoneException extends RuntimeException{
+/**
+ * Exceção lançada quando um telefone inválido é encontrado ou quando ocorre um erro relacionado ao telefone.
+ */
+public class TelefoneException extends RuntimeException {
 
-    public TelefoneException(String mensagem){
+    /**
+     * Construtor para criar uma nova instância {@link TelefoneException}.
+     *
+     * @param mensagem A mensagem detalhando o erro relacionado ao telefone.
+     */
+    public TelefoneException(String mensagem) {
         super(mensagem);
     }
 }

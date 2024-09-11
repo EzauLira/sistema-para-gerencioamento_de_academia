@@ -12,6 +12,10 @@ import java.util.Scanner;
 
 public class Main {
 
+
+    /**
+     *Atributos e objetos estáticos que estão sendo usados em mais de um método.
+     */
     private static final Scanner input = new Scanner(System.in);
     private static byte opcao;
     private static final ClienteService clienteService = new ClienteService();
@@ -25,7 +29,7 @@ public class Main {
     }
 
     /**
-     * Método principal que percorre todo os menus para fazer o cadastro do cliente e agendamento do treino da academia.
+     * Método principal que percorre todo os menus, para fazer o cadastro e agendamento do treino da academia.
      */
     public static void menuPrincipal() {
         System.out.println("\n|| SISTEMA PARA GERENCIAMENTO DE ACADEMIA ||");
@@ -218,12 +222,15 @@ public class Main {
 
             input.nextLine();
 
-            System.out.println("Escolha a DATA do treino: ");
-            String data = input.nextLine();
+            String data;
+            do {
+            System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual.");
+            data = input.nextLine();
             if (data.equals("0"))
                 break;
+            } while (agendamentoService.validarData(data));
 
-            System.out.println("Escolha a HORA do treino: ");
+            System.out.println("Escolha a HORA do treino.");
             String hora = input.nextLine();
             if (hora.equals("0"))
                 break;

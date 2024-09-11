@@ -1,5 +1,10 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
 
+/**
+ * Enumeração para representar os diferentes tipos de erros que podem ocorrer
+ * ao interagir com o banco de dados. Cada tipo de erro tem uma mensagem padrão
+ * e uma mensagem customizada associada a ele.
+ */
 public enum ErroBancoDados {
 
     MESMO_TREINO("O mesmo treino já está agendado", "O mesmo treino já está agendado para este cliente nesta data."),
@@ -10,17 +15,30 @@ public enum ErroBancoDados {
     TELEFONE_JA_CADASTRADO("Erro: Telefone já cadastrado.", "Telefone já está cadastrado."),
     EMAIL_JA_CADASTRADO("Erro: Email já cadastrado.", "Email já está cadastrado."),
     NOME_NAO_ENCONTRADO("Nome não encontrado", "Cliente não encontrado. Verifique se o nome está correto ou talvez essa pessoa não esteja cadastrada."),
-    OUTRO_ERRO("Outro erro", "Erro não catalogado. Entre em contato com nosso suporte técnico.");
+    OUTRO_ERRO("Outro erro", "Erro não catalogado. Favor, entre em contato com nosso suporte técnico.");
 
     private final String mensagem;
     private final String mensagemCustom;
 
+    /**
+     * Construtor para criar uma nova instância {@link ErroBancoDados}.
+     *
+     * @param mensagem A mensagem padrão associada ao erro.
+     * @param mensagemCustom A mensagem customizada associada ao erro.
+     */
     ErroBancoDados(String mensagem, String mensagemCustom) {
         this.mensagem = mensagem;
         this.mensagemCustom = mensagemCustom;
     }
 
-    public static ErroBancoDados novaMensagem(String message) {
+    /**
+     * Retorna o tipo de erro correspondente com base na mensagem fornecida.
+     * Se a mensagem não corresponder a nenhum erro catalogado, retorna {@link #OUTRO_ERRO}.
+     *
+     * @param message A mensagem de erro recebida.
+     * @return O tipo de erro correspondente.
+     */
+    public static ErroBancoDados mensagemDoBanco(String message) {
         for (ErroBancoDados mensagem : ErroBancoDados.values()) {
             if (message.contains(mensagem.mensagem)) {
                 return mensagem;
@@ -29,6 +47,11 @@ public enum ErroBancoDados {
         return OUTRO_ERRO;
     }
 
+    /**
+     * Obtém a mensagem customizada associada ao erro.
+     *
+     * @return A mensagem customizada do erro.
+     */
     public String getMensagemCustom() {
         return mensagemCustom;
     }

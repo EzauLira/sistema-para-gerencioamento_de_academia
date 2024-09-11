@@ -1,5 +1,10 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.mdoel;
 
+
+/**
+ * Classe para representar um plano na academia.
+ * Esta classe é usada para armazenar as informações do plano.
+ */
 public class Planos {
 
     private int id;

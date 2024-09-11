@@ -1,9 +1,12 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErro;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 
 /**
  * Classe utilitária para validação de datas de agendamento.
@@ -17,14 +20,22 @@ public class ValidarDataAgendamentoUtils {
      * @param data Data a ser validada no formato "dd/MM/yyyy".
      * @return {@code true} se a data for inválida, {@code false} caso contrário.
      */
-    public static boolean validarDataAgendamento(String data){
-        LocalDate dataAtual = LocalDate.now();
-        String dataFormatada = dataAtual.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    public static boolean validarDataAgendamento(String data) {
+        try {
 
-        if (!data.equals(dataFormatada)){
-            System.out.println(MensagemErro.DATA_INVALIDA.getMensagem());
-            return true;
+            DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate dataAtual = LocalDate.now();
+            LocalDate dataVinda = LocalDate.parse(data, dataFormatada);
+
+            if (dataVinda.isBefore(dataAtual)){
+                System.out.println(MensagemErro.DATA_INVALIDA.getMensagem());
+                return true;
+            }else {
+                return false;
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(MensagemExcecao.DATA_INVALIDA.getMensagem());
         }
-        return false;
+        return true;
     }
 }

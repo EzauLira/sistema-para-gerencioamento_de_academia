@@ -139,7 +139,7 @@ public class Main {
                 if (genero.equals("0") || genero.equals("00") || genero.equals("000"))
                     break;
 
-                System.out.println("INFORME SEU TELEFONE. O formato deve ser 119123456789: ");
+                System.out.println("INFORME SEU TELEFONE. O formato deve ser 11912345678: ");
                 telefone = input.nextLine();
                 if (telefone.equals("0") || telefone.equals("00") || telefone.equals("000"))
                     break;
@@ -204,7 +204,6 @@ public class Main {
         System.out.println("\nOBS: Siga as instruções para agendar seu treino. Caso queira voltar ao menu, digite 0 a qualquer momento.\n");
 
         while (true) {
-
             String nome;
             input.nextLine();
             do {
@@ -224,7 +223,7 @@ public class Main {
 
             String data;
             do {
-            System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual.");
+            System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato Dia/Mês/Ano.");
             data = input.nextLine();
             if (data.equals("0"))
                 break;

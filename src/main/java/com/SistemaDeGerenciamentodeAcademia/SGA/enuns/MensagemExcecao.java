@@ -12,6 +12,7 @@ public enum MensagemExcecao {
     GENERO_INVALIDO("Entrada inválida. Digite 'M' para masculino ou 'F' para feminino."),
     TELEFONE_INVALIDO("Telefone inválido."),
     EMAIL_INVALIDO("Necessário que contenho um email valido."),
+    DATA_INVALIDA("Data inválida. necessária que seja no formato Dia/Mês/Ano"),
     CPF_INVALIDO("CPF inválido. Necessário que seja no mínimo 11 digitos.");
 
     private final String mensagem;

@@ -38,6 +38,7 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
             ps.setInt(7, clienteDto.getIdPlano());
             ps.execute();
 
+
         }
     }
 
@@ -61,7 +62,7 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String nomeCliente = rs.getString(1);
+                String nomeCliente = rs.getString("nome");
 
                 System.out.println("-------------------------------------");
                 System.out.println("Clientes encontrados: \n");

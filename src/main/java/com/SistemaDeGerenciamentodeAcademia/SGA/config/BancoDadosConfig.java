@@ -18,5 +18,4 @@ public class BancoDadosConfig {
            throw new RuntimeException("Erro ao conectar com o banco de dados");
         }
     }
-
 }

@@ -1,0 +1,11 @@
+CREATE TABLE instrutor(
+	id SERIAL primary key,
+	nome VARCHAR(20) NOT NULL,
+	cpf VARCHAR(11) UNIQUE NOT NULL,
+	genero INTEGER NOT NULL,
+	telefone VARCHAR(15) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	senha VARCHAR(50) UNIQUE NOT NULL,
+	FOREIGN KEY (genero) REFERENCES genero(id)
+
+);

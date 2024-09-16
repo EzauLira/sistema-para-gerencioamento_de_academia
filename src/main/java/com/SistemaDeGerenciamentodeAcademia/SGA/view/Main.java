@@ -49,18 +49,6 @@ public class Main {
                         }else{
                             cadastroCliente();
                         }
-
-                        //CAMINHO DA ALEGRIA:
-                        //Mostrar opção de ‘login’ para cliente;
-                        //Após fazer o ‘login’ como cliente passar para uma verificação para ver se o cliente existe no banco de dados.
-                        //Se o cliente exister de fato, mostrar as opções de: AGENDAMENTO DE TREINO COM OS INSTRUTORES DISPINÍVEIS, CANCELAR ALGUM TREINO, ATUALIZAR A DATA OU A HORA,
-                        //LISTAR OS ÚLTIMOS TREINOS FEITOS, LISTAR OS TREINOS QUE AINDA ESTARÃO PARA ACONTECER.
-
-                        //CAMINHO DA TRISTEZA:
-                        //Mostrar opção de ‘login’ para cliente;
-                        //Após fazer o ‘login’ como cliente passar para uma verificação para ver se o cliente existe no banco de dados.
-                        //Se esse cliente não exister, mostrar uma mensagem dizendo que o cliente não foi encontrado, primeiro pedir para ele verificar os dados digitados ou cadastrar-se.
-                        //Mosrar uma opção para que essa pessoa possa escolher se deseja se cadastrar, tentar novamente ou simplismente sair.
                         break;
                     case 2:
                         loginInstrutor();

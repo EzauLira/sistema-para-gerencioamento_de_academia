@@ -23,7 +23,7 @@ public enum ErroBancoDadosEnum {
     CPF_NAO_ENCONTRADO("CPF não cadastrado", "CPF não encontrado ou não cadastrado."),
     SENHA_INCORRETA("Senha incorreta", "Senha inválida."),
     NENHUM_TRIENO_ATIVO_ENCONTRADO("Nenhum treino ativo encontrado para o cliente.", "Nenhum treino ativo encontrado ou a senha está incorreta."),
-    NENHUM_TRIENO_INATIVO_ENCONTRADO("Nenhum treino inativo encontrado para o cliente.", "Nenhum treino inaativo encontrado ou a senha está incorreta."),
+    NENHUM_TRIENO_INATIVO_ENCONTRADO("Nenhum treino inativo encontrado para o cliente.", "Nenhum treino inativo encontrado ou a senha está incorreta."),
     ERRO_NOVO_AGENDAMENTO("Agendamento não encontrado ou não pertence ao cliente.", "Agendamento não encontrado ou a senha está incorreta."),
     ERRO_DELETAR_AGENDAMENTO("Nenhum treino ativo encontrado para o agendamento fornecido.", "Nenhum treino ativo encontrado ou a senha está incorreta."),
     OUTRO_ERRO("Outro erro", "Erro não catalogado. Favor, entre em contato com nosso suporte técnico.");

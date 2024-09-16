@@ -1,22 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
 
-public enum OpcoesEnum {
-
-    SISTEMA("""
-                ╔════════════════════════════╗
-                ║   Sistema:                 ║
-                ║                            ║
-                ║   ####     ####      ##    ║
-                ║  ##  ##   ##  ##    ####   ║
-                ║  ##       ##       ##  ##  ║
-                ║   ####    ## ###   ######  ║
-                ║      ##   ##  ##   ##  ##  ║
-                ║  ##  ##   ##  ##   ##  ##  ║
-                ║   ####     ####    ##  ##  ║
-                ║                            ║
-                ║   Versão: 1.0.0            ║
-                ╚════════════════════════════╝
-                """),
+public enum OpcoesClientesEnum {
 
     OPCOES_ENUM("""
             ╔══════════════════════════════╗
@@ -26,13 +10,6 @@ public enum OpcoesEnum {
             ╚══════════════════════════════╝
             Digite uma opção:"""),
     OPCOES_CLIENTE("""
-              ╔════════════════════════════════════════════╗
-              ║ Você deseja Fazer login ou se cadastrar?   ║
-              ║ [1] - LOGIN                                ║
-              ║ [2] - CADASTRAR                            ║
-              ╚════════════════════════════════════════════╝
-              Digite uma opção:"""),
-    OPCOES_INSTRUTOR("""
               ╔════════════════════════════════════════════╗
               ║ Você deseja Fazer login ou se cadastrar?   ║
               ║ [1] - LOGIN                                ║
@@ -64,7 +41,7 @@ public enum OpcoesEnum {
 
     private final String mensagem;
 
-    OpcoesEnum(String mensagem){
+    OpcoesClientesEnum(String mensagem){
         this.mensagem = mensagem;
     }
 

@@ -4,7 +4,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
  * Enumeração para representar as mensagens de erro relacionadas a entradas inválidas
  * e outras condições de erro no sistema. Cada tipo de erro tem uma mensagem associada.
  */
-public enum MensagemErro {
+public enum MensagemErroEnum {
 
     OPCAO_INVALIDA("Cadastro não concluído.\nOpção inválida! Digite uma opção válida."),
     GENERO_INVALIDO("Entrada inválida."),
@@ -18,11 +18,11 @@ public enum MensagemErro {
     private final String mensagem;
 
     /**
-     * Construtor para criar uma nova instância {@link MensagemErro}.
+     * Construtor para criar uma nova instância {@link MensagemErroEnum}.
      *
      * @param mensagem A mensagem associada ao erro.
      */
-    MensagemErro(String mensagem){
+    MensagemErroEnum(String mensagem){
         this.mensagem = mensagem;
     }
 

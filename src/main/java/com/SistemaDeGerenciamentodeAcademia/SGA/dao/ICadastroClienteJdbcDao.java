@@ -1,5 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dao;
 
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.BuscarClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
 
@@ -28,5 +29,7 @@ public interface ICadastroClienteJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     void buscarPessoaPeloPrimeiroNome(BuscarClienteDto buscarClienteDto) throws SQLException;
-
+    void listaTreinosAtivos(AgendamentoDto agendamento) throws SQLException;
+    void listaTreinosInativos(AgendamentoDto agendamento) throws SQLException;
+    void listarGenero() throws SQLException;
 }

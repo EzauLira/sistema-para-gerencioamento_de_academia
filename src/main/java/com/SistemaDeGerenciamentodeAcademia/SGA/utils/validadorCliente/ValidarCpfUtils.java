@@ -1,6 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErro;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.CpfException;
 
 /**
@@ -15,8 +15,9 @@ public class ValidarCpfUtils {
      * @param cpf CPF a ser validado.
      */
     public static void validarCpf(String cpf) {
+
         if (cpf.length() != 11 || cpf.trim().isEmpty()) {
-            throw new CpfException(MensagemErro.CPF_INVALIDO.getMensagem());
+            throw new CpfException(MensagemErroEnum.CPF_INVALIDO.getMensagem());
         }
     }
 }

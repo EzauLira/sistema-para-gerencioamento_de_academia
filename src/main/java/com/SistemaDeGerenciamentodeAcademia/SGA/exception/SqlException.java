@@ -1,6 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.exception;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.ErroBancoDados;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.ErroBancoDadosEnum;
 
 /**
  * Exceção lançada para tratamento de erros relacionados a operações SQL.
@@ -14,7 +14,7 @@ public class SqlException extends RuntimeException {
      * @param e A exceção que contém a mensagem de erro SQL.
      */
     public static void sqlException(Exception e) {
-        ErroBancoDados erroBancoDados = ErroBancoDados.mensagemDoBanco(e.getMessage());
-        System.out.println(erroBancoDados.getMensagemCustom());
+        ErroBancoDadosEnum erroBancoDadosEnum = ErroBancoDadosEnum.mensagemDoBanco(e.getMessage());
+        System.out.println(erroBancoDadosEnum.getMensagemCustom());
     }
 }

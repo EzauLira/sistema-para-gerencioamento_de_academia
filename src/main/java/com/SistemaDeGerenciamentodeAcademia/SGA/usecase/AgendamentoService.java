@@ -2,7 +2,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.AgendamentoJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucesso;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarDataAgendamentoUtils;
@@ -58,8 +58,38 @@ public class AgendamentoService {
             sucesso = false;
         } finally {
             if (sucesso) {
-                System.out.println(MensagemSucesso.AGENDAMENTO_EFETUADO.getMensagem());
+                System.out.println(MensagemSucessoEnum.AGENDAMENTO_EFETUADO.getMensagem());
             }
+        }
+    }
+
+    public void atualizarTreino(int treino, int novoTreino, String data, String hora){
+        boolean sucesso = true;
+        AgendamentoDto agendamentoDto = new AgendamentoDto(treino, novoTreino, data, hora);
+
+        try {
+            agendamentoJdbcDao.atualizarAgendamento(agendamentoDto);
+        }catch (SQLException e){
+            SqlException.sqlException(e);
+            sucesso = false;
+        }finally {
+            if (sucesso)
+                System.out.println(MensagemSucessoEnum.AGENDAMENTO_ATIALIZADO.getMensagem());
+        }
+    }
+
+    public void cancelarTreinoAtivo(int treino){
+        boolean sucesso = true;
+        AgendamentoDto agendamentoDto = new AgendamentoDto(treino);
+
+        try {
+            agendamentoJdbcDao.calcelarTreinoTreino(agendamentoDto);
+        }catch (SQLException e){
+            SqlException.sqlException(e);
+            sucesso = false;
+        }finally {
+            if (sucesso)
+                System.out.println(MensagemSucessoEnum.AGENDAMENTO_CANCELADO.getMensagem());
         }
     }
 

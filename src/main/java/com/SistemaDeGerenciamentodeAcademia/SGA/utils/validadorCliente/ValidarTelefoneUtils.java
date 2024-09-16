@@ -1,6 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErro;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.TelefoneException;
 
 /**
@@ -17,7 +17,7 @@ public class ValidarTelefoneUtils {
     public static void validarTelefone(String telefone){
 
         if (telefone.trim().isEmpty() || telefone.length() != 11){
-            throw new TelefoneException(MensagemErro.TELEFONE_INVALIDO.getMensagem());
+            throw new TelefoneException(MensagemErroEnum.TELEFONE_INVALIDO.getMensagem());
         }
     }
 }

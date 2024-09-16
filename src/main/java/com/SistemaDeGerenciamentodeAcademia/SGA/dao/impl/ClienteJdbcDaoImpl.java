@@ -2,6 +2,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.ICadastroClienteJdbcDao;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.BuscarClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
 
@@ -10,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
+public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
 
     /**
      * Este método executa a consulta SQL "SELECT * FROM cadastrar_cliente" para cadastrar um novo cliente no banco de dados.
@@ -23,7 +24,7 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
     @Override
     public void cadastrarCliente(ClienteDto clienteDto) throws SQLException {
 
-        String sql = "SELECT * FROM cadastrar_cliente(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "SELECT * FROM cadastrar_cliente(?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -32,13 +33,13 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
             ps.setString(1, clienteDto.getNome());
             ps.setInt(2, clienteDto.getIdade());
             ps.setString(3, clienteDto.getCpf());
-            ps.setString(4, clienteDto.getGenero());
+            ps.setInt(4, clienteDto.getGenero());
             ps.setString(5, clienteDto.getTelefone());
             ps.setString(6, clienteDto.getEmail());
-            ps.setInt(7, clienteDto.getIdPlano());
+            ps.setString(7, clienteDto.getSenha());
+            ps.setInt(8, clienteDto.getIdPlano());
+
             ps.execute();
-
-
         }
     }
 
@@ -62,12 +63,76 @@ public class CadastroClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String nomeCliente = rs.getString("nome");
+                String nomeCliente = rs.getString(1);
 
                 System.out.println("-------------------------------------");
                 System.out.println("Clientes encontrados: \n");
                 System.out.println("Nome do cliente: " + nomeCliente);
                 System.out.println("-------------------------------------");
+            }
+        }
+    }
+
+    @Override
+    public void listaTreinosAtivos(AgendamentoDto agendamento) throws SQLException {
+        String sql = "SELECT * FROM listar_treinos_ativos(?)";
+
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, agendamento.getSenha());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                int id = rs.getInt(1);
+                String nome = rs.getString(2);
+                String data = rs.getString(3);
+                String hora = rs.getString(4);
+
+                System.out.println("║" + id + " - " + nome + " - " + data + " - " + hora);
+            }
+        }
+    }
+
+    @Override
+    public void listaTreinosInativos(AgendamentoDto agendamento) throws SQLException {
+        String sql = "SELECT * FROM listar_treinos_inativos(?)";
+
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, agendamento.getSenha());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                int id = rs.getInt(1);
+                String nome = rs.getString(2);
+                String data = rs.getString(3);
+                String hora = rs.getString(4);
+                ;
+
+                System.out.println("║" + id + " - " + nome + " - " + data + " - " + hora);
+            }
+        }
+    }
+
+    @Override
+    public void listarGenero() throws SQLException {
+        String sql = "SELECT * FROM genero";
+
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String genero = rs.getString(2);
+
+                System.out.println(id + " - " + genero);
             }
         }
     }

@@ -4,7 +4,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
  * Enumeração para representar mensagens de exceção relacionadas a entradas inválidas
  * e outras condições de erro específicas no sistema. Cada tipo de exceção tem uma mensagem associada.
  */
-public enum MensagemExcecao {
+public enum MensagemExcecaoEnum {
 
     ENTRADA_INVALIDA("Entrada inválida. Necessário que seja um número."),
     NOME_INVALIDO("Nome inválido. Necessário que tenha no mínimo 10 caracteres.\n"),
@@ -18,11 +18,11 @@ public enum MensagemExcecao {
     private final String mensagem;
 
     /**
-     * Construtor para criar uma nova instância {@link MensagemExcecao}.
+     * Construtor para criar uma nova instância {@link MensagemExcecaoEnum}.
      *
      * @param mensagem A mensagem associada à exceção.
      */
-    MensagemExcecao(String mensagem){
+    MensagemExcecaoEnum(String mensagem){
         this.mensagem = mensagem;
     }
 

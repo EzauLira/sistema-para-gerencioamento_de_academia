@@ -1,7 +1,7 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErro;
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecao;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,13 +28,13 @@ public class ValidarDataAgendamentoUtils {
             LocalDate dataVinda = LocalDate.parse(data, dataFormatada);
 
             if (dataVinda.isBefore(dataAtual)){
-                System.out.println(MensagemErro.DATA_INVALIDA.getMensagem());
+                System.out.println(MensagemErroEnum.DATA_INVALIDA.getMensagem());
                 return true;
             }else {
                 return false;
             }
         } catch (DateTimeParseException e) {
-            System.out.println(MensagemExcecao.DATA_INVALIDA.getMensagem());
+            System.out.println(MensagemExcecaoEnum.DATA_INVALIDA.getMensagem());
         }
         return true;
     }

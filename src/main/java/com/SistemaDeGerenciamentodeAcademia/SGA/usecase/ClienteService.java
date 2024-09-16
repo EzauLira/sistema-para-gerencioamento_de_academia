@@ -1,11 +1,12 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.CadastroClienteJdbcDaoImpl;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.ClienteJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.PlanoJdbcDaoImpl;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.BuscarClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.PlanosDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucesso;
+import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente.*;
 
@@ -21,13 +22,12 @@ public class ClienteService {
     /**
      * Atributos e objetos, privados e estáticos a serem usados nos métodos.
      */
-    private boolean sucesso;
-    private static final CadastroClienteJdbcDaoImpl cadastroClienteJdbcDaoImpl = new CadastroClienteJdbcDaoImpl();
+    private static final ClienteJdbcDaoImpl clienteJdbcDaoImpl = new ClienteJdbcDaoImpl();
     private static final PlanoJdbcDaoImpl planoJdbcDaoImpl = new PlanoJdbcDaoImpl();
 
     /**
-     * Lista todos os planos disponíveis e imprime suas informações.
-     * Exibe o ID, nome, descrição, duração e preço de cada plano.
+     * Lista todos os planos disponíveis e imprime as suas informações.
+     * Exibe o ‘ID’, nome, descrição, duração e preço de cada plano.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
      */
     public void listarplanos() {
@@ -47,34 +47,34 @@ public class ClienteService {
      * Se o cadastro for realizado com sucesso, uma mensagem de sucesso é exibida.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
      *
-     * @param nome Nome do cliente.
-     * @param idade Idade do cliente.
-     * @param cpf CPF do cliente.
-     * @param genero Gênero do cliente ('M' para masculino ou 'F' para feminino).
+     * @param nome     Nome do cliente.
+     * @param idade    Idade do cliente.
+     * @param cpf      CPF do cliente.
+     * @param genero   Gênero do cliente (Masculino, Feminino ou Outros).
      * @param telefone Telefone do cliente.
-     * @param email Email do cliente.
-     * @param plano ID do plano escolhido pelo cliente.
+     * @param email    Email do cliente.
+     * @param senha    Senha para login futuro.
+     * @param plano    ID do plano escolhido pelo cliente.
      */
-    public void cadastrarCliente(String nome, int idade, String cpf, String genero, String telefone, String email, int plano) {
-        sucesso = true;
+    public void cadastrarCliente(String nome, int idade, String cpf, int genero, String telefone, String email, String senha, int plano) {
+        boolean sucesso = true;
 
         ValidarNomeUtils.validarNome(nome);
         ValidarIDadeUtils.validarIdade(idade);
         ValidarCpfUtils.validarCpf(cpf);
-        ValidarGeneroUtils.validarGenero(genero);
         ValidarTelefoneUtils.validarTelefone(telefone);
         ValidarEmailUtils.validarEmail(email);
 
-        ClienteDto clienteDto = new ClienteDto(nome, idade, cpf, genero, telefone, email, plano);
+        ClienteDto clienteDto = new ClienteDto(nome, idade, cpf, genero, telefone, email, senha, plano);
 
         try {
-            cadastroClienteJdbcDaoImpl.cadastrarCliente(clienteDto);
+            clienteJdbcDaoImpl.cadastrarCliente(clienteDto);
         } catch (SQLException e) {
             SqlException.sqlException(e);
             sucesso = false;
         } finally {
             if (sucesso) {
-                System.out.println(MensagemSucesso.CADASTRO_EFETUADO.getMensagem());
+                System.out.println(MensagemSucessoEnum.CADASTRO_EFETUADO.getMensagem());
             }
         }
     }
@@ -87,18 +87,43 @@ public class ClienteService {
      * @param nome Nome do cliente a ser buscado.
      */
     public void buscarClientePeloPrimeiroNome(String nome) {
-        sucesso = true;
         BuscarClienteDto buscarClienteDto = new BuscarClienteDto(nome);
 
         try {
-            cadastroClienteJdbcDaoImpl.buscarPessoaPeloPrimeiroNome(buscarClienteDto);
+            clienteJdbcDaoImpl.buscarPessoaPeloPrimeiroNome(buscarClienteDto);
         } catch (SQLException e) {
             SqlException.sqlException(e);
-            sucesso = false;
-        } finally {
-            if (sucesso) {
-                System.out.println(MensagemSucesso.AGENDAMENTO_EFETUADO.getMensagem());
-            }
         }
     }
+
+    public boolean listarAgendamentosAtivos(String senha){
+        AgendamentoDto agendamentoDto = new AgendamentoDto(senha);
+        try {
+            clienteJdbcDaoImpl.listaTreinosAtivos(agendamentoDto);
+        }catch (SQLException e){
+            SqlException.sqlException(e);
+            return false;
+        }
+        return true;
+    }
+
+    public void listarAgendamentosInativos(String senha){
+        AgendamentoDto agendamentoDto = new AgendamentoDto(senha);
+        try {
+            clienteJdbcDaoImpl.listaTreinosInativos(agendamentoDto);
+        }catch (SQLException e){
+            SqlException.sqlException(e);
+        }
+    }
+
+    public void listarGenero() {
+        try {
+            clienteJdbcDaoImpl.listarGenero();
+
+        } catch (SQLException e) {
+            SqlException.sqlException(e);
+        }
+    }
+
+
 }

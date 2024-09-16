@@ -67,4 +67,33 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
             ps.execute();
         }
     }
+
+    public void atualizarAgendamento(AgendamentoDto agendamento) throws SQLException {
+        String sql = "SELECT * FROM atualizar_agendamento(?,?,?,?)";
+
+        try (Connection connection = BancoDadosConfig.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+
+
+            ps.setInt(1, agendamento.getTreino());
+            ps.setInt(2, agendamento.getNovoTreino());
+            ps.setString(3, agendamento.getData());
+            ps.setString(4, agendamento.getHora());
+
+            ps.execute();
+        }
+    }
+
+    public void calcelarTreinoTreino(AgendamentoDto agendamentoDto) throws SQLException{
+        String sql = "SELECT * FROM deletar_treino_ativo(?)";
+
+        try (Connection connection = BancoDadosConfig.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, agendamentoDto.getTreino());
+
+            ps.execute();
+
+        }
+    }
 }

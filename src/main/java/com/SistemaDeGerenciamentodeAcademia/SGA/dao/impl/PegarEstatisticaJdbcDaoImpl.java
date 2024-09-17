@@ -112,7 +112,6 @@ public class PegarEstatisticaJdbcDaoImpl implements IPegarEstatisticaJdbcDao {
                 System.out.println("Hora do treino: " + horaTreino);
                 System.out.println("-------------------------------------");
             }
-
         }
     }
 }

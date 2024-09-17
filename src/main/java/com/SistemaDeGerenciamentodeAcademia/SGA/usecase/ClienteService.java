@@ -2,12 +2,10 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.ClienteJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.PlanoJdbcDaoImpl;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.BuscarClienteDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.PlanosDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
+import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente.*;
 
 import java.sql.SQLException;
@@ -30,16 +28,14 @@ public class ClienteService {
      * Exibe o ‘ID’, nome, descrição, duração e preço de cada plano.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
      */
-    public void listarplanos() {
+    public List<PlanosDto> listarplanos() {
         try {
             List<PlanosDto> planos = planoJdbcDaoImpl.listarPlanos();
-
-            for (PlanosDto p : planos) {
-                System.out.println(p.getId() + " - " + p.getNome() + " - " + p.getDescricao() + " - " + p.getDuracao() + " - " + p.getPreco());
-            }
+            return planos;
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
+        return null;
     }
 
     /**
@@ -96,34 +92,43 @@ public class ClienteService {
         }
     }
 
-    public boolean listarAgendamentosAtivos(String senha){
-        AgendamentoDto agendamentoDto = new AgendamentoDto(senha);
+    public List<TreinosAtivosEInativosDto> listarAgendamentosAtivos(String senha){
         try {
-            clienteJdbcDaoImpl.listaTreinosAtivos(agendamentoDto);
-        }catch (SQLException e){
-            SqlException.sqlException(e);
-            return false;
-        }
-        return true;
-    }
-
-    public void listarAgendamentosInativos(String senha){
-        AgendamentoDto agendamentoDto = new AgendamentoDto(senha);
-        try {
-            clienteJdbcDaoImpl.listaTreinosInativos(agendamentoDto);
+            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosAtivos(senha);
+            return treinos;
         }catch (SQLException e){
             SqlException.sqlException(e);
         }
+        return null;
     }
 
-    public void listarGenero() {
+    public List<TreinosAtivosEInativosDto> listarAgendamentosInativos(String senha){
         try {
-            clienteJdbcDaoImpl.listarGenero();
+            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosInativos(senha);
+            return treinos;
+        }catch (SQLException e){
+            SqlException.sqlException(e);
+        }
+        return null;
+    }
 
+    public List<GeneroDto> listarGenero() {
+        try {
+            List<GeneroDto> generos = clienteJdbcDaoImpl.listarGenero();
+            return generos;
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
+        return null;
     }
 
-
+    public List<ClienteDto> buscarDadosPessoaisPeloPrimeiroNome(String nome){
+        try {
+            List<ClienteDto> clienteDto = clienteJdbcDaoImpl.buscarDadosPessoaisPeloPrimeiroNome(nome);
+            return clienteDto;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

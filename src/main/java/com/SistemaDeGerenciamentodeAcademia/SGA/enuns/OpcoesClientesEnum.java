@@ -22,11 +22,21 @@ public enum OpcoesClientesEnum {
               ║ ATENÇÃO: Siga as instruções de ligIn. Caso queira voltar, digite 0 a qualquer momento.     ║
               ╚════════════════════════════════════════════════════════════════════════════════════════════╝
               """),
-    MENU_CLIENTE("""
+    MENU_INFORMATIVO_CLIENTE("""
               ╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
               ║                                                      Bem-Vindo(a)! O que deseja fazer?                                                           ║
               ║ ATENÇÃO: Siga as instruções para cada opção escolhida, a fim de evitar possíveis erros. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
               ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"""),
+    MENU_BUSCAR_CLIENTE_INFORMATIVO("""
+              ╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+              ║                                       BUSCAR DADOS PESSOAIS PELO NOME                                       ║
+              ║ ATENÇÃO: Siga as instruções para buscar o cliente. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
+              ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"""),
+    MENU_DO_CADASTRO_INFORMATIVO("""
+              ╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
+              ║                                          CADASTRAR CLIENTE                                        ║
+              ║ ATENÇÃO: Siga as instruções do cadastro. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
+              ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝"""),
     OPCOES_MENU_CLIENTE("""
               
               ╔════════════════════════════════════════════╗
@@ -35,6 +45,7 @@ public enum OpcoesClientesEnum {
               ║ [3] - Listar agenda inativa                ║
               ║ [4] - Atualizar treino ativo               ║
               ║ [5] - Cancelar treino                      ║
+              ║ [6] - Buscar dados                         ║
               ║ [0] - Sair                                 ║
               ╚════════════════════════════════════════════╝
               Digite uma opção:""");

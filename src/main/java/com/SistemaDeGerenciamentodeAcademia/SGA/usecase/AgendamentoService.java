@@ -20,20 +20,20 @@ public class AgendamentoService {
     private static final AgendamentoJdbcDaoImpl agendamentoJdbcDao = new AgendamentoJdbcDaoImpl();
 
     /**
-     * Lista todos os treinos disponíveis e imprime suas informações.
+     * Lista todos os treinos disponíveis e imprime as suas informações.
      * Exibe o ID, nome e descrição de cada treino.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
      */
-    public void listarTreinos() {
+    public List<Treino> listarTreinos() {
         try {
             List<Treino> treinos = agendamentoJdbcDao.listarTreinos();
 
-            for (Treino t : treinos) {
-                System.out.println(t.getId() + " - " + t.getNome() + " - " + t.getDescricao());
-            }
+            return treinos;
+
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
+        return null;
     }
 
     /**
@@ -41,12 +41,12 @@ public class AgendamentoService {
      * Se o agendamento for criado com sucesso, uma mensagem de sucesso é exibida.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
      *
-     * @param nome Nome do cliente que está agendando o treino.
+     * @param nome Nome do cliente que está a agendar o treino.
      * @param treino ID do treino a ser agendado.
      * @param data Data do agendamento.
      * @param hora Hora do agendamento.
      */
-    public void criarAgendamento(String nome, int treino, String data, String hora) {
+    public void agendarTreino(String nome, int treino, String data, String hora) {
         boolean sucesso = true;
 
         AgendamentoDto agendamentoDto = new AgendamentoDto(nome, treino, data, hora);
@@ -63,6 +63,16 @@ public class AgendamentoService {
         }
     }
 
+    /**
+     * Este método cria um objeto AgendamentoDto com os dados fornecidos e tenta atualizar o agendamento no banco de dados.
+     * Utiliza um bloco try-catch-finally para garantir que exceções SQL sejam tratadas e uma mensagem de sucesso seja exibida se a operação for bem-sucedida.
+     * O parâmetro (treino) contém o ID do treino atual, (novoTreino) contém o ID do novo treino, (data) contém a data do agendamento e (hora) contém a hora do agendamento.
+     *
+     * @param treino ID do treino atual.
+     * @param novoTreino ID do novo treino.
+     * @param data Data do agendamento.
+     * @param hora Hora do agendamento.
+     */
     public void atualizarTreino(int treino, int novoTreino, String data, String hora){
         boolean sucesso = true;
         AgendamentoDto agendamentoDto = new AgendamentoDto(treino, novoTreino, data, hora);
@@ -78,12 +88,17 @@ public class AgendamentoService {
         }
     }
 
+    /**
+     * Este método tenta cancelar um treino ativo no banco de dados com base no ID do treino fornecido.
+     * Utiliza um bloco try-catch-finally para garantir que exceções SQL sejam tratadas e uma mensagem de sucesso seja exibida se a operação for bem-sucedida.
+     * O parâmetro (treino) contém o ID do treino a ser cancelado.
+     *
+     * @param treino ID do treino a ser cancelado.
+     */
     public void cancelarTreinoAtivo(int treino){
         boolean sucesso = true;
-        AgendamentoDto agendamentoDto = new AgendamentoDto(treino);
-
         try {
-            agendamentoJdbcDao.calcelarTreinoTreino(agendamentoDto);
+            agendamentoJdbcDao.calcelarTreino(treino);
         }catch (SQLException e){
             SqlException.sqlException(e);
             sucesso = false;

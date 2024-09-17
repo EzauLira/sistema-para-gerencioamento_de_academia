@@ -3,12 +3,10 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
 public enum OpcoesInstrutorEnum {
 
     OPCOES_INSTRUTOR("""
-              ╔════════════════════════════════════════════╗
-              ║ Você deseja Fazer login ou se cadastrar?   ║
-              ║ [1] - LOGIN                                ║
-              ║ [2] - CADASTRAR                            ║
-              ╚════════════════════════════════════════════╝
-              Digite uma opção:""");
+              ╔═══════════════════════════════════════════╗
+              ║             Olá instrutor!                ║
+              ║ Insira seu CPF e Senha para efetuar login ║
+              ╚═══════════════════════════════════════════╝""");
 
 
     private final String mensagem;

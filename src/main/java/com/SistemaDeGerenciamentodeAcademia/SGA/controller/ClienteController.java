@@ -1,29 +1,34 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.controller;
 
+import com.SistemaDeGerenciamentodeAcademia.SGA.config.Timer;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.GeneroDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.PlanosDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.TreinosAtivosEInativosDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.OpcoesClientesEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.*;
+import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.AgendamentoService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.LoginClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ClienteController {
 
     private static final Scanner input = new Scanner(System.in);
-    private static byte opcao;
     private static final ClienteService clienteService = new ClienteService();
     private static final AgendamentoService agendamentoService = new AgendamentoService();
     private static final LoginClienteService loginClienteService = new LoginClienteService();
-    private static final Main main = new Main();
 
     public void loginCliente() {
 
         System.out.println(OpcoesClientesEnum.MENU_LOGIN_CLIENTE.getMensagem());
-        input.nextLine();
         while (true) {
 
             System.out.println(">> Digite seu CPF: ");
@@ -66,8 +71,8 @@ public class ClienteController {
                     break;
             } while (agendamentoService.validarNome(nome));
 
-            System.out.println("O que você vai querer treinar? ");
-            agendamentoService.listarTreinos();
+            System.out.println("\nO que você vai querer treinar? \n");
+            listarTreinos();
             int treino = input.nextInt();
             if (treino == 0)
                 break;
@@ -87,7 +92,7 @@ public class ClienteController {
             if (hora.equals("0"))
                 break;
 
-            agendamentoService.criarAgendamento(nome, treino, data, hora);
+            agendamentoService.agendarTreino(nome, treino, data, hora);
             break;
         }
     }
@@ -101,7 +106,7 @@ public class ClienteController {
             if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
                 break;
             System.out.println("\n");
-            clienteService.listarAgendamentosAtivos(senha);
+            listarAgendamentoAtivo(senha);
             break;
         }
     }
@@ -117,7 +122,7 @@ public class ClienteController {
                 break;
 
             System.out.println("\n");
-            clienteService.listarAgendamentosInativos(senha);
+            listarAgendamentoInativo(senha);
             break;
         }
     }
@@ -132,43 +137,40 @@ public class ClienteController {
             if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
                 break;
 
-            int trieinoEscolhido = 0;
-            int novoTreino = 0;
+            int trieinoEscolhido;
+            int novoTreino;
             String data;
             String hora;
-            if (clienteService.listarAgendamentosAtivos(senha)) {
-                System.out.println("\nFavor, escolha um treino que deseja atualizar");
-                trieinoEscolhido = input.nextInt();
-                if (trieinoEscolhido == 0)
-                    break;
-
-                System.out.println("\n");
-                agendamentoService.listarTreinos();
-                System.out.println("\nEscolha seu novo treino");
-                novoTreino = input.nextInt();
-                if (novoTreino == 0)
-                    break;
-
-                input.nextLine();
-                do {
-                    System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato Dia/Mês/Ano.");
-                    data = input.nextLine();
-                    if (data.equals("0"))
-                        break;
-                } while (agendamentoService.validarData(data));
-
-                System.out.println("Escolha a HORA do treino.");
-                hora = input.nextLine();
-                if (hora.equals("0"))
-                    break;
-            } else {
+            System.out.println(" ");
+            listarAgendamentoAtivo(senha);
+            System.out.println("\nFavor, escolha um treino que deseja atualizar");
+            trieinoEscolhido = input.nextInt();
+            if (trieinoEscolhido == 0)
                 break;
-            }
+
+            System.out.println(" ");
+            listarTreinos();
+            System.out.println("\nEscolha seu novo treino");
+            novoTreino = input.nextInt();
+            if (novoTreino == 0)
+                break;
+
+            input.nextLine();
+            do {
+                System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato Dia/Mês/Ano.");
+                data = input.nextLine();
+                if (data.equals("0"))
+                    break;
+            } while (agendamentoService.validarData(data));
+
+            System.out.println("Escolha a HORA do treino.");
+            hora = input.nextLine();
+            if (hora.equals("0"))
+                break;
             agendamentoService.atualizarTreino(trieinoEscolhido, novoTreino, data, hora);
             break;
         }
     }
-
 
     public static void cancelarTreino() {
         while (true) {
@@ -179,18 +181,15 @@ public class ClienteController {
             String senha = input.nextLine();
             if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
                 break;
+            System.out.println(" ");
 
-            System.out.println("\n");
             int trieinoEscolhido;
-            if (clienteService.listarAgendamentosAtivos(senha)) {
-                System.out.println("Favor, escolha um treino que deseja cancelar");
-                trieinoEscolhido = input.nextInt();
-                if (trieinoEscolhido == 0)
-                    break;
+            listarAgendamentoAtivo(senha);
 
-            } else {
+            System.out.println("\nFavor, escolha um treino que deseja cancelar");
+            trieinoEscolhido = input.nextInt();
+            if (trieinoEscolhido == 0)
                 break;
-            }
             agendamentoService.cancelarTreinoAtivo(trieinoEscolhido);
             break;
         }
@@ -201,8 +200,7 @@ public class ClienteController {
      */
     public void cadastroCliente() {
 
-        System.out.println("\n|| CADASTRAR CLIENTE || ");
-        System.out.println("\nOBS: Siga as instruções do cadastro. Caso queira voltar ao menu, digite 0 a qualquer momento.\n");
+        System.out.println(OpcoesClientesEnum.MENU_DO_CADASTRO_INFORMATIVO.getMensagem());
 
         while (true) {
             String nome;
@@ -212,7 +210,7 @@ public class ClienteController {
             String telefone;
             String senha;
             try {
-                input.nextLine();
+
                 System.out.println("INFORME SEU NOME. O nome deve conter no mínimo 10 caracteres e não pode haver numeros.");
                 nome = input.nextLine();
                 if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
@@ -231,7 +229,8 @@ public class ClienteController {
                     break;
 
                 System.out.println("INFORME SEU GÊNERO: ");
-                clienteService.listarGenero();
+                System.out.println(" ");
+                listarGenero();
                 genero = input.nextInt();
                 if (genero == 0)
                     break;
@@ -254,7 +253,8 @@ public class ClienteController {
                     break;
 
                 System.out.println("HORA DE ESCOLHER O SEU PLANO: ");
-                clienteService.listarplanos();
+                System.out.println(" ");
+                listarPlanos();
                 int plano = input.nextInt();
                 if (plano == 0)
                     break;
@@ -273,8 +273,7 @@ public class ClienteController {
             }
             break;
         }
-        main.inicio();
-
+        Main.cliente();
     }
 
     /**
@@ -282,40 +281,112 @@ public class ClienteController {
      */
     public static void menuDoCliente() {
 
-        System.out.println(OpcoesClientesEnum.MENU_CLIENTE.getMensagem());
+        System.out.println(OpcoesClientesEnum.MENU_INFORMATIVO_CLIENTE.getMensagem());
 
         while (true) {
+            try {
+                System.out.println(OpcoesClientesEnum.OPCOES_MENU_CLIENTE.getMensagem());
+                byte opcao = input.nextByte();
+                switch (opcao) {
+                    case 1:
+                        agendatTreino();
+                        break;
 
-            System.out.println(OpcoesClientesEnum.OPCOES_MENU_CLIENTE.getMensagem());
+                    case 2:
+                        listarAgendaAtiva();
+                        break;
 
-            opcao = input.nextByte();
-            switch (opcao) {
-                case 1:
-                    agendatTreino();
-                    break;
+                    case 3:
+                        listarAgendaInativa();
+                        break;
 
-                case 2:
-                    listarAgendaAtiva();
-                    break;
-
-                case 3:
-                    listarAgendaInativa();
-                    break;
-
-                case 4:
-                    atualizarTreinoAtivo();
-                    break;
-                case 5:
-                    cancelarTreino();
-                    break;
-                case 0:
-                    System.out.println("Saindo da conta...");
-                    main.inicio();
-                    break;
-                default:
-                    System.out.println(MensagemErroEnum.OPCAO_INVALIDA.getMensagem());
-                    break;
+                    case 4:
+                        atualizarTreinoAtivo();
+                        break;
+                    case 5:
+                        cancelarTreino();
+                        break;
+                    case 6:
+                        buscarDadosPessoaisPeloPrimeiroNome();
+                        break;
+                    case 0:
+                        System.out.println("Saindo da conta...");
+                        Timer.tempoCorrido();
+                        Main.inicio();
+                        break;
+                    default:
+                        System.out.println(MensagemErroEnum.OPCAO_INVALIDA.getMensagem());
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
+                input.nextLine();
             }
+        }
+    }
+
+    public static void buscarDadosPessoaisPeloPrimeiroNome() {
+        System.out.println(OpcoesClientesEnum.MENU_BUSCAR_CLIENTE_INFORMATIVO.getMensagem());
+
+        while (true) {
+            String nome;
+            input.nextLine();
+            System.out.println("INFORME SEU PRIMEIRO NOME.");
+            nome = input.nextLine();
+            System.out.println(" ");
+            if (nome.equals("0") || nome.equals("00") || nome.equals("000")) {
+                break;
+            }
+            buscarDadosPessoaisPeloNome(nome);
+            break;
+        }
+    }
+
+    public static void listarTreinos() {
+        List<Treino> treinos = agendamentoService.listarTreinos();
+        for (Treino t : treinos) {
+            System.out.println("║" + t.getId() + " - " + t.getNome() + " - " + t.getDescricao());
+        }
+    }
+
+    public static void listarAgendamentoAtivo(String senha) {
+        List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosAtivos(senha);
+        for (TreinosAtivosEInativosDto t : treino) {
+            System.out.println("║" + "[" + t.getId() + "] - " + t.getNome() + " - " + t.getData() + " - " + t.getHora());
+        }
+    }
+
+    public static void listarAgendamentoInativo(String senha) {
+        List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosInativos(senha);
+        for (TreinosAtivosEInativosDto t : treino) {
+            System.out.println("║" + "[" + t.getId() + "] - " + t.getNome() + " - " + t.getData() + " - " + t.getHora());
+        }
+    }
+
+    public static void listarGenero() {
+        List<GeneroDto> generos = clienteService.listarGenero();
+        for (GeneroDto g : generos) {
+            System.out.println("║" + "[" + g.getId() + "] - " + g.getNome());
+        }
+    }
+
+    public static void listarPlanos() {
+        List<PlanosDto> planos = clienteService.listarplanos();
+        for (PlanosDto p : planos) {
+            System.out.println("║" + "[" + p.getId() + "] - " + p.getNome() + " - " + p.getDescricao() + " - " + p.getDuracao() + " - " + p.getPreco());
+        }
+    }
+
+    public static void buscarDadosPessoaisPeloNome(String nome) {
+        List<ClienteDto> clienteDto = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
+        for (ClienteDto c : clienteDto) {
+            System.out.println(
+                    "║ Nome: " + c.getNome() +
+                    "\n║ CPF: " + c.getCpf() +
+                    "\n║ Telefone: " + c.getTelefone() +
+                    "\n║ Email: " + c.getEmail() +
+                    "\n║ Senha: " + c.getSenha() +
+                    "\n║ Plano: " + c.getPlano_nome());
         }
     }
 }

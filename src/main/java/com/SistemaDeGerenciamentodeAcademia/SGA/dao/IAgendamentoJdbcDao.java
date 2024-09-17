@@ -12,6 +12,9 @@ import java.util.List;
  */
 public interface IAgendamentoJdbcDao {
 
+    //--------------------------------------------------------------------------------------------------------------------------------------//
+
+
     /**
      * Lista todos os treinos disponíveis no banco de dados.
      *
@@ -20,6 +23,9 @@ public interface IAgendamentoJdbcDao {
      */
     List<Treino> listarTreinos() throws SQLException;
 
+
+    //--------------------------------------------------------------------------------------------------------------------------------------//
+
     /**
      * Agenda um novo treino na academia com base nos dados fornecidos.
      *
@@ -27,4 +33,29 @@ public interface IAgendamentoJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     void agendarTreino(AgendamentoDto agendamento) throws SQLException;
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Busca uma lista de agendamentos ativos e atualiza eles.
+     *
+     * @param agendamento Um objeto {@link AgendamentoDto} contendo os dados necessários para atualizarar o agendamento, como treino, data e hora.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
+    void atualizarAgendamento(AgendamentoDto agendamento) throws SQLException;
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Busca os dos agendamentos ativos e cancela-los;
+     *
+     * @param trieno Um objeto contendo os dados necessários para cancelar o treino.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
+    void calcelarTreino(int trieno) throws SQLException;
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------------//
 }

@@ -4,7 +4,6 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.controller.ClienteController;
 import com.SistemaDeGerenciamentodeAcademia.SGA.controller.InstrutorController;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
-import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.LoginClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.RelatorioService;
 
 import java.util.InputMismatchException;
@@ -19,7 +18,6 @@ public class Main {
     private static byte opcao;
     private static final ClienteService clienteService = new ClienteService();
     private static final RelatorioService relatorioService = new RelatorioService();
-    private static final LoginClienteService loginClienteService = new LoginClienteService();
     private static final ClienteController clienteController = new ClienteController();
     private static final InstrutorController instrutorController = new InstrutorController();
 
@@ -36,26 +34,16 @@ public class Main {
         while (true) {
             try {
                 System.out.println(OpcoesClientesEnum.OPCOES_ENUM.getMensagem());
-                byte resposta = input.nextByte();
+                byte opcao = input.nextByte();
+                switch (opcao) {
 
-                switch (resposta) {
                     case 1:
-                        System.out.println(OpcoesClientesEnum.OPCOES_CLIENTE.getMensagem());
-                        byte loginCadastrar = input.nextByte();
-                        if (loginCadastrar == 1) {
-                            clienteController.loginCliente();
-                        } else {
-                            clienteController.cadastroCliente();
-                        }
+                        cliente();
                         break;
+
                     case 2:
                         System.out.println(OpcoesInstrutorEnum.OPCOES_INSTRUTOR.getMensagem());
-                        loginCadastrar = input.nextByte();
-                        if (loginCadastrar == 1){
-                            instrutorController.loginInstrutor();
-                        }else {
-                            //instrutorController.cadastrarInstrutor();
-                        }
+                        instrutorController.loginInstrutor();
                         //CAMINHO DA ALEGRIA:
                         //Mostrar opção de ‘login’ para cliente;
                         //Após fazer o ‘login’ como instrutor passar para uma verificação para ver se o instrutor existe no banco de dados.
@@ -78,6 +66,26 @@ public class Main {
                 input.nextLine();
             }
         }
+    }
+
+    public static void cliente() {
+        System.out.println(OpcoesClientesEnum.OPCOES_CLIENTE.getMensagem());
+        boolean deuCerto = false;
+        do {
+            System.out.print("");
+            if (input.hasNextByte()) {
+                byte loginCadastrar = input.nextByte();
+                if (loginCadastrar == 1) {
+                    clienteController.loginCliente();
+                } else {
+                    clienteController.cadastroCliente();
+                }
+                deuCerto = true;
+            } else {
+                System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
+                input.next();
+            }
+        } while (!deuCerto);
     }
 
     /**

@@ -17,7 +17,7 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
     /**
      *  Este método executa a consulta SQL "SELECT * FROM treino" para listar todos os treinos armazenados no banco de dados.
      *  Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
-     *  A consulta é executada e através do (while) os resultados são iterados para criar objetos (Treino) com os dados de ID, nome e descrição de cada treino.
+     *  A consulta é executada e através do (while) os resultados são iterados para criar objetos (Treino) com os dados de ‘ID’, nome e descrição de cada treino.
      *  Esses objetos são adicionados a uma lista, que é então retornada para o chamador do método.
      *
      * @return Retorna uma lista de objetos {@link Treino} representando todos os treinos encontrados no banco de dados.
@@ -68,6 +68,15 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
         }
     }
 
+    /**
+     * Este método executa a consulta SQL (SELECT * FROM atualizar_agendamento) para atualizar um agendamento no banco de dados com base nos dados fornecidos.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     * O parâmetro (agendamento) contém os dados do agendamento a ser atualizado. Os dados incluem o treino atual, o novo treino, a data e a hora.
+     *
+     * @param agendamento Parâmetro que contém os dados do agendamento a ser atualizado no banco de dados.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
+    @Override
     public void atualizarAgendamento(AgendamentoDto agendamento) throws SQLException {
         String sql = "SELECT * FROM atualizar_agendamento(?,?,?,?)";
 
@@ -84,13 +93,22 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
         }
     }
 
-    public void calcelarTreinoTreino(AgendamentoDto agendamentoDto) throws SQLException{
+    /**
+     * Este método executa a consulta SQL (SELECT * FROM deletar_treino_ativo) para cancelar um treino ativo no banco de dados com base no ID do treino fornecido.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     * O parâmetro (treino) contém o ID do treino a ser cancelado.
+     *
+     * @param treino Parâmetro que contém o ID do treino a ser cancelado no banco de dados.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
+    @Override
+    public void calcelarTreino(int treino) throws SQLException {
         String sql = "SELECT * FROM deletar_treino_ativo(?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, agendamentoDto.getTreino());
+            ps.setInt(1, treino);
 
             ps.execute();
 

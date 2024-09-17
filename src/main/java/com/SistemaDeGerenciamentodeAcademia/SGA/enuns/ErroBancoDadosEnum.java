@@ -7,9 +7,11 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
  */
 public enum ErroBancoDadosEnum {
 
-    MESMO_TREINO("O mesmo treino já está agendado", "O mesmo treino já está agendado para este cliente nesta data."),
+    MESMO_TREINO("O mesmo treino já está agendado", "O mesmo treino já está agendado ou você já fez este treino nesta data."),
+    ERRO_DATA_E_HORA_PASSADAS("A data e hora do agendamento devem ser futuras.", "A data e hora do agendamento devem ser futuras."),
+    FORA_DAS_TRES_OPCOES_DE_TREINO("Treino inválido. Deve ser 1, 2 ou 3.", "Treino escolhido inválido: Deve ser umas das opções validas"),
     JA_EXISTE_TREINO("Já existe um treino agendado", "Já existe um treino agendado para este cliente nesta data e hora. Deve haver pelo menos 30 minutos de diferença entre os treinos."),
-    CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", "Cliente não encontrado. Por favor cadastre o clien1te ou reveja o nome digitado."),
+    CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", "Cliente não encontrado. Por favor reveja o nome digitado, o nome precisa ser o mesmo digitado no cadastro.\nCaso não lembre do nome digitado vá em BUSCAR DADOS."),
     NOME_JA_CADASTRADO("Erro: Nome já cadastrado.", "Nome já está cadastrado."),
     CPF_JA_CADASTRADO("Erro: CPF já cadastrado.", "CPF já está cadastrado."),
     TELEFONE_JA_CADASTRADO("Erro: Telefone já cadastrado.", "Telefone já está cadastrado."),

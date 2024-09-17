@@ -1,18 +1,19 @@
--- FUNCTION: public.agendar_treino(character varying, integer, character varying, character varying)
-
--- DROP FUNCTION IF EXISTS public.agendar_treino(character varying, integer, character varying, character varying);
-
 CREATE OR REPLACE FUNCTION public.agendar_treino(
-	p_cliente_nome character varying,
-	p_treino_id integer,
-	p_data character varying,
-	p_hora character varying)
+    p_cliente_nome character varying,
+    p_treino_id integer,
+    p_data character varying,
+    p_hora character varying)
     RETURNS void
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE
 AS $BODY$
 BEGIN
+    -- Verificar se o treino_id é válido
+    IF p_treino_id NOT IN (1, 2, 3) THEN
+        RAISE EXCEPTION 'Treino inválido: %. Deve ser 1, 2 ou 3.', p_treino_id;
+    END IF;
+
     -- Verificar se o cliente já existe na tabela cliente
     IF NOT EXISTS (
         SELECT 1
@@ -20,6 +21,11 @@ BEGIN
         WHERE nome = p_cliente_nome
     ) THEN
         RAISE EXCEPTION 'Cliente não encontrado: %', p_cliente_nome;
+    END IF;
+
+    -- Verificar se a data e hora do agendamento são futuras
+    IF TO_TIMESTAMP(p_data || ' ' || p_hora, 'YYYY-MM-DD HH24:MI') <= NOW() THEN
+        RAISE EXCEPTION 'A data e hora do agendamento devem ser futuras.';
     END IF;
 
     -- Verificar se já existe um treino agendado para o mesmo cliente na mesma data e hora

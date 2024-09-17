@@ -28,15 +28,6 @@ public class AgendamentoDto {
         this.hora = hora;
     }
 
-    public AgendamentoDto(int treino){
-        this.treino = treino;
-    }
-
-    public AgendamentoDto(String senha){
-        this.senha = senha;
-    }
-
-
     public String getNome() {
         return nome;
     }

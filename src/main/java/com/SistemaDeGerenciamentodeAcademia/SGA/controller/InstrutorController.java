@@ -1,5 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.controller;
 
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.GeneroDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
@@ -8,6 +9,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.LoginClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.RelatorioService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InstrutorController {
@@ -64,7 +66,7 @@ public class InstrutorController {
                     break;
 
                 System.out.println("INFORME SEU GÊNERO: ");
-                clienteService.listarGenero();
+                listarGenero();
                 genero = input.nextInt();
                 if (genero == 0)
                     break;
@@ -101,5 +103,12 @@ public class InstrutorController {
             break;
         }
         main.inicio();
+    }
+
+    public static void listarGenero(){
+        List<GeneroDto> generos = clienteService.listarGenero();
+        for (GeneroDto g : generos){
+            System.out.println("║"+ "["+ g.getId() + "] - " + g.getNome());
+        }
     }
 }

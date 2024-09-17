@@ -14,6 +14,7 @@ public class ClienteDto {
     private String email;
     private String senha;
     private int idPlano;
+    private String plano_nome;
 
     public ClienteDto(String nome, int idade, String cpf, int genero, String telefone, String email, String senha, int idPlano) {
         this.nome = nome;
@@ -29,6 +30,15 @@ public class ClienteDto {
     public ClienteDto(String cpf, String senha){
         this.cpf = cpf;
         this.senha = senha;
+    }
+
+    public ClienteDto(String nome, String cpf, String telefone, String email, String senha, String plano_nome) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+        this.plano_nome = plano_nome;
     }
 
     public String getNome() {
@@ -97,5 +107,13 @@ public class ClienteDto {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getPlano_nome() {
+        return plano_nome;
+    }
+
+    public void setPlano_nome(String plano_nome) {
+        this.plano_nome = plano_nome;
     }
 }

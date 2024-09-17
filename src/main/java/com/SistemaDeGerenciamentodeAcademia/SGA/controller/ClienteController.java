@@ -209,55 +209,56 @@ public class ClienteController {
             int genero;
             String telefone;
             String senha;
-            try {
 
+            try {
+                input.nextLine();
                 System.out.println("INFORME SEU NOME. O nome deve conter no mínimo 10 caracteres e não pode haver numeros.");
                 nome = input.nextLine();
                 if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
-                    break;
+                    Main.cliente();
 
                 System.out.println("INFORME SUA IDADE. A idade deve ser no mínimo 15 anos. ");
                 idade = input.nextInt();
                 if (idade == 0)
-                    break;
+                    Main.cliente();
 
                 input.nextLine();
 
                 System.out.println("INFORME SEU CPF. O CPF deve ser válido e conter 11 digitos. ");
                 cpf = input.nextLine();
                 if (cpf.equals("0") || cpf.equals("00") || cpf.equals("000"))
-                    break;
+                    Main.cliente();
 
                 System.out.println("INFORME SEU GÊNERO: ");
                 System.out.println(" ");
                 listarGenero();
                 genero = input.nextInt();
                 if (genero == 0)
-                    break;
+                    Main.cliente();
 
                 input.nextLine();
 
                 System.out.println("INFORME SEU TELEFONE. O formato deve ser 11912345678: ");
                 telefone = input.nextLine();
                 if (telefone.equals("0") || telefone.equals("00") || telefone.equals("000"))
-                    break;
+                    Main.cliente();
 
                 System.out.println("INFORME SEU EMAIL. O e-mail deve ser válido e neste formato: faluno@email.com: ");
                 String email = input.nextLine();
                 if (email.equals("0") || email.equals("00") || email.equals("000"))
-                    break;
+                    Main.cliente();
 
                 System.out.println("INFORME UMA SENHA.");
                 senha = input.nextLine();
                 if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
-                    break;
+                    Main.cliente();
 
                 System.out.println("HORA DE ESCOLHER O SEU PLANO: ");
                 System.out.println(" ");
                 listarPlanos();
                 int plano = input.nextInt();
                 if (plano == 0)
-                    break;
+                    Main.cliente();
 
                 clienteService.cadastrarCliente(nome, idade, cpf, genero, telefone, email, senha, plano);
             } catch (NomeException e) {
@@ -270,10 +271,10 @@ public class ClienteController {
                 System.out.println(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
             } catch (EmailException e) {
                 System.out.println(MensagemExcecaoEnum.EMAIL_INVALIDO.getMensagem());
+            } catch (InputMismatchException e) {
+                System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
             }
-            break;
         }
-        Main.cliente();
     }
 
     /**
@@ -382,11 +383,11 @@ public class ClienteController {
         for (ClienteDto c : clienteDto) {
             System.out.println(
                     "║ Nome: " + c.getNome() +
-                    "\n║ CPF: " + c.getCpf() +
-                    "\n║ Telefone: " + c.getTelefone() +
-                    "\n║ Email: " + c.getEmail() +
-                    "\n║ Senha: " + c.getSenha() +
-                    "\n║ Plano: " + c.getPlano_nome());
+                            "\n║ CPF: " + c.getCpf() +
+                            "\n║ Telefone: " + c.getTelefone() +
+                            "\n║ Email: " + c.getEmail() +
+                            "\n║ Senha: " + c.getSenha() +
+                            "\n║ Plano: " + c.getPlano_nome());
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
-import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.CpfException;
 
 /**
@@ -19,8 +17,11 @@ public class ValidarCpfUtils {
      *
      * @param cpf CPF a ser validado.
      */
-    public static void validarCpf(String cpf) {
-        if (cpf == null || cpf.length() != 11 || cpf.trim().isEmpty() || !cpf.matches("\\d{11}")) {
+    public static void validarCpf(String cpfSemFormatacao) {
+
+        String cpf = cpfSemFormatacao.replaceAll("\\D", "");
+
+        if (cpf == null || cpf.trim().isEmpty()) {
             throw new CpfException(MensagemExcecaoEnum.CPF_INVALIDO.getMensagem());
         }
 

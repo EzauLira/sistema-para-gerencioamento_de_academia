@@ -17,8 +17,11 @@ public class ValidarTelefoneUtils {
      *
      * @param telefone Telefone a ser validado.
      */
-    public static void validarTelefone(String telefone) throws TelefoneException {
-        if (telefone == null || telefone.trim().isEmpty() || telefone.length() != 11 || !telefone.matches("\\d{11}")) {
+    public static void validarTelefone(String telefoneSemFormatacao) {
+
+        String telefone = telefoneSemFormatacao.replaceAll("[\\s\\-()]","");
+
+        if (telefone == null || telefone.trim().isEmpty()) {
             throw new TelefoneException(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
         }
 

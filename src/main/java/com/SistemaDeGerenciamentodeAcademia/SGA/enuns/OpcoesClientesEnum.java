@@ -9,7 +9,7 @@ public enum OpcoesClientesEnum {
             ║ [2] - INSTRUTOR              ║
             ╚══════════════════════════════╝
             Digite uma opção:"""),
-    OPCOES_CLIENTE("""
+    OPCOES_CLIENTE_LOGIN_OU_CADASTRO("""
               ╔════════════════════════════════════════════╗
               ║ Você deseja Fazer login ou se cadastrar?   ║
               ║ [1] - LOGIN                                ║

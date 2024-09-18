@@ -30,10 +30,10 @@ public interface ICadastroClienteJdbcDao {
     /**
      * Busca clientes pelo primeiro nome fornecido.
      *
-     * @param buscarClienteDto Um objeto {@link BuscarClienteDto} contendo o primeiro nome do cliente a ser buscado.
+     * @param nome Um objeto contendo o primeiro nome do cliente a ser buscado.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    void buscarPessoaPeloPrimeiroNome(BuscarClienteDto buscarClienteDto) throws SQLException;
+    List<ClienteDto> buscarPessoaPeloPrimeiroNome(String nome) throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//

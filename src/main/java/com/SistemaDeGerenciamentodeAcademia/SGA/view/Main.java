@@ -2,11 +2,13 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.view;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.controller.ClienteController;
 import com.SistemaDeGerenciamentodeAcademia.SGA.controller.InstrutorController;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.RelatorioService;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -69,23 +71,25 @@ public class Main {
     }
 
     public static void cliente() {
-        System.out.println(OpcoesClientesEnum.OPCOES_CLIENTE.getMensagem());
-        boolean deuCerto = false;
+        System.out.println(OpcoesClientesEnum.OPCOES_CLIENTE_LOGIN_OU_CADASTRO.getMensagem());
         do {
             System.out.print("");
             if (input.hasNextByte()) {
                 byte loginCadastrar = input.nextByte();
                 if (loginCadastrar == 1) {
                     clienteController.loginCliente();
-                } else {
+                } else if (loginCadastrar == 2) {
                     clienteController.cadastroCliente();
+                }else if (loginCadastrar == 0 ){
+                    inicio();
+                }else {
+                    System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
                 }
-                deuCerto = true;
             } else {
                 System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
                 input.next();
             }
-        } while (!deuCerto);
+        } while (true);
     }
 
     /**
@@ -105,6 +109,16 @@ public class Main {
             }
             clienteService.buscarClientePeloPrimeiroNome(nome);
             break;
+        }
+    }
+
+    public static void listaRetornadaDaBuscaDocliente(String nome){
+        List<ClienteDto> cliente = clienteService.buscarClientePeloPrimeiroNome(nome);
+        for (ClienteDto c : cliente){
+            System.out.println("-------------------------------------");
+            System.out.println("Clientes encontrados: \n");
+            System.out.println("Nome do cliente: " + c.getNome());
+            System.out.println("-------------------------------------");
         }
     }
 

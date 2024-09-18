@@ -48,29 +48,28 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
      * O parâmetro (buscarClienteDto) contém o nome a ser usado na busca. Se clientes correspondentes forem encontrados, os seus nomes são exibidos no console.
      *
-     * @param buscarClienteDto Parâmetro que pega o nome requisitado para buscar no banco de dados.
+     * @param nome Parâmetro que pega o nome requisitado para buscar no banco de dados.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public void buscarPessoaPeloPrimeiroNome(BuscarClienteDto buscarClienteDto) throws SQLException {
+    public List<ClienteDto> buscarPessoaPeloPrimeiroNome(String nome) throws SQLException {
+        List<ClienteDto> clienteDto = new ArrayList<>();
 
         String sql = "SELECT * FROM buscar_pessoa_pelo_primeiro_nome(?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, buscarClienteDto.getNome());
+            ps.setString(1,nome);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String nomeCliente = rs.getString(1);
+                ClienteDto cliente = new ClienteDto(rs.getString("nome"));
 
-                System.out.println("-------------------------------------");
-                System.out.println("Clientes encontrados: \n");
-                System.out.println("Nome do cliente: " + nomeCliente);
-                System.out.println("-------------------------------------");
+                clienteDto.add(cliente);
             }
         }
+        return clienteDto;
     }
 
 

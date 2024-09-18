@@ -41,6 +41,10 @@ public class ClienteDto {
         this.plano_nome = plano_nome;
     }
 
+    public ClienteDto(String nome) {
+        this.nome = nome;
+    }
+
     public String getNome() {
         return nome;
     }

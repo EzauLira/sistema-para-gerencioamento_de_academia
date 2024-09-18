@@ -6,11 +6,8 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
  */
 public enum MensagemErroEnum {
 
-    OPCAO_INVALIDA("Cadastro não concluído.\nOpção inválida! Digite uma opção válida."),
-    GENERO_INVALIDO("Entrada inválida."),
-    CPF_INVALIDO("CPF inválido."),
+    OPCAO_INVALIDA("Opção inválida! Digite uma opção válida."),
     IDADE_INVALIDA("A idade precisa ser maior que 15 anos."),
-    TELEFONE_INVALIDO("Telefone inválido."),
     EMAIL_INVALIDO("Necessário que contenho um email valido."),
     DATA_INVALIDA("Data inválida. A data de agendamento não pode ser antes da data atual."),
     NOME_INVALIDO("Nome inválido.");

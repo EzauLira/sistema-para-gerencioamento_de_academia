@@ -34,13 +34,13 @@ public class ClienteController {
             System.out.println(">> Digite seu CPF: ");
             String cpf = input.nextLine();
             if (cpf.equals("0")) {
-                break;
+                Main.cliente();
             }
 
             System.out.println(">> Digite sua SENHA: ");
             String senha = input.nextLine();
             if (senha.equals("0")) {
-                break;
+                Main.cliente();
             }
 
             if (loginClienteService.fazerLoginCliente(cpf, senha)) {
@@ -205,8 +205,8 @@ public class ClienteController {
         while (true) {
             String nome;
             String cpf;
-            int idade;
-            int genero;
+            String idade;
+            String genero;
             String telefone;
             String senha;
 
@@ -217,14 +217,12 @@ public class ClienteController {
                 if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
                     Main.cliente();
 
-                System.out.println("INFORME SUA IDADE. A idade deve ser no mínimo 15 anos. ");
-                idade = input.nextInt();
-                if (idade == 0)
+                System.out.println("INFORME SUA IDADE. A idade deve ser no mínimo 15 anos.");
+                idade = input.nextLine();
+                if (idade.equals("0"))
                     Main.cliente();
 
-                input.nextLine();
-
-                System.out.println("INFORME SEU CPF. O CPF deve ser válido e conter 11 digitos. ");
+                System.out.println("INFORME SEU CPF. O CPF deve ser válido e conter 11 digitos numéricos e pode ser com pontuação ou sem pontuação (123.456.789-10/12345678910).");
                 cpf = input.nextLine();
                 if (cpf.equals("0") || cpf.equals("00") || cpf.equals("000"))
                     Main.cliente();
@@ -232,13 +230,11 @@ public class ClienteController {
                 System.out.println("INFORME SEU GÊNERO: ");
                 System.out.println(" ");
                 listarGenero();
-                genero = input.nextInt();
-                if (genero == 0)
+                genero = input.nextLine();
+                if (genero.equals("0"))
                     Main.cliente();
 
-                input.nextLine();
-
-                System.out.println("INFORME SEU TELEFONE. O formato deve ser 11912345678: ");
+                System.out.println("INFORME SEU TELEFONE. Pode ser no formato (11912345678/(11) 95841-5900): ");
                 telefone = input.nextLine();
                 if (telefone.equals("0") || telefone.equals("00") || telefone.equals("000"))
                     Main.cliente();
@@ -256,11 +252,11 @@ public class ClienteController {
                 System.out.println("HORA DE ESCOLHER O SEU PLANO: ");
                 System.out.println(" ");
                 listarPlanos();
-                int plano = input.nextInt();
-                if (plano == 0)
+                String plano = input.nextLine();
+                if (plano.equals("0"))
                     Main.cliente();
 
-                clienteService.cadastrarCliente(nome, idade, cpf, genero, telefone, email, senha, plano);
+                clienteService.cadastrarCliente(nome, Integer.parseInt(idade), cpf, Integer.parseInt(genero), telefone, email, senha, Integer.parseInt(plano));
             } catch (NomeException e) {
                 System.out.println(MensagemExcecaoEnum.NOME_INVALIDO.getMensagem());
             } catch (IdadeException e) {
@@ -273,6 +269,8 @@ public class ClienteController {
                 System.out.println(MensagemExcecaoEnum.EMAIL_INVALIDO.getMensagem());
             } catch (InputMismatchException e) {
                 System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida insira um numero");
             }
         }
     }

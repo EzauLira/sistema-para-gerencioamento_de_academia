@@ -5,7 +5,6 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.PlanoJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
-import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente.*;
 
 import java.sql.SQLException;
@@ -82,14 +81,14 @@ public class ClienteService {
      *
      * @param nome Nome do cliente a ser buscado.
      */
-    public void buscarClientePeloPrimeiroNome(String nome) {
-        BuscarClienteDto buscarClienteDto = new BuscarClienteDto(nome);
-
+    public List<ClienteDto> buscarClientePeloPrimeiroNome(String nome) {
         try {
-            clienteJdbcDaoImpl.buscarPessoaPeloPrimeiroNome(buscarClienteDto);
+            List<ClienteDto> cliente = clienteJdbcDaoImpl.buscarPessoaPeloPrimeiroNome(nome);
+            return cliente;
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
+        return null;
     }
 
     public List<TreinosAtivosEInativosDto> listarAgendamentosAtivos(String senha){

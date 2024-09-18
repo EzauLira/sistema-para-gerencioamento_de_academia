@@ -78,19 +78,19 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
      * O parâmetro (senha) contém a senha a ser usada na busca. Se treinos correspondentes forem encontrados, os seus detalhes são adicionados à lista de treinos ativos.
      *
-     * @param senha Parâmetro que pega a senha requisitada para buscar no banco de dados.
+     * @param id Parâmetro que pega a senha requisitada para buscar no banco de dados.
      * @return Lista de treinos ativos encontrados.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<TreinosAtivosEInativosDto> listaTreinosAtivos(String senha) throws SQLException {
+    public List<TreinosAtivosEInativosDto> listaTreinosAtivos(int id) throws SQLException {
         List<TreinosAtivosEInativosDto> treinosAtivos = new ArrayList<>();
         String sql = "SELECT * FROM listar_treinos_ativos(?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, senha);
+            ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
 
@@ -112,12 +112,12 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
      * O parâmetro (senha) contém a senha a ser usada na busca. Se treinos correspondentes forem encontrados, os seus detalhes são adicionados à lista de treinos inativos.
      *
-     * @param senha Parâmetro que pega a senha requisitada para buscar no banco de dados.
+     * @param id Parâmetro que pega a senha requisitada para buscar no banco de dados.
      * @return Lista de treinos inativos encontrados.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<TreinosAtivosEInativosDto> listaTreinosInativos(String senha) throws SQLException {
+    public List<TreinosAtivosEInativosDto> listaTreinosInativos(int id) throws SQLException {
         List<TreinosAtivosEInativosDto> treinosInativos = new ArrayList<>();
 
         String sql = "SELECT * FROM listar_treinos_inativos(?)";
@@ -125,7 +125,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, senha);
+            ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
 

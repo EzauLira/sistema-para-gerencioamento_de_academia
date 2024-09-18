@@ -10,15 +10,12 @@ public class LoginClienteService {
 
     private static final LoginClienteJdbcDaoImpl loginClienteJdbcDaoImpl = new LoginClienteJdbcDaoImpl();
 
-    public boolean fazerLoginCliente(String cpf, String senha){
-        ClienteDto clienteDto = new ClienteDto(cpf, senha);
-
+    public int fazerLoginCliente(String cpf, String senha){
         try {
-            loginClienteJdbcDaoImpl.fazerLoginCliente(clienteDto);
+            return loginClienteJdbcDaoImpl.fazerLoginCliente(cpf, senha);
         }catch (SQLException e) {
             SqlException.sqlException(e);
-            return false;
         }
-        return true;
+      return 0;
     }
 }

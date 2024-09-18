@@ -91,21 +91,21 @@ public class ClienteService {
         return null;
     }
 
-    public List<TreinosAtivosEInativosDto> listarAgendamentosAtivos(String senha){
+    public List<TreinosAtivosEInativosDto> listarAgendamentosAtivos(int id) {
         try {
-            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosAtivos(senha);
+            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosAtivos(id);
             return treinos;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             SqlException.sqlException(e);
         }
         return null;
     }
 
-    public List<TreinosAtivosEInativosDto> listarAgendamentosInativos(String senha){
+    public List<TreinosAtivosEInativosDto> listarAgendamentosInativos(int id) {
         try {
-            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosInativos(senha);
+            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosInativos(id);
             return treinos;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             SqlException.sqlException(e);
         }
         return null;
@@ -121,11 +121,11 @@ public class ClienteService {
         return null;
     }
 
-    public List<ClienteDto> buscarDadosPessoaisPeloPrimeiroNome(String nome){
+    public List<ClienteDto> buscarDadosPessoaisPeloPrimeiroNome(String nome) {
         try {
             List<ClienteDto> clienteDto = clienteJdbcDaoImpl.buscarDadosPessoaisPeloPrimeiroNome(nome);
             return clienteDto;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

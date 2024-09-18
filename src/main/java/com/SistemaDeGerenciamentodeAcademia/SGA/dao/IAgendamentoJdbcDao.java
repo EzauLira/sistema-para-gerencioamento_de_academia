@@ -29,10 +29,10 @@ public interface IAgendamentoJdbcDao {
     /**
      * Agenda um novo treino na academia com base nos dados fornecidos.
      *
-     * @param agendamento Um objeto {@link AgendamentoDto} contendo os dados necessários para agendar o treino, como nome, tipo de treino, data e hora.
+     * @param id/treino/data/hora Um objeto {@link AgendamentoDto} contendo os dados necessários para agendar o treino, como nome, tipo de treino, data e hora.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    void agendarTreino(AgendamentoDto agendamento) throws SQLException;
+    void agendarTreino(int id, int treino, String data, String hora) throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//

@@ -11,7 +11,7 @@ public enum MensagemExcecaoEnum {
     IDADE_INVALIDA("\nA idade precisa ser maior que 15 anos.\n"),
     TELEFONE_INVALIDO("\nTelefone inválido. O telefone deve conter exatamente 11 dígitos numéricos, o DDD deve estar entre 01 e 99, o número de celular deve começar com 9 e não pode ter todos os dígitos iguais.\n"),
     EMAIL_INVALIDO("\nNecessário que contenho um email valido.\n"),
-    DATA_INVALIDA("\nData inválida. necessária que seja no formato Dia/Mês/Ano\n"),
+    DATA_INVALIDA("\nData inválida. necessária que seja no formato 01/01/2024\n"),
     CPF_INVALIDO("\nCPF inválido. O CPF deve conter exatamente 11 dígitos numéricos e não pode conter todos os dígitos iguais. \n");
 
     private final String mensagem;

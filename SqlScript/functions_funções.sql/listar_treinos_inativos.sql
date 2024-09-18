@@ -1,9 +1,9 @@
--- FUNCTION: public.listar_treinos_inativos(character varying)
+-- FUNCTION: public.listar_treinos_inativos(integer)
 
--- DROP FUNCTION IF EXISTS public.listar_treinos_inativos(character varying);
+-- DROP FUNCTION IF EXISTS public.listar_treinos_inativos(integer);
 
 CREATE OR REPLACE FUNCTION public.listar_treinos_inativos(
-	cliente_senha character varying)
+	p_cliente_id integer)
     RETURNS TABLE(agendamento_id integer, treino_nome character varying, data character varying, hora character varying) 
     LANGUAGE 'plpgsql'
     COST 100
@@ -23,9 +23,9 @@ BEGIN
     JOIN 
         public.treino t ON a.treino_id = t.id
     JOIN
-        public.cliente c ON a.cliente_nome = c.nome
+        public.cliente c ON a.cliente_id = c.id
     WHERE 
-        c.senha = cliente_senha
+        c.id = p_cliente_id
         AND (a.data::date < CURRENT_DATE OR (a.data::date = CURRENT_DATE AND a.hora::time <= CURRENT_TIME));
 
     IF NOT FOUND THEN
@@ -34,5 +34,5 @@ BEGIN
 END;
 $BODY$;
 
-ALTER FUNCTION public.listar_treinos_inativos(character varying)
+ALTER FUNCTION public.listar_treinos_inativos(integer)
     OWNER TO postgres;

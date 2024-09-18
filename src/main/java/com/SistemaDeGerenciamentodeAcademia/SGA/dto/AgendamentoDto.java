@@ -7,6 +7,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
  */
 public class AgendamentoDto {
 
+    private int id;
     private String nome;
     private int treino;
     private int novoTreino;
@@ -14,11 +15,14 @@ public class AgendamentoDto {
     private String hora;
     private String senha;
 
-    public AgendamentoDto(String nome, int treino, String data, String hora){
+    public AgendamentoDto(int id, String nome, int treino, int novoTreino, String data, String hora, String senha) {
+        this.id = id;
         this.nome = nome;
         this.treino = treino;
+        this.novoTreino = novoTreino;
         this.data = data;
         this.hora = hora;
+        this.senha = senha;
     }
 
     public AgendamentoDto(int treino, int novoTreino, String data, String hora){
@@ -74,5 +78,13 @@ public class AgendamentoDto {
 
     public void setNovoTreino(int novoTreino) {
         this.novoTreino = novoTreino;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

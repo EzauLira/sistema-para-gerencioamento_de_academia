@@ -27,11 +27,6 @@ public class ClienteDto {
         this.idPlano = idPlano;
     }
 
-    public ClienteDto(String cpf, String senha){
-        this.cpf = cpf;
-        this.senha = senha;
-    }
-
     public ClienteDto(String nome, String cpf, String telefone, String email, String senha, String plano_nome) {
         this.nome = nome;
         this.cpf = cpf;

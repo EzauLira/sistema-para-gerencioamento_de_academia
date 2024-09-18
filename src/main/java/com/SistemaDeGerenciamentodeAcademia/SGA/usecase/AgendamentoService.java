@@ -41,18 +41,16 @@ public class AgendamentoService {
      * Se o agendamento for criado com sucesso, uma mensagem de sucesso é exibida.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
      *
-     * @param nome Nome do cliente que está a agendar o treino.
+     * @param id ID do cliente que está a agendar o treino.
      * @param treino ID do treino a ser agendado.
      * @param data Data do agendamento.
      * @param hora Hora do agendamento.
      */
-    public void agendarTreino(String nome, int treino, String data, String hora) {
+    public void agendarTreino(int id, int treino, String data, String hora) {
         boolean sucesso = true;
 
-        AgendamentoDto agendamentoDto = new AgendamentoDto(nome, treino, data, hora);
-
         try {
-            agendamentoJdbcDao.agendarTreino(agendamentoDto);
+            agendamentoJdbcDao.agendarTreino(id, treino, data, hora);
         } catch (SQLException e) {
             SqlException.sqlException(e);
             sucesso = false;

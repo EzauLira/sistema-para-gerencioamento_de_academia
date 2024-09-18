@@ -11,22 +11,22 @@ import java.sql.SQLException;
 
 public class LoginClienteJdbcDaoImpl implements ILoginClienteJdbcDao {
 
-    public void fazerLoginCliente(ClienteDto clienteDto) throws SQLException {
+    public int fazerLoginCliente(String cpf, String senha) throws SQLException {
         String sql = "SELECT * FROM login_cliente(?,?)";
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, clienteDto.getCpf());
-            ps.setString(2, clienteDto.getSenha());
+            ps.setString(1, cpf);
+            ps.setString(2, senha);
 
             ps.execute();
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    String retorno = rs.getString(1);
-                    System.out.println("\n"+retorno+"\n");
+                    return rs.getInt("cliente_id");
                 }
             }
         }
+        return 0;
     }
 }

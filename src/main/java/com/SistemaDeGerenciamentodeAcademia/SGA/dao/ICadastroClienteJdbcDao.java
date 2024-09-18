@@ -41,10 +41,10 @@ public interface ICadastroClienteJdbcDao {
     /**
      * Lista Treinos ativos do cliente.
      *
-     * @param senha Um parametro {@link String} contendo a senha do cliente através dela todos os treinos ativos serão buscados.
+     * @param id Um parametro {@link String} contendo a senha do cliente através dela todos os treinos ativos serão buscados.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    List<TreinosAtivosEInativosDto> listaTreinosAtivos(String senha) throws SQLException;
+    List<TreinosAtivosEInativosDto> listaTreinosAtivos(int id) throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//
@@ -52,10 +52,10 @@ public interface ICadastroClienteJdbcDao {
     /**
      * Lista Treinos inativos do cliente.
      *
-     * @param senha Um parametro {@link String} contendo a senha do cliente através dela todos os treinos inativos serão buscados.
+     * @param id Um parametro {@link String} contendo a senha do cliente através dela todos os treinos inativos serão buscados.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    List<TreinosAtivosEInativosDto> listaTreinosInativos(String senha) throws SQLException;
+    List<TreinosAtivosEInativosDto> listaTreinosInativos(int id) throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//

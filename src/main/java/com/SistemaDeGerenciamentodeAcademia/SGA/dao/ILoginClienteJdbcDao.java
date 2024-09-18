@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 public interface ILoginClienteJdbcDao {
 
-    void fazerLoginCliente(ClienteDto clienteDto) throws SQLException;
+    int fazerLoginCliente(String cpf, String senha) throws SQLException;
 }

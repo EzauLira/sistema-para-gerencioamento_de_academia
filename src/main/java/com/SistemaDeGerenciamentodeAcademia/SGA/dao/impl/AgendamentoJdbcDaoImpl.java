@@ -48,21 +48,21 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
      * Agenda um treino na academia chamando a função (SELECT * FROM agendar_treino) no banco de dados.
      * A função recebe os dados do usuário e os insere conforme os parâmetros especificados.
      *
-     * @param agendamento Parâmetro que pega os dados do usuário para agendar um treino na academia.
+     * @param id, treino, data, hora Parâmetro que pega os dados do usuário para agendar um treino na academia.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public void agendarTreino(AgendamentoDto agendamento) throws SQLException {
+    public void agendarTreino(int id, int treino, String data, String hora) throws SQLException {
 
         String sql = "SELECT * FROM agendar_treino(?, ?, ?, ?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, agendamento.getNome());
-            ps.setInt(2, agendamento.getTreino());
-            ps.setString(3, agendamento.getData());
-            ps.setString(4, agendamento.getHora());
+            ps.setInt(1, id);
+            ps.setInt(2, treino);
+            ps.setString(3, data);
+            ps.setString(4, hora);
 
             ps.execute();
         }

@@ -3,12 +3,12 @@
 -- DROP FUNCTION IF EXISTS public.cadastrar_instrutor(character varying, character varying, integer, character varying, character varying, character varying);
 
 CREATE OR REPLACE FUNCTION public.cadastrar_instrutor(
-    p_nome character varying,
-    p_cpf character varying,
-    p_genero integer,
-    p_telefone character varying,
-    p_email character varying,
-    p_senha character varying)
+	p_nome character varying,
+	p_cpf character varying,
+	p_genero integer,
+	p_telefone character varying,
+	p_email character varying,
+	p_senha character varying)
     RETURNS text
     LANGUAGE 'plpgsql'
     COST 100

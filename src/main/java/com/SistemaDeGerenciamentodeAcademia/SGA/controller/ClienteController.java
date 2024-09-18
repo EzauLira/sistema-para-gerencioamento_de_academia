@@ -43,8 +43,10 @@ public class ClienteController {
                 Main.cliente();
             }
 
-            if (loginClienteService.fazerLoginCliente(cpf, senha)) {
-                menuDoCliente();
+            int id = loginClienteService.fazerLoginCliente(cpf, senha);
+
+            if (id != 0) {
+                menuDoCliente(id);
                 break;
             } else {
                 System.out.println("\n[1] - Para tentar logar novamente. \n[2] - Para cadastrar-se.");
@@ -58,18 +60,10 @@ public class ClienteController {
         }
     }
 
-    public static void agendatTreino() {
+    public static void agendatTreino(int id) {
 
         System.out.println("Opção escolhida: AGENDAMENTE. Vamos agendar seu treino.\n");
         while (true) {
-            String nome;
-            input.nextLine();
-            do {
-                System.out.println("INFORME o NOME. O nome deve ser o mesmo nome do cadastro. Digite 0 para voltar");
-                nome = input.nextLine();
-                if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
-                    break;
-            } while (agendamentoService.validarNome(nome));
 
             System.out.println("\nO que você vai querer treinar? \n");
             listarTreinos();
@@ -92,58 +86,33 @@ public class ClienteController {
             if (hora.equals("0"))
                 break;
 
-            agendamentoService.agendarTreino(nome, treino, data, hora);
+            agendamentoService.agendarTreino(id, treino, data, hora);
             break;
         }
     }
 
-    public static void listarAgendaAtiva() {
+    public static void listarAgendaAtiva(int id) {
         System.out.println("Opção escolhida: LISTAR AGENDA ATIVA. Vamos listar seus treinos ativos.\n");
-        while (true) {
-            input.nextLine();
-            System.out.println("INFORME SUA SENHA");
-            String senha = input.nextLine();
-            if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
-                break;
-            System.out.println("\n");
-            listarAgendamentoAtivo(senha);
-            break;
-        }
+        listarAgendamentoAtivo(id);
+
     }
 
-    public static void listarAgendaInativa() {
-        while (true) {
-            System.out.println("Opção escolhida: LISTAR AGENDA INATIVA. Vamos listar seus treinos inativos.\n");
-
-            input.nextLine();
-            System.out.println("INFORME SUA SENHA");
-            String senha = input.nextLine();
-            if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
-                break;
-
-            System.out.println("\n");
-            listarAgendamentoInativo(senha);
-            break;
-        }
+    public static void listarAgendaInativa(int id) {
+        System.out.println("Opção escolhida: LISTAR AGENDA INATIVA. Vamos listar seus treinos inativos.\n");
+        listarAgendamentoInativo(id);
     }
 
-    public static void atualizarTreinoAtivo() {
+    public static void atualizarTreinoAtivo(int id) {
         while (true) {
             System.out.println("Opção escolhida: ATUALIZAR TREINO ATIVO. Vamos atualizar seus treinos ativos.\n");
-
-            input.nextLine();
-            System.out.println("INFORME SUA SENHA");
-            String senha = input.nextLine();
-            if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
-                break;
 
             int trieinoEscolhido;
             int novoTreino;
             String data;
             String hora;
             System.out.println(" ");
-            listarAgendamentoAtivo(senha);
-            System.out.println("\nFavor, escolha um treino que deseja atualizar");
+            listarAgendamentoAtivo(id);
+            System.out.println("\nFavor, escolha um treino que deseja atualizar, se não houver digite 0 para sair.");
             trieinoEscolhido = input.nextInt();
             if (trieinoEscolhido == 0)
                 break;
@@ -172,21 +141,16 @@ public class ClienteController {
         }
     }
 
-    public static void cancelarTreino() {
+    public static void cancelarTreino(int id) {
         while (true) {
             System.out.println("Opção escolhida: CANCELAR TREINO. Vamos cancelar seu treino.\n");
 
-            input.nextLine();
-            System.out.println("INFORME SUA SENHA");
-            String senha = input.nextLine();
-            if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
-                break;
             System.out.println(" ");
 
             int trieinoEscolhido;
-            listarAgendamentoAtivo(senha);
+            listarAgendamentoAtivo(id);
 
-            System.out.println("\nFavor, escolha um treino que deseja cancelar");
+            System.out.println("\nFavor, escolha um treino que deseja cancelar, se não houver digite 0 para sair");
             trieinoEscolhido = input.nextInt();
             if (trieinoEscolhido == 0)
                 break;
@@ -272,13 +236,15 @@ public class ClienteController {
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida insira um numero");
             }
+            break;
         }
+        Main.cliente();
     }
 
     /**
      * Método que possuí um menu infinito que marca um agendamento para o treino na academia.
      */
-    public static void menuDoCliente() {
+    public static void menuDoCliente(int id) {
 
         System.out.println(OpcoesClientesEnum.MENU_INFORMATIVO_CLIENTE.getMensagem());
 
@@ -288,22 +254,22 @@ public class ClienteController {
                 byte opcao = input.nextByte();
                 switch (opcao) {
                     case 1:
-                        agendatTreino();
+                        agendatTreino(id);
                         break;
 
                     case 2:
-                        listarAgendaAtiva();
+                        listarAgendaAtiva(id);
                         break;
 
                     case 3:
-                        listarAgendaInativa();
+                        listarAgendaInativa(id);
                         break;
 
                     case 4:
-                        atualizarTreinoAtivo();
+                        atualizarTreinoAtivo(id);
                         break;
                     case 5:
-                        cancelarTreino();
+                        cancelarTreino(id);
                         break;
                     case 6:
                         buscarDadosPessoaisPeloPrimeiroNome();
@@ -343,20 +309,29 @@ public class ClienteController {
 
     public static void listarTreinos() {
         List<Treino> treinos = agendamentoService.listarTreinos();
+        if (treinos == null) {
+            return;
+        }
         for (Treino t : treinos) {
             System.out.println("║" + t.getId() + " - " + t.getNome() + " - " + t.getDescricao());
         }
     }
 
-    public static void listarAgendamentoAtivo(String senha) {
-        List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosAtivos(senha);
+    public static void listarAgendamentoAtivo(int id) {
+        List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosAtivos(id);
+        if (treino == null) {
+            return;
+        }
         for (TreinosAtivosEInativosDto t : treino) {
             System.out.println("║" + "[" + t.getId() + "] - " + t.getNome() + " - " + t.getData() + " - " + t.getHora());
         }
     }
 
-    public static void listarAgendamentoInativo(String senha) {
-        List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosInativos(senha);
+    public static void listarAgendamentoInativo(int id) {
+        List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosInativos(id);
+        if (treino == null) {
+            return;
+        }
         for (TreinosAtivosEInativosDto t : treino) {
             System.out.println("║" + "[" + t.getId() + "] - " + t.getNome() + " - " + t.getData() + " - " + t.getHora());
         }

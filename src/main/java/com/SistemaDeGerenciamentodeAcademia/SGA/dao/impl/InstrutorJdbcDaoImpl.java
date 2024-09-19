@@ -17,6 +17,7 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
      *
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
+    @Override
     public void cadastrarInstrutor(InstrutorDto instrutorDto) throws SQLException {
         String sql = "SELECT * FROM cadastrar_instrutor(?, ?, ?, ?, ?, ?)";
         try (Connection connection = BancoDadosConfig.getConnection();

@@ -1,14 +1,14 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento;
+package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 
 /**
- * Classe utilitária para validação de nomes de agendamento.
+ * Classe utilitária para validação de nomes de relatórios.
  */
-public class ValidarNomeAgendamentoUtils {
+public class ValidarNomeRelatorioUtils {
 
     /**
-     * Valida o nome fornecido para agendamento.
+     * Valida o nome fornecido para relatórios.
      * Exibe uma mensagem de erro se o nome for inválido.
      *
      * @param nome Nome a ser validado.
@@ -16,10 +16,10 @@ public class ValidarNomeAgendamentoUtils {
      */
     public static boolean validarNome(String nome) {
 
-        if (nome.trim().isEmpty() || nome.length() < 10){
+        if (nome.trim().isEmpty() || nome.length() < 10 || nome.matches(".*\\d.*")){
             System.out.println(MensagemErroEnum.NOME_INVALIDO.getMensagem());
             return true;
-        }else {
+        } else {
             return false;
         }
     }

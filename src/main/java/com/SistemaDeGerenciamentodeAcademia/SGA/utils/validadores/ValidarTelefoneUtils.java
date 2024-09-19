@@ -1,4 +1,4 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente;
+package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.TelefoneException;
@@ -15,7 +15,7 @@ public class ValidarTelefoneUtils {
      * Verifica se o número não é composto por todos os mesmos dígitos
      * Lança uma exceção se o telefone for inválido.
      *
-     * @param telefone Telefone a ser validado.
+     * @param telefoneSemFormatacao Telefone vindo ser formatação para ser validado.
      */
     public static void validarTelefone(String telefoneSemFormatacao) {
 

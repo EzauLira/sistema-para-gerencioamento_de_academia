@@ -2,7 +2,6 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.ILoginClienteJdbcDao;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

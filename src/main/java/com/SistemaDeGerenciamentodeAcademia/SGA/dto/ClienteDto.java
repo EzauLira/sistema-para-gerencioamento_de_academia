@@ -1,10 +1,12 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
 
+import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Cliente;
+
 /**
  * Data Transfer Object (DTO) para representar os dados de um cliente na academia.
  * Este objeto é utilizado para transferir as informações necessárias para cadastrar ou atualizar um cliente.
  */
-public class ClienteDto {
+public class ClienteDto{
 
     private String nome;
     private int idade;

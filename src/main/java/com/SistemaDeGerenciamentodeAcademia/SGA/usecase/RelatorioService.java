@@ -3,7 +3,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.PegarEstatisticaJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ColetarRelatorioDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
-import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorRelatoiroUtils.ValidarNomeRelatorioUtils;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarNomeRelatorioUtils;
 
 import java.sql.SQLException;
 

@@ -13,7 +13,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.AgendamentoService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.LoginClienteService;
-import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarHoraUtils;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensConstanteUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
 import java.util.InputMismatchException;
@@ -32,13 +32,13 @@ public class ClienteController {
         System.out.println(OpcoesClientesEnum.MENU_LOGIN_CLIENTE.getMensagem());
         while (true) {
 
-            System.out.println(">> Digite seu CPF: ");
+            System.out.println(MensagensConstanteUtils.LOGIN_DIGITE_CPF);
             String cpf = input.nextLine();
             if (cpf.equals("0")) {
                 Main.cliente();
             }
 
-            System.out.println(">> Digite sua SENHA: ");
+            System.out.println(MensagensConstanteUtils.LOGIN_DIGITE_SENHA);
             String senha = input.nextLine();
             if (senha.equals("0")) {
                 Main.cliente();
@@ -50,7 +50,7 @@ public class ClienteController {
                 menuDoCliente(id);
                 break;
             } else {
-                System.out.println("\n[1] - Para tentar logar novamente. \n[2] - Para cadastrar-se.");
+                System.out.println(OpcoesClientesEnum.MSG_TENTAR_NOVAMENTE.getMensagem());
                 byte op = input.nextByte();
                 if (op == 1) {
                     input.nextLine();
@@ -63,10 +63,10 @@ public class ClienteController {
 
     public static void agendatTreino(int id) {
 
-        System.out.println("Opção escolhida: AGENDAMENTE. Vamos agendar seu treino.\n");
+        System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_AGENDADMENTO.getMensagem());
         while (true) {
 
-            System.out.println("\nO que você vai querer treinar? \n");
+            System.out.println(MensagensConstanteUtils.AGENDA_OQUE_VAI_TREINAR);
             listarTreinos();
             int treino = input.nextInt();
             if (treino == 0)
@@ -76,7 +76,7 @@ public class ClienteController {
 
             String data;
             do {
-                System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato 01/01/2024.");
+                System.out.println(MensagensConstanteUtils.AGENDA_ESCOLHA_DATA);
                 data = input.nextLine();
                 if (data.equals("0"))
                     break;
@@ -84,7 +84,7 @@ public class ClienteController {
 
             String hora;
             do {
-                System.out.println("Escolha a HORA do treino.");
+                System.out.println(MensagensConstanteUtils.AGENDA_ESCOLHA_HORA);
                 hora = input.nextLine();
                 if (hora.equals("0"))
                     break;
@@ -97,19 +97,19 @@ public class ClienteController {
     }
 
     public static void listarAgendaAtiva(int id) {
-        System.out.println("Opção escolhida: LISTAR AGENDA ATIVA. Vamos listar seus treinos ativos.\n");
+        System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_LISTA_ATIVA.getMensagem());
         listarAgendamentoAtivo(id);
 
     }
 
     public static void listarAgendaInativa(int id) {
-        System.out.println("Opção escolhida: LISTAR AGENDA INATIVA. Vamos listar seus treinos inativos.\n");
+        System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_LISTA_INATIVA.getMensagem());
         listarAgendamentoInativo(id);
     }
 
     public static void atualizarTreinoAtivo(int id) {
         while (true) {
-            System.out.println("Opção escolhida: ATUALIZAR TREINO ATIVO. Vamos atualizar seus treinos ativos.\n");
+            System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_TREINO_ATIVO.getMensagem());
 
             int trieinoEscolhido;
             int novoTreino;
@@ -117,27 +117,27 @@ public class ClienteController {
             String hora;
             System.out.println(" ");
             listarAgendamentoAtivo(id);
-            System.out.println("\nFavor, escolha um treino que deseja atualizar, se não houver digite 0 para sair.");
+            System.out.println(MensagensConstanteUtils.ATUALIZAR_TREINO_QUE_DESEJA_ATUALIZAR);
             trieinoEscolhido = input.nextInt();
             if (trieinoEscolhido == 0)
                 break;
 
             System.out.println(" ");
             listarTreinos();
-            System.out.println("\nEscolha seu novo treino");
+            System.out.println(MensagensConstanteUtils.ATUALIZAR_NOVO_TREINO);
             novoTreino = input.nextInt();
             if (novoTreino == 0)
                 break;
 
             input.nextLine();
             do {
-                System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato Dia/Mês/Ano.");
+                System.out.println(MensagensConstanteUtils.ATUALIZAR_ESCOLHA_DATA_TREINO);
                 data = input.nextLine();
                 if (data.equals("0"))
                     break;
             } while (agendamentoService.validarData(data));
 
-            System.out.println("Escolha a HORA do treino.");
+            System.out.println(MensagensConstanteUtils.ATUALIZAR_ESCOLHA_HORA_TREINO);
             hora = input.nextLine();
             if (hora.equals("0"))
                 break;
@@ -148,14 +148,14 @@ public class ClienteController {
 
     public static void cancelarTreino(int id) {
         while (true) {
-            System.out.println("Opção escolhida: CANCELAR TREINO. Vamos cancelar seu treino.\n");
+            System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_CANCELAR_TREINO.getMensagem());
 
             System.out.println(" ");
 
             int trieinoEscolhido;
             listarAgendamentoAtivo(id);
 
-            System.out.println("\nFavor, escolha um treino que deseja cancelar, se não houver digite 0 para sair");
+            System.out.println(MensagensConstanteUtils.CANCELAR_ESCOLHA_UM_TREINO_PARA_CANCELAR);
             trieinoEscolhido = input.nextInt();
             if (trieinoEscolhido == 0)
                 break;
@@ -181,44 +181,44 @@ public class ClienteController {
 
             try {
                 input.nextLine();
-                System.out.println("INFORME SEU NOME. O nome deve conter no mínimo 10 caracteres e não pode haver numeros.");
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_NOME);
                 nome = input.nextLine();
                 if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
                     Main.cliente();
 
-                System.out.println("INFORME SUA IDADE. A idade deve ser no mínimo 15 anos.");
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SUA_IDADE);
                 idade = input.nextLine();
                 if (idade.equals("0"))
                     Main.cliente();
 
-                System.out.println("INFORME SEU CPF. O CPF deve ser válido e conter 11 digitos numéricos e pode ser com pontuação ou sem pontuação (123.456.789-10/12345678910).");
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_CPF);
                 cpf = input.nextLine();
                 if (cpf.equals("0") || cpf.equals("00") || cpf.equals("000"))
                     Main.cliente();
 
-                System.out.println("INFORME SEU GÊNERO: ");
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_GENERO);
                 System.out.println(" ");
                 listarGenero();
                 genero = input.nextLine();
                 if (genero.equals("0"))
                     Main.cliente();
 
-                System.out.println("INFORME SEU TELEFONE. Pode ser no formato (11912345678/(11) 95841-5900): ");
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_TELEFONE);
                 telefone = input.nextLine();
                 if (telefone.equals("0") || telefone.equals("00") || telefone.equals("000"))
                     Main.cliente();
 
-                System.out.println("INFORME SEU EMAIL. O e-mail deve ser válido e neste formato: faluno@email.com: ");
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_EMAIL);
                 String email = input.nextLine();
                 if (email.equals("0") || email.equals("00") || email.equals("000"))
                     Main.cliente();
 
-                System.out.println("INFORME UMA SENHA. A senha deve ter no mínimo 5 caracteres, incluindo pelo menos uma letra maiúscula, um número e um caractere especial (@ ou .)");
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SUA_SENHA);
                 senha = input.nextLine();
                 if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
                     Main.cliente();
 
-                System.out.println("HORA DE ESCOLHER O SEU PLANO: ");
+                System.out.println(MensagensConstanteUtils.CADASTRO_ESCOLHA_SEU_PLANO);
                 System.out.println(" ");
                 listarPlanos();
                 String plano = input.nextLine();
@@ -239,7 +239,7 @@ public class ClienteController {
             } catch (InputMismatchException e) {
                 System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
             } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida insira um numero");
+                System.out.println(MensagensConstanteUtils.CADASTRO_ENTRADA_INVALIDA);
             }
             break;
         }
@@ -280,7 +280,7 @@ public class ClienteController {
                         buscarDadosPessoaisPeloPrimeiroNome();
                         break;
                     case 0:
-                        System.out.println("Saindo da conta...");
+                        System.out.println(MensagensConstanteUtils.MENU_CLIENE_SAINDO);
                         Timer.tempoCorrido();
                         Main.inicio();
                         break;
@@ -301,7 +301,7 @@ public class ClienteController {
         while (true) {
             String nome;
             input.nextLine();
-            System.out.println("INFORME SEU PRIMEIRO NOME.");
+            System.out.println(MensagensConstanteUtils.DADOS_PESSOAIS);
             nome = input.nextLine();
             System.out.println(" ");
             if (nome.equals("0") || nome.equals("00") || nome.equals("000")) {

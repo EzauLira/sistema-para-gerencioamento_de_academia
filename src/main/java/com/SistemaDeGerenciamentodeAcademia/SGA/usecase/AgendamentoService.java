@@ -5,9 +5,8 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
-import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarDataAgendamentoUtils;
-import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarHoraUtils;
-import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarNomeAgendamentoUtils;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarDataUtils;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarHoraUtils;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -114,7 +113,7 @@ public class AgendamentoService {
      * @return true se a data for válida, false caso contrário.
      */
     public boolean validarData(String data) {
-        return ValidarDataAgendamentoUtils.validarDataAgendamento(data);
+        return ValidarDataUtils.validarDataAgendamento(data);
     }
 
     public boolean validarHora(String hora){

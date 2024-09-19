@@ -1,4 +1,4 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento;
+package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Classe utilitária para validação de datas de agendamento.
  */
-public class ValidarDataAgendamentoUtils {
+public class ValidarDataUtils {
 
     /**
      * Valida se a data fornecida iguala a data atual formatada.

@@ -5,7 +5,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.PlanoJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
-import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente.*;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.*;
 
 import java.sql.SQLException;
 import java.util.List;

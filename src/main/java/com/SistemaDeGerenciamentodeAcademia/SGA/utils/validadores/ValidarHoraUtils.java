@@ -1,4 +1,4 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento;
+package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
 

@@ -9,6 +9,12 @@ public enum OpcoesClientesEnum {
             ║ [2] - INSTRUTOR              ║
             ╚══════════════════════════════╝
             Digite uma opção:"""),
+    MSG_TENTAR_NOVAMENTE("""
+            ╔════════════════════════════════════╗
+            ║ [1] - Para tentar logar novamente. ║
+            ║ [2] - Para cadastrar-se.           ║
+            ╚════════════════════════════════════╝
+            Digite uma opção:"""),
     OPCOES_CLIENTE_LOGIN_OU_CADASTRO("""
               ╔════════════════════════════════════════════╗
               ║ Você deseja Fazer login ou se cadastrar?   ║
@@ -38,6 +44,26 @@ public enum OpcoesClientesEnum {
               ║ ATENÇÃO: Siga as instruções do cadastro. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
               ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝
               Precione ENTER para continuar:"""),
+    OP_ESCOLHIDA_AGENDADMENTO("""
+              ╔═════════════════════════════════════════════════════════╗
+              ║ Opção escolhida: AGENDAMENTE. Vamos agendar seu treino. ║
+              ╚═════════════════════════════════════════════════════════╝"""),
+    OP_ESCOLHIDA_LISTA_ATIVA("""
+              ╔═════════════════════════════════════════════════════════════════════════╗
+              ║ Opção escolhida: LISTAR AGENDA ATIVA. Vamos listar seus treinos ativos. ║
+              ╚═════════════════════════════════════════════════════════════════════════╝"""),
+    OP_ESCOLHIDA_LISTA_INATIVA("""
+              ╔═════════════════════════════════════════════════════════════════════════════╗
+              ║ Opção escolhida: LISTAR AGENDA INATIVA. Vamos listar seus treinos inativos. ║
+              ╚═════════════════════════════════════════════════════════════════════════════╝"""),
+    OP_ESCOLHIDA_TREINO_ATIVO("""
+              ╔═══════════════════════════════════════════════════════════════════════════════╗
+              ║ Opção escolhida: ATUALIZAR TREINO ATIVO. Vamos atualizar seus treinos ativos. ║
+              ╚═══════════════════════════════════════════════════════════════════════════════╝"""),
+    OP_ESCOLHIDA_CANCELAR_TREINO("""
+              ╔══════════════════════════════════════════════════════════════╗
+              ║ Opção escolhida: CANCELAR TREINO. Vamos cancelar seu treino. ║
+              ╚══════════════════════════════════════════════════════════════╝"""),
     OPCOES_MENU_CLIENTE("""
               
               ╔════════════════════════════════════════════╗

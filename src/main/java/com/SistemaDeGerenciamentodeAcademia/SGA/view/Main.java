@@ -25,9 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ClienteController.agendatTreino(6);
-
-        //inicio();
+        inicio();
 
     }
 
@@ -165,75 +163,4 @@ public class Main {
                 break;
         }
     }
-
-//    /**
-//     * Método principal que percorre todo os menus, para fazer o cadastro e agendamento do treino da academia.
-//     */
-//    public static void menuPrincipal() {
-//        System.out.println("\n|| SISTEMA PARA GERENCIAMENTO DE ACADEMIA ||");
-//
-//        while (true) {
-//            try {
-//                System.out.println("\n|| MENU PRINCIPAL ||");
-//
-//                System.out.println("\n(1) - Menu Cliente");
-//                System.out.println("(3) - Ver relatórios");
-//                System.out.println("(0) - Sair");
-//                System.out.println("\nEscolha uma opção: ");
-//
-//                opcao = input.nextByte();
-//                switch (opcao) {
-//                    case 1:
-//                        menuCliente();
-//                        break;
-//                    case 3:
-//                        menuRelatorios();
-//                        break;
-//                    case 0:
-//                        System.out.println("Aplicação encerrada.");
-//                        System.exit(0);
-//                        break;
-//                    default:
-//                        System.out.println(MensagemErroEnum.OPCAO_INVALIDA.getMensagem());
-//                        break;
-//                }
-//            } catch (InputMismatchException e) {
-//                System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
-//
-//                input.nextLine();
-//            }
-//        }
-//    }
-
-//    /**
-//     * Método que possuí um menu com as opções do cliente.
-//     */
-//    public static void menuCliente() {
-//
-//        while (true) {
-//
-//            System.out.println("\n|| MENU CLIENTE ||");
-//
-//            System.out.println("\n(1) - Cadastrar um cliente");
-//            System.out.println("(2) - Buscar cliente");
-//            System.out.println("(0) - Voltar");
-//
-//            opcao = input.nextByte();
-//            switch (opcao) {
-//                case 1:
-//                    cadastroCliente();
-//                    break;
-//                case 2:
-//                    buscarClientePeloNome();
-//                    break;
-//                case 0:
-//                    menuPrincipal();
-//                default:
-//                    System.out.println(MensagemErroEnum.OPCAO_INVALIDA.getMensagem());
-//                    break;
-//            }
-//        }
-//    }
-
-
 }

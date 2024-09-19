@@ -1,4 +1,4 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorCliente;
+package com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.IdadeException;

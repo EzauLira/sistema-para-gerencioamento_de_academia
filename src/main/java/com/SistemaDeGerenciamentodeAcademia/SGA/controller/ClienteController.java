@@ -13,6 +13,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.AgendamentoService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.LoginClienteService;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarHoraUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
 import java.util.InputMismatchException;
@@ -75,16 +76,20 @@ public class ClienteController {
 
             String data;
             do {
-                System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato Dia/Mês/Ano.");
+                System.out.println("Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato 01/01/2024.");
                 data = input.nextLine();
                 if (data.equals("0"))
                     break;
             } while (agendamentoService.validarData(data));
 
-            System.out.println("Escolha a HORA do treino.");
-            String hora = input.nextLine();
-            if (hora.equals("0"))
-                break;
+            String hora;
+            do {
+                System.out.println("Escolha a HORA do treino.");
+                hora = input.nextLine();
+                if (hora.equals("0"))
+                    break;
+            } while (!agendamentoService.validarHora(hora));
+
 
             agendamentoService.agendarTreino(id, treino, data, hora);
             break;
@@ -208,7 +213,7 @@ public class ClienteController {
                 if (email.equals("0") || email.equals("00") || email.equals("000"))
                     Main.cliente();
 
-                System.out.println("INFORME UMA SENHA.");
+                System.out.println("INFORME UMA SENHA. A senha deve ter no mínimo 5 caracteres, incluindo pelo menos uma letra maiúscula, um número e um caractere especial (@ ou .)");
                 senha = input.nextLine();
                 if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
                     Main.cliente();

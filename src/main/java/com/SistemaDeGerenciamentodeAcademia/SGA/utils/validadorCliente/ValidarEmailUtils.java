@@ -16,8 +16,10 @@ public class ValidarEmailUtils {
      */
     public static void validarEmail(String email){
 
-        if (email.trim().isEmpty() || !email.contains("@") && !email.contains(".com")){
+        if (email.trim().isEmpty() || !email.contains("@") ||
+                (!email.contains(".com") && !email.contains(".br") && !email.contains(".org"))) {
             throw new EmailException(MensagemErroEnum.EMAIL_INVALIDO.getMensagem());
         }
+
     }
 }

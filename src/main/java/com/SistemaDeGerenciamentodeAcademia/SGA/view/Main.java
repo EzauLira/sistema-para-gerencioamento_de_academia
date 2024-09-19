@@ -25,8 +25,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        inicio();
+        ClienteController.agendatTreino(6);
 
+        //inicio();
 
     }
 

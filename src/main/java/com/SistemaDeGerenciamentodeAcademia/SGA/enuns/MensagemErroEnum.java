@@ -11,6 +11,7 @@ public enum MensagemErroEnum {
     IDADE_INVALIDA("A idade precisa ser maior que 15 anos."),
     EMAIL_INVALIDO("Necessário que contenho um email valido."),
     DATA_INVALIDA("Data inválida. A data de agendamento não pode ser antes da data atual."),
+    DATA_INVALIDA_MAIOR("A data de agendamento não pode ser superior a um ano a partir da data atual."),
     NOME_INVALIDO("Nome inválido.");
 
     private final String mensagem;

@@ -1,17 +1,15 @@
+-- FUNCTION: public.buscar_dados_pessoais_pelo_primeiro_nome(character varying)
+
+-- DROP FUNCTION IF EXISTS public.buscar_dados_pessoais_pelo_primeiro_nome(character varying);
+
 CREATE OR REPLACE FUNCTION public.buscar_dados_pessoais_pelo_primeiro_nome(
-    primeiro_nome character varying)
-    RETURNS TABLE(
-        nome character varying,
-        cpf character varying,
-        telefone character varying,
-        email character varying,
-        senha character varying,
-        plano_nome character varying
-    )
+	primeiro_nome character varying)
+    RETURNS TABLE(nome character varying, cpf character varying, telefone character varying, email character varying, senha character varying, plano_nome character varying) 
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE
     ROWS 1000
+
 AS $BODY$
 BEGIN
     -- Verifica se existe algum cliente com o nome fornecido

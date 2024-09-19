@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class ValidarDataAgendamentoUtils {
 
     /**
-     * Valida se a data fornecida é igual à data atual formatada.
+     * Valida se a data fornecida iguala a data atual formatada.
      * Exibe uma mensagem de erro se a data for inválida.
      *
      * @param data Data a ser validada no formato "dd/MM/yyyy".
@@ -22,15 +22,18 @@ public class ValidarDataAgendamentoUtils {
      */
     public static boolean validarDataAgendamento(String data) {
         try {
-
             DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate dataAtual = LocalDate.now();
             LocalDate dataVinda = LocalDate.parse(data, dataFormatada);
+            LocalDate dataLimite = dataAtual.plusYears(1);
 
-            if (dataVinda.isBefore(dataAtual)){
+            if (dataVinda.isBefore(dataAtual)) {
                 System.out.println(MensagemErroEnum.DATA_INVALIDA.getMensagem());
                 return true;
-            }else {
+            } else if (dataVinda.isAfter(dataLimite)) {
+                System.out.println(MensagemErroEnum.DATA_INVALIDA_MAIOR.getMensagem());
+                return true;
+            } else {
                 return false;
             }
         } catch (DateTimeParseException e) {
@@ -38,4 +41,5 @@ public class ValidarDataAgendamentoUtils {
         }
         return true;
     }
+
 }

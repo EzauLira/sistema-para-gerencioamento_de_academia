@@ -16,7 +16,7 @@ public class ValidarNomeUtils {
      */
     public static void validarNome(String nome) {
 
-        if (nome.trim().isEmpty() || nome.length() < 10) {
+        if (nome.trim().isEmpty() || nome.length() < 10 || nome.matches(".*\\d.*")) {
             throw new NomeException(MensagemErroEnum.NOME_INVALIDO.getMensagem());
         }
     }

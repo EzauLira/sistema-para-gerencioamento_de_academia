@@ -6,6 +6,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarDataAgendamentoUtils;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarHoraUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadorAgendamento.ValidarNomeAgendamentoUtils;
 
 import java.sql.SQLException;
@@ -52,7 +53,7 @@ public class AgendamentoService {
         try {
             agendamentoJdbcDao.agendarTreino(id, treino, data, hora);
         } catch (SQLException e) {
-            SqlException.sqlException(e);
+          SqlException.sqlException(e);
             sucesso = false;
         } finally {
             if (sucesso) {
@@ -107,16 +108,6 @@ public class AgendamentoService {
     }
 
     /**
-     * Valida o nome fornecido para o agendamento.
-     *
-     * @param nome Nome a ser validado.
-     * @return true se o nome for válido, false caso contrário.
-     */
-    public boolean validarNome(String nome) {
-        return ValidarNomeAgendamentoUtils.validarNome(nome);
-    }
-
-    /**
      * Valida a data fornecida para o agendamento.
      *
      * @param data Data a ser validada.
@@ -124,5 +115,9 @@ public class AgendamentoService {
      */
     public boolean validarData(String data) {
         return ValidarDataAgendamentoUtils.validarDataAgendamento(data);
+    }
+
+    public boolean validarHora(String hora){
+        return ValidarHoraUtils.validarHora(hora);
     }
 }

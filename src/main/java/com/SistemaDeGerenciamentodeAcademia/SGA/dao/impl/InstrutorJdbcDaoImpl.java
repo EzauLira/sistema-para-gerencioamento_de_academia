@@ -36,6 +36,16 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
 
         }
     }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Método que lista os agendamentos de hoje.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     *
+     * @return Lista de agendamentos de hoje.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public List<AgendamentoDto> listarAgendamentosDeHoje() throws SQLException {
         List<AgendamentoDto> agendamentosHoje = new ArrayList<>();
@@ -56,6 +66,16 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
         return agendamentosHoje;
     }
 
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Método que lista os treinos de um cliente específico.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     *
+     * @param nome Nome do cliente para listar os treinos.
+     * @return Lista de treinos do cliente específico.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public List<AgendamentoDto> listarTreinosDeUmClienteEspecifico(String nome) throws SQLException {
         List<AgendamentoDto> listarTreinosEspecifico = new ArrayList<>();
@@ -81,6 +101,16 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
         return listarTreinosEspecifico;
     }
 
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Método que busca o histórico de treinos de um cliente específico.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     *
+     * @param nome Nome do cliente para buscar o histórico de treinos.
+     * @return Lista de histórico de treinos do cliente específico.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
     @Override
     public List<AgendamentoDto> buscarHistoricoDeUmClienteEspecifico(String nome) throws SQLException {
         List<AgendamentoDto> listarHistoricoTreinosEspecifico = new ArrayList<>();
@@ -105,4 +135,6 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
         }
         return listarHistoricoTreinosEspecifico;
     }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 }

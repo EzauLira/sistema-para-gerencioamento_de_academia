@@ -36,4 +36,10 @@ public class MensagensConstanteUtils {
 
     //-------------------------------------------------------------------MENU-BUSCAR-DADOS-PESSOAIS--------------------------------------------------------------------------//
     public static final String DADOS_PESSOAIS = ">> INFORME SEU PRIMEIRO NOME.";
+
+    //-------------------------------------------------------------------MENU-BUSCAR-HISTORICO-DE-TREINO-ISTRUTOR------------------------------------------------------------//
+    public static final String BUSCAR_HISTORICO_NOME_DO_CLIENTE = ">> INFORME O NOME DO CLIENTE. O nome deve ser completo, caso não lembre vá em buscar dados.";
+
+    //-------------------------------------------------------------------MENU-LISTAR-TREINOS-DO-CLIENTE-ESPECIFICO-----------------------------------------------------------//
+    public static final String BUSCAR_TREINOS_ATIVOS_NOME_DO_CLIENTE = ">> INFORME O NOME DO CLIENTE. O nome deve ser completo, caso não lembre vá em buscar dados.";
 }

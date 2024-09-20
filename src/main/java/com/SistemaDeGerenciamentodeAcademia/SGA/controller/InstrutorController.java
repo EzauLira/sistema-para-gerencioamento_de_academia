@@ -34,13 +34,13 @@ public class InstrutorController {
         System.out.println(OpcoesInstrutorEnum.OPCOES_INSTRUTOR.getMensagem());
         System.out.println(" ");
         while (true) {
-            System.out.println(">> Digite seu CPF: ");
+            System.out.println(MensagensConstanteUtils.LOGIN_DIGITE_CPF);
             String cpf = input.nextLine();
             if (cpf.equals("0")) {
                 break;
             }
 
-            System.out.println(">> Digite sua SENHA: ");
+            System.out.println(MensagensConstanteUtils.LOGIN_DIGITE_SENHA);
             String senha = input.nextLine();
             if (senha.equals("0")) {
                 break;
@@ -149,7 +149,7 @@ public class InstrutorController {
         String nome;
         input.nextLine();
         do {
-            System.out.println("INFORME O NOME DO CLIENTE. O nome deve ser completo, caso não lembre vá em buscar dados.");
+            System.out.println(MensagensConstanteUtils.BUSCAR_TREINOS_ATIVOS_NOME_DO_CLIENTE);
             nome = input.nextLine();
             if (nome.equals("0")) {
                 menuDoInstrutor();
@@ -187,7 +187,7 @@ public class InstrutorController {
         String nome;
         input.nextLine();
         do {
-            System.out.println("INFORME O NOME DO CLIENTE. O nome deve ser completo, caso não lembre vá em buscar dados.");
+            System.out.println(MensagensConstanteUtils.BUSCAR_HISTORICO_NOME_DO_CLIENTE);
             nome = input.nextLine();
             if (nome.equals("0")) {
                 menuDoInstrutor();

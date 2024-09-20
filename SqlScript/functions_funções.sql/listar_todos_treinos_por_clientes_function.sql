@@ -1,8 +1,8 @@
--- FUNCTION: public.listar_treinos_de_um_cliente_especifico(character varying)
+-- FUNCTION: public.listar_todos_treinos_por_cliente(character varying)
 
--- DROP FUNCTION IF EXISTS public.listar_treinos_de_um_cliente_especifico(character varying);
+-- DROP FUNCTION IF EXISTS public.listar_todos_treinos_por_cliente(character varying);
 
-CREATE OR REPLACE FUNCTION public.listar_treinos_de_um_cliente_especifico(
+CREATE OR REPLACE FUNCTION public.listar_todos_treinos_por_cliente(
 	p_cliente_nome character varying)
     RETURNS TABLE(treino_nome character varying, data character varying, hora character varying) 
     LANGUAGE 'plpgsql'
@@ -29,15 +29,13 @@ BEGIN
     JOIN 
         treino t ON a.treino_id = t.id
     WHERE 
-        LOWER(c.nome) = LOWER(p_cliente_nome)
-        AND TO_DATE(a.data, 'DD/MM/YYYY') >= CURRENT_DATE;
+        LOWER(c.nome) = LOWER(p_cliente_nome);
 
-    -- Verifica se a consulta retornou resultados
     IF NOT FOUND THEN
-        RAISE EXCEPTION 'Nenhum treino ativo encontrado para o cliente.';
+        RAISE EXCEPTION 'Nenhum treino encontrado para o cliente';
     END IF;
 END;
 $BODY$;
 
-ALTER FUNCTION public.listar_treinos_de_um_cliente_especifico(character varying)
+ALTER FUNCTION public.listar_todos_treinos_por_cliente(character varying)
     OWNER TO postgres;

@@ -79,12 +79,12 @@ public class ClienteController {
                             loginCliente();
                         } else if (op == 2) {
                             cadastroCliente();
-                        } else if (op == 0){
-                           Main.inicio();
-                        }else {
+                        } else if (op == 0) {
+                            Main.inicio();
+                        } else {
                             System.out.println(MensagemErroEnum.OPCAO_INVALIDA.getMensagem());
                         }
-                    }catch (InputMismatchException e){
+                    } catch (InputMismatchException e) {
                         System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
                         input.nextLine();
                     }
@@ -391,7 +391,7 @@ public class ClienteController {
 
     public static void buscarDadosPessoaisPeloNome(String nome) {
         List<ClienteDto> clienteDto = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
-        if (clienteDto == null){
+        if (clienteDto == null) {
             return;
         }
         for (ClienteDto c : clienteDto) {

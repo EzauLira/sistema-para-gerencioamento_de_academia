@@ -12,6 +12,11 @@ CREATE OR REPLACE FUNCTION public.buscar_dados_pessoais_pelo_primeiro_nome(
 
 AS $BODY$
 BEGIN
+    -- Verifica se a entrada não está vazia
+    IF primeiro_nome IS NULL OR primeiro_nome = '' THEN
+        RAISE EXCEPTION 'O nome não pode ser vazio. Por favor, forneça um nome válido.';
+    END IF;
+
     -- Verifica se existe algum cliente com o nome fornecido
     IF NOT EXISTS (
         SELECT 1 

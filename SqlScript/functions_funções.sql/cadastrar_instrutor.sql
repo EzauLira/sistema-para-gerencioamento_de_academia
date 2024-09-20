@@ -15,6 +15,9 @@ CREATE OR REPLACE FUNCTION public.cadastrar_instrutor(
     VOLATILE PARALLEL UNSAFE
 AS $BODY$
 BEGIN
+ -- Remover pontos e traços do CPF
+    p_cpf := regexp_replace(p_cpf, '[^0-9]', '', 'g');
+
     -- Verifica se já existe um instrutor com o mesmo nome
     IF EXISTS (SELECT 1 FROM instrutor WHERE nome = p_nome) THEN
         RAISE EXCEPTION 'Erro: Nome já cadastrado.';

@@ -15,6 +15,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensConstanteUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -179,6 +180,7 @@ public class ClienteController {
     public static void agendatTreino(int id) {
 
         System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_AGENDADMENTO.getMensagem());
+        System.out.println(OpcoesClientesEnum.MENU_AGENDAR_TREINO_INFORMATIVO.getMensagem());
         while (true) {
 
             System.out.println(MensagensConstanteUtils.AGENDA_OQUE_VAI_TREINAR);

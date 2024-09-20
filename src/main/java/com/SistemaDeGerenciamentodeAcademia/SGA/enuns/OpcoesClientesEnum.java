@@ -39,6 +39,12 @@ public enum OpcoesClientesEnum {
               ║ ATENÇÃO: Siga as instruções do cadastro. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
               ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝
               """),
+    MENU_AGENDAR_TREINO_INFORMATIVO("""
+              ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗
+              ║                                         AGENDAR NOVO TREINO                                           ║
+              ║ ATENÇÃO: Siga as instruções para está opção. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
+              ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝
+              """),
     OP_ESCOLHIDA_AGENDADMENTO("""
               ╔═════════════════════════════════════════════════════════╗
               ║ Opção escolhida: AGENDAMENTO. Vamos agendar seu treino. ║

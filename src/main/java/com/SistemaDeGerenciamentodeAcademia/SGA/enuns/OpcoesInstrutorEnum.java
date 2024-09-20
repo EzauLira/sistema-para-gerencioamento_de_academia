@@ -19,10 +19,10 @@ public enum OpcoesInstrutorEnum {
             ╚════════════════════════════════════╝
             Digite uma opção:"""),
     MENU_BUSCAR_TREINO_INFORMATIVO("""
-              ╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
-              ║                                   LISTAR TREINOS DE UM CLIENTE ESPECÍFICO                                   ║
-              ║ ATENÇÃO: Siga as instruções para buscar o cliente. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
-              ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+              ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗
+              ║                                 LISTAR TREINOS DE UM CLIENTE ESPECÍFICO                               ║
+              ║ ATENÇÃO: Siga as instruções para está opção. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
+              ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝
               """),
 
     OP_ESCOLHIDA_AGENDADMENTO_DO_DIA("""
@@ -39,17 +39,17 @@ public enum OpcoesInstrutorEnum {
               ║ Opção escolhida: BUSCAR HISTÓRICO DE UM CLIENTE ESPECÍFICO. Vamos buscar o histórico do cliente. ║
               ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝"""),
     MENU_BUSCAR_HISTORICO_TREINO_INFORMATIVO("""
-              ╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
-              ║                                   BUSCAR HISTÓRICO DE UM CLIENTE ESPECÍFICO                                 ║
-              ║ ATENÇÃO: Siga as instruções para buscar o cliente. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
-              ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+              ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗
+              ║                                BUSCAR HISTÓRICO DE UM CLIENTE ESPECÍFICO                              ║
+              ║ ATENÇÃO: Siga as instruções para está opção. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
+              ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝
               """),
 
     MENU_BUSCAR_CLIENTE_INFORMATIVO("""
-              ╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
-              ║                                       BUSCAR DADOS PESSOAIS PELO NOME                                       ║
-              ║ ATENÇÃO: Siga as instruções para buscar o cliente. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
-              ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"""),
+              ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗
+              ║                                    BUSCAR DADOS PESSOAIS PELO NOME                                    ║
+              ║ ATENÇÃO: Siga as instruções para está opção. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
+              ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝"""),
     OP_ESCOLHIDA_BUSCAR_DADOS_PESSOAIS("""
               ╔═════════════════════════════════════════════════════════════════════════════════════════╗
               ║ Opção escolhida: BUSCAR DADOS PESSOAIS DE UM CLIENT . Vamos buscar os dados do cliente. ║

@@ -18,10 +18,17 @@ public class ValidarTelefoneUtils {
      * @param telefoneSemFormatacao Telefone vindo ser formatação para ser validado.
      */
     public static void validarTelefone(String telefoneSemFormatacao) {
+        if (telefoneSemFormatacao == null || telefoneSemFormatacao.trim().isEmpty()) {
+            throw new TelefoneException(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
+        }
 
-        String telefone = telefoneSemFormatacao.replaceAll("[\\s\\-()]","");
+        String telefone = telefoneSemFormatacao.replaceAll("[\\s\\-().]", "");
 
-        if (telefone == null || telefone.trim().isEmpty()) {
+        if (telefone.length() != 11) {
+            throw new TelefoneException(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
+        }
+
+        if (!telefone.matches("\\d{11}")) {
             throw new TelefoneException(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
         }
 
@@ -38,4 +45,5 @@ public class ValidarTelefoneUtils {
             throw new TelefoneException(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
         }
     }
+
 }

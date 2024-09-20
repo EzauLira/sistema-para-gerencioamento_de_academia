@@ -23,6 +23,21 @@ public class ClienteService {
     private static final PlanoJdbcDaoImpl planoJdbcDaoImpl = new PlanoJdbcDaoImpl();
 
     /**
+     * Método usando para fazer login com cliente no sistema.
+     * @param cpf usasdo para ser o método de login do usuário.
+     * @param senha usada para logar na conta.
+     * @return retorna 0 caso o id do cliente não for encontrado.
+     */
+    public int fazerLoginCliente(String cpf, String senha){
+        try {
+            return clienteJdbcDaoImpl.fazerLoginCliente(cpf, senha);
+        }catch (SQLException e) {
+            SqlException.sqlException(e);
+        }
+        return 0;
+    }
+
+    /**
      * Lista todos os planos disponíveis e imprime as suas informações.
      * Exibe o ‘ID’, nome, descrição, duração e preço de cada plano.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
@@ -74,23 +89,6 @@ public class ClienteService {
         }
     }
 
-    /**
-     * Busca um cliente pelo primeiro nome.
-     * Se a busca for realizada com sucesso, uma mensagem de sucesso é exibida.
-     * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
-     *
-     * @param nome Nome do cliente a ser buscado.
-     */
-    public List<ClienteDto> buscarClientePeloPrimeiroNome(String nome) {
-        try {
-            List<ClienteDto> cliente = clienteJdbcDaoImpl.buscarPessoaPeloPrimeiroNome(nome);
-            return cliente;
-        } catch (SQLException e) {
-            SqlException.sqlException(e);
-        }
-        return null;
-    }
-
     public List<TreinosAtivosEInativosDto> listarAgendamentosAtivos(int id) {
         try {
             List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosAtivos(id);
@@ -126,7 +124,7 @@ public class ClienteService {
             List<ClienteDto> clienteDto = clienteJdbcDaoImpl.buscarDadosPessoaisPeloPrimeiroNome(nome);
             return clienteDto;
         } catch (SQLException e) {
-            e.printStackTrace();
+            SqlException.sqlException(e);
         }
         return null;
     }

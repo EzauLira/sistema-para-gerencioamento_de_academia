@@ -13,6 +13,36 @@ import java.util.List;
 
 public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
 
+
+    /**
+     * Método que executa a colsulta SQL "SELECT * FROM login_cliente" para efetuar o login do cliente no sistema.
+     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
+     * Os dados do cliente são fornecidos pelos parâmetros (CPF e SENHA) são consultados no banco de dados se existir efetua o login.
+     * @param cpf para login do usuário. Através deste CPF eu coleto o id do cliene para acessar as demais opções do menu automaticamente.
+     * @param senha para logar na conta.
+     * @return Primeiro retorna o ID do Cliente para acessar as demais funções do usuáro. Segundo retorna zero caso o id do cliente não for encontado.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
+    @Override
+    public int fazerLoginCliente(String cpf, String senha) throws SQLException {
+        String sql = "SELECT * FROM login_cliente(?,?)";
+        try (Connection connection = BancoDadosConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, cpf);
+            ps.setString(2, senha);
+
+            ps.execute();
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("cliente_id");
+                }
+            }
+        }
+        return 0;
+    }
+
     /**
      * Este método executa a consulta SQL "SELECT * FROM cadastrar_cliente" para cadastrar um novo cliente no banco de dados.
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
@@ -42,36 +72,6 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
             ps.execute();
         }
     }
-
-    /**
-     * Este método executa a consulta SQL (SELECT * FROM buscar_pessoa_pelo_primeiro_nome) para buscar clientes no banco de dados com base no primeiro nome fornecido.
-     * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
-     * O parâmetro (buscarClienteDto) contém o nome a ser usado na busca. Se clientes correspondentes forem encontrados, os seus nomes são exibidos no console.
-     *
-     * @param nome Parâmetro que pega o nome requisitado para buscar no banco de dados.
-     * @throws SQLException Lança uma SQLException que será tratada na service.
-     */
-    @Override
-    public List<ClienteDto> buscarPessoaPeloPrimeiroNome(String nome) throws SQLException {
-        List<ClienteDto> clienteDto = new ArrayList<>();
-
-        String sql = "SELECT * FROM buscar_pessoa_pelo_primeiro_nome(?)";
-
-        try (Connection connection = BancoDadosConfig.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-
-            ps.setString(1,nome);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                ClienteDto cliente = new ClienteDto(rs.getString("nome"));
-
-                clienteDto.add(cliente);
-            }
-        }
-        return clienteDto;
-    }
-
 
     /**
      * Este método executa a consulta SQL (SELECT * FROM listar_treinos_ativos) para buscar treinos ativos no banco de dados com base na senha fornecida.

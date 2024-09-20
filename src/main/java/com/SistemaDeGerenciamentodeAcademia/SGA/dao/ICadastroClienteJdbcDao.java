@@ -14,6 +14,17 @@ public interface ICadastroClienteJdbcDao {
 
     //--------------------------------------------------------------------------------------------------------------------------------------//
 
+    /**
+     * Método a ser implementado, para fazer login no sistema tanto para usuário quanto para instrutor.
+     * @param cpf passado para edentificar o usuário ou instrutor.
+     * @param senha para acessar a conta.
+     * @throws SQLException Lança uma SQLException que será tratada na service.
+     */
+    int fazerLoginCliente(String cpf, String senha) throws SQLException;
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------------//
+
 
     /**
      * Cadastra um novo cliente na academia com base nos dados fornecidos.
@@ -26,17 +37,6 @@ public interface ICadastroClienteJdbcDao {
 
     //--------------------------------------------------------------------------------------------------------------------------------------//
 
-
-    /**
-     * Busca clientes pelo primeiro nome fornecido.
-     *
-     * @param nome Um objeto contendo o primeiro nome do cliente a ser buscado.
-     * @throws SQLException Lança uma SQLException que será tratada na service.
-     */
-    List<ClienteDto> buscarPessoaPeloPrimeiroNome(String nome) throws SQLException;
-
-
-    //--------------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      * Lista Treinos ativos do cliente.

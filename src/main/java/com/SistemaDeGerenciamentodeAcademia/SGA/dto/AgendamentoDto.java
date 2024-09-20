@@ -10,6 +10,7 @@ public class AgendamentoDto {
     private int id;
     private String nome;
     private int treino;
+    private String treinoNome;
     private int novoTreino;
     private String data;
     private String hora;
@@ -30,6 +31,18 @@ public class AgendamentoDto {
         this.novoTreino = novoTreino;
         this.data = data;
         this.hora = hora;
+    }
+
+    public AgendamentoDto(String nome, String treinoNome) {
+        this.nome = nome;
+        this.treinoNome = treinoNome;
+    }
+
+    public AgendamentoDto(String treinoNome, String data, String hora) {
+        this.treinoNome = treinoNome;
+        this.data = data;
+        this.hora = hora;
+
     }
 
     public String getNome() {
@@ -86,5 +99,13 @@ public class AgendamentoDto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTreinoNome() {
+        return treinoNome;
+    }
+
+    public void setTreinoNome(String treinoNome) {
+        this.treinoNome = treinoNome;
     }
 }

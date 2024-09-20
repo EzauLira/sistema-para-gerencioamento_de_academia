@@ -21,7 +21,7 @@ public class ValidarCpfUtils {
 
         String cpf = cpfSemFormatacao.replaceAll("\\D", "");
 
-        if (cpf == null || cpf.trim().isEmpty()) {
+        if (cpf == null || cpf.trim().isEmpty() || cpf.length() != 11) {
             throw new CpfException(MensagemExcecaoEnum.CPF_INVALIDO.getMensagem());
         }
 
@@ -53,4 +53,5 @@ public class ValidarCpfUtils {
             throw new CpfException(MensagemExcecaoEnum.CPF_INVALIDO.getMensagem());
         }
     }
+
 }

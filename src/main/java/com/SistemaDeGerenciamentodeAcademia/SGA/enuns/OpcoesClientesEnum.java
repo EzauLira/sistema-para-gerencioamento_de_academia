@@ -2,17 +2,11 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
 
 public enum OpcoesClientesEnum {
 
-    OPCOES_ENUM("""
-            ╔══════════════════════════════╗
-            ║ Você é cliente ou instrutor? ║
-            ║ [1] - CLIENTE                ║
-            ║ [2] - INSTRUTOR              ║
-            ╚══════════════════════════════╝
-            Digite uma opção:"""),
     MSG_TENTAR_NOVAMENTE("""
             ╔════════════════════════════════════╗
             ║ [1] - Para tentar logar novamente. ║
             ║ [2] - Para cadastrar-se.           ║
+            ║ [0] - Voltar                       ║
             ╚════════════════════════════════════╝
             Digite uma opção:"""),
     OPCOES_CLIENTE_LOGIN_OU_CADASTRO("""
@@ -20,6 +14,7 @@ public enum OpcoesClientesEnum {
               ║ Você deseja Fazer login ou se cadastrar?   ║
               ║ [1] - LOGIN                                ║
               ║ [2] - CADASTRAR                            ║
+              ║ [0] - VOLTAR                               ║
               ╚════════════════════════════════════════════╝
               Digite uma opção:"""),
     MENU_LOGIN_CLIENTE("""
@@ -43,19 +38,21 @@ public enum OpcoesClientesEnum {
               ║                                          CADASTRAR CLIENTE                                        ║
               ║ ATENÇÃO: Siga as instruções do cadastro. Caso queira voltar ao menu, digite 0 a qualquer momento. ║
               ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝
-              Precione ENTER para continuar:"""),
+              """),
     OP_ESCOLHIDA_AGENDADMENTO("""
               ╔═════════════════════════════════════════════════════════╗
-              ║ Opção escolhida: AGENDAMENTE. Vamos agendar seu treino. ║
+              ║ Opção escolhida: AGENDAMENTO. Vamos agendar seu treino. ║
               ╚═════════════════════════════════════════════════════════╝"""),
     OP_ESCOLHIDA_LISTA_ATIVA("""
               ╔═════════════════════════════════════════════════════════════════════════╗
               ║ Opção escolhida: LISTAR AGENDA ATIVA. Vamos listar seus treinos ativos. ║
-              ╚═════════════════════════════════════════════════════════════════════════╝"""),
+              ╚═════════════════════════════════════════════════════════════════════════╝
+              """),
     OP_ESCOLHIDA_LISTA_INATIVA("""
               ╔═════════════════════════════════════════════════════════════════════════════╗
               ║ Opção escolhida: LISTAR AGENDA INATIVA. Vamos listar seus treinos inativos. ║
-              ╚═════════════════════════════════════════════════════════════════════════════╝"""),
+              ╚═════════════════════════════════════════════════════════════════════════════╝
+              """),
     OP_ESCOLHIDA_TREINO_ATIVO("""
               ╔═══════════════════════════════════════════════════════════════════════════════╗
               ║ Opção escolhida: ATUALIZAR TREINO ATIVO. Vamos atualizar seus treinos ativos. ║

@@ -12,7 +12,6 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.exception.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.AgendamentoService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
-import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.LoginClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensConstanteUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
@@ -25,40 +24,156 @@ public class ClienteController {
     private static final Scanner input = new Scanner(System.in);
     private static final ClienteService clienteService = new ClienteService();
     private static final AgendamentoService agendamentoService = new AgendamentoService();
-    private static final LoginClienteService loginClienteService = new LoginClienteService();
 
-    public void loginCliente() {
+    public static void clienteLogarOuCadastrar() {
+        System.out.println(OpcoesClientesEnum.OPCOES_CLIENTE_LOGIN_OU_CADASTRO.getMensagem());
+        do {
+            System.out.print("");
+            if (input.hasNextByte()) {
+                byte loginCadastrar = input.nextByte();
+                if (loginCadastrar == 1) {
+                    input.nextLine();
+                    loginCliente();
+                } else if (loginCadastrar == 2) {
+                    cadastroCliente();
+                } else if (loginCadastrar == 0) {
+                    Main.inicio();
+                } else {
+                    System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
+                }
+            } else {
+                System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
+                input.nextLine();
+            }
+        } while (true);
+    }
 
+    public static void loginCliente() {
         System.out.println(OpcoesClientesEnum.MENU_LOGIN_CLIENTE.getMensagem());
         while (true) {
 
             System.out.println(MensagensConstanteUtils.LOGIN_DIGITE_CPF);
             String cpf = input.nextLine();
             if (cpf.equals("0")) {
-                Main.cliente();
+                clienteLogarOuCadastrar();
             }
 
             System.out.println(MensagensConstanteUtils.LOGIN_DIGITE_SENHA);
             String senha = input.nextLine();
             if (senha.equals("0")) {
-                Main.cliente();
+                clienteLogarOuCadastrar();
             }
 
-            int id = loginClienteService.fazerLoginCliente(cpf, senha);
+            int id = clienteService.fazerLoginCliente(cpf, senha);
 
             if (id != 0) {
                 menuDoCliente(id);
                 break;
             } else {
-                System.out.println(OpcoesClientesEnum.MSG_TENTAR_NOVAMENTE.getMensagem());
-                byte op = input.nextByte();
-                if (op == 1) {
-                    input.nextLine();
-                } else {
-                    cadastroCliente();
-                }
+                do {
+                    try {
+                        System.out.println(OpcoesClientesEnum.MSG_TENTAR_NOVAMENTE.getMensagem());
+                        byte op = input.nextByte();
+                        if (op == 1) {
+                            input.nextLine();
+                            loginCliente();
+                        } else if (op == 2) {
+                            cadastroCliente();
+                        } else if (op == 0){
+                           Main.inicio();
+                        }else {
+                            System.out.println(MensagemErroEnum.OPCAO_INVALIDA.getMensagem());
+                        }
+                    }catch (InputMismatchException e){
+                        System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
+                        input.nextLine();
+                    }
+
+                } while (true);
             }
         }
+    }
+
+    /**
+     * Método que possuí um menu infinito para cadastro de cliente.
+     */
+    public static void cadastroCliente() {
+
+        System.out.println(OpcoesClientesEnum.MENU_DO_CADASTRO_INFORMATIVO.getMensagem());
+
+        while (true) {
+            String nome;
+            String cpf;
+            String idade;
+            String genero;
+            String telefone;
+            String senha;
+
+            try {
+                input.nextLine();
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_NOME);
+                nome = input.nextLine();
+                if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
+                    clienteLogarOuCadastrar();
+
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SUA_IDADE);
+                idade = input.nextLine();
+                if (idade.equals("0"))
+                    clienteLogarOuCadastrar();
+
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_CPF);
+                cpf = input.nextLine();
+                if (cpf.equals("0") || cpf.equals("00") || cpf.equals("000"))
+                    clienteLogarOuCadastrar();
+
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_GENERO);
+                System.out.println(" ");
+                listarGenero();
+                genero = input.nextLine();
+                if (genero.equals("0"))
+                    clienteLogarOuCadastrar();
+
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_TELEFONE);
+                telefone = input.nextLine();
+                if (telefone.equals("0") || telefone.equals("00") || telefone.equals("000"))
+                    clienteLogarOuCadastrar();
+
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_EMAIL);
+                String email = input.nextLine();
+                if (email.equals("0") || email.equals("00") || email.equals("000"))
+                    clienteLogarOuCadastrar();
+
+                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SUA_SENHA);
+                senha = input.nextLine();
+                if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
+                    clienteLogarOuCadastrar();
+
+                System.out.println(MensagensConstanteUtils.CADASTRO_ESCOLHA_SEU_PLANO);
+                System.out.println(" ");
+                listarPlanos();
+                String plano = input.nextLine();
+                if (plano.equals("0"))
+                    clienteLogarOuCadastrar();
+
+                clienteService.cadastrarCliente(nome, Integer.parseInt(idade), cpf, Integer.parseInt(genero), telefone, email, senha, Integer.parseInt(plano));
+            } catch (NomeException e) {
+                System.out.println(MensagemExcecaoEnum.NOME_INVALIDO.getMensagem());
+            } catch (IdadeException e) {
+                System.out.println(MensagemExcecaoEnum.IDADE_INVALIDA.getMensagem());
+            } catch (CpfException e) {
+                System.out.println(MensagemExcecaoEnum.CPF_INVALIDO.getMensagem());
+            } catch (TelefoneException e) {
+                System.out.println(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
+            } catch (EmailException e) {
+                System.out.println(MensagemExcecaoEnum.EMAIL_INVALIDO.getMensagem());
+            } catch (InputMismatchException e) {
+                System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
+            } catch (NumberFormatException e) {
+                System.out.println(MensagensConstanteUtils.CADASTRO_ENTRADA_INVALIDA);
+            }
+            break;
+        }
+        clienteLogarOuCadastrar();
     }
 
     public static void agendatTreino(int id) {
@@ -164,86 +279,21 @@ public class ClienteController {
         }
     }
 
-    /**
-     * Método que possuí um menu infinito para cadastro de cliente.
-     */
-    public void cadastroCliente() {
-
-        System.out.println(OpcoesClientesEnum.MENU_DO_CADASTRO_INFORMATIVO.getMensagem());
+    public static void buscarDadosPessoaisPeloPrimeiroNome() {
+        System.out.println(OpcoesClientesEnum.MENU_BUSCAR_CLIENTE_INFORMATIVO.getMensagem());
 
         while (true) {
             String nome;
-            String cpf;
-            String idade;
-            String genero;
-            String telefone;
-            String senha;
-
-            try {
-                input.nextLine();
-                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_NOME);
-                nome = input.nextLine();
-                if (nome.equals("0") || nome.equals("00") || nome.equals("000"))
-                    Main.cliente();
-
-                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SUA_IDADE);
-                idade = input.nextLine();
-                if (idade.equals("0"))
-                    Main.cliente();
-
-                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_CPF);
-                cpf = input.nextLine();
-                if (cpf.equals("0") || cpf.equals("00") || cpf.equals("000"))
-                    Main.cliente();
-
-                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_GENERO);
-                System.out.println(" ");
-                listarGenero();
-                genero = input.nextLine();
-                if (genero.equals("0"))
-                    Main.cliente();
-
-                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_TELEFONE);
-                telefone = input.nextLine();
-                if (telefone.equals("0") || telefone.equals("00") || telefone.equals("000"))
-                    Main.cliente();
-
-                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SEU_EMAIL);
-                String email = input.nextLine();
-                if (email.equals("0") || email.equals("00") || email.equals("000"))
-                    Main.cliente();
-
-                System.out.println(MensagensConstanteUtils.CADASTRO_INFORME_SUA_SENHA);
-                senha = input.nextLine();
-                if (senha.equals("0") || senha.equals("00") || senha.equals("000"))
-                    Main.cliente();
-
-                System.out.println(MensagensConstanteUtils.CADASTRO_ESCOLHA_SEU_PLANO);
-                System.out.println(" ");
-                listarPlanos();
-                String plano = input.nextLine();
-                if (plano.equals("0"))
-                    Main.cliente();
-
-                clienteService.cadastrarCliente(nome, Integer.parseInt(idade), cpf, Integer.parseInt(genero), telefone, email, senha, Integer.parseInt(plano));
-            } catch (NomeException e) {
-                System.out.println(MensagemExcecaoEnum.NOME_INVALIDO.getMensagem());
-            } catch (IdadeException e) {
-                System.out.println(MensagemExcecaoEnum.IDADE_INVALIDA.getMensagem());
-            } catch (CpfException e) {
-                System.out.println(MensagemExcecaoEnum.CPF_INVALIDO.getMensagem());
-            } catch (TelefoneException e) {
-                System.out.println(MensagemExcecaoEnum.TELEFONE_INVALIDO.getMensagem());
-            } catch (EmailException e) {
-                System.out.println(MensagemExcecaoEnum.EMAIL_INVALIDO.getMensagem());
-            } catch (InputMismatchException e) {
-                System.out.println(MensagemExcecaoEnum.ENTRADA_INVALIDA.getMensagem());
-            } catch (NumberFormatException e) {
-                System.out.println(MensagensConstanteUtils.CADASTRO_ENTRADA_INVALIDA);
+            input.nextLine();
+            System.out.println(MensagensConstanteUtils.DADOS_PESSOAIS);
+            nome = input.nextLine();
+            System.out.println(" ");
+            if (nome.equals("0") || nome.equals("00") || nome.equals("000")) {
+                break;
             }
+            buscarDadosPessoaisPeloNome(nome);
             break;
         }
-        Main.cliente();
     }
 
     /**
@@ -295,23 +345,6 @@ public class ClienteController {
         }
     }
 
-    public static void buscarDadosPessoaisPeloPrimeiroNome() {
-        System.out.println(OpcoesClientesEnum.MENU_BUSCAR_CLIENTE_INFORMATIVO.getMensagem());
-
-        while (true) {
-            String nome;
-            input.nextLine();
-            System.out.println(MensagensConstanteUtils.DADOS_PESSOAIS);
-            nome = input.nextLine();
-            System.out.println(" ");
-            if (nome.equals("0") || nome.equals("00") || nome.equals("000")) {
-                break;
-            }
-            buscarDadosPessoaisPeloNome(nome);
-            break;
-        }
-    }
-
     public static void listarTreinos() {
         List<Treino> treinos = agendamentoService.listarTreinos();
         if (treinos == null) {
@@ -358,6 +391,9 @@ public class ClienteController {
 
     public static void buscarDadosPessoaisPeloNome(String nome) {
         List<ClienteDto> clienteDto = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
+        if (clienteDto == null){
+            return;
+        }
         for (ClienteDto c : clienteDto) {
             System.out.println(
                     "║ Nome: " + c.getNome() +

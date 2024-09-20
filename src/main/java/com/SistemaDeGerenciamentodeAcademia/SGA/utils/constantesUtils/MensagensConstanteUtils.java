@@ -7,18 +7,18 @@ public class MensagensConstanteUtils {
     public static final String LOGIN_DIGITE_SENHA = ">> Digite sua SENHA: ";
 
     //-------------------------------------------------------------------MENU-AGENDAMENTO------------------------------------------------------------------------------------//
-    public static final String AGENDA_OQUE_VAI_TREINAR = ">> O que você vai querer treinar?";
+    public static final String AGENDA_OQUE_VAI_TREINAR = "\n>> O que você vai querer treinar?\n";
     public static final String AGENDA_ESCOLHA_DATA = ">> Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato 01/01/2024.";
     public static final String AGENDA_ESCOLHA_HORA = ">> Escolha a HORA do treino.";
 
     //-------------------------------------------------------------------MENU-ATUALIZAR-TREINO-------------------------------------------------------------------------------//
-    public static final String ATUALIZAR_TREINO_QUE_DESEJA_ATUALIZAR = ">> Favor, escolha um treino que deseja atualizar, se não houver digite 0 para sair.";
+    public static final String ATUALIZAR_TREINO_QUE_DESEJA_ATUALIZAR = "\n>> Favor, escolha um treino que deseja atualizar, se não houver digite 0 para sair.";
     public static final String ATUALIZAR_NOVO_TREINO = ">> Escolha seu novo treino";
     public static final String ATUALIZAR_ESCOLHA_DATA_TREINO = ">> Escolha a DATA do treino. Atenção não poder ser uma data anterior a data atual no formato 01/01/2024.";
     public static final String ATUALIZAR_ESCOLHA_HORA_TREINO = ">> Escolha a HORA do treino.";
 
     //-------------------------------------------------------------------MENU-CANCELAR-TREINO--------------------------------------------------------------------------------//
-    public static final String CANCELAR_ESCOLHA_UM_TREINO_PARA_CANCELAR = ">> Favor, escolha um treino que deseja cancelar, se não houver digite 0 para sair.";
+    public static final String CANCELAR_ESCOLHA_UM_TREINO_PARA_CANCELAR = "\n>> Favor, escolha um treino que deseja cancelar, se não houver digite 0 para sair.";
 
     ////-------------------------------------------------------------------MENU-CADASTRO------------------------------------------------------------------------------------//
     public static final String CADASTRO_INFORME_SEU_NOME = ">> INFORME SEU NOME. O nome deve conter no mínimo 10 caracteres e não pode haver numeros.";

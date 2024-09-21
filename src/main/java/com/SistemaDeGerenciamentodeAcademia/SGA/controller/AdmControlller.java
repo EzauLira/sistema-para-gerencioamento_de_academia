@@ -18,17 +18,19 @@ public class AdmControlller {
     private static final Scanner input = new Scanner(System.in);
     private static final AdmService admService = new AdmService();
 
-
+    /**
+     * Método para efetuar o login do administrado
+     */
     public static void loginAdmin() {
 
         System.out.println(OpcoesAdmEnum.OPCOES_ADM.getMensagem());
-        System.out.println(">> USUÁRIO");
+        System.out.println(MensagensConstanteUtils.ADM_INFORME_SEU_USUARIO);
         String usuario = input.nextLine();
         if (usuario.equals("0")) {
             Main.inicio();
         }
 
-        System.out.println(">> SENHA");
+        System.out.println(MensagensConstanteUtils.ADM_INFORME_SUA_SENHA);
         String senha = input.nextLine();
         if (senha.equals("0")) {
             Main.inicio();
@@ -58,6 +60,9 @@ public class AdmControlller {
         }
     }
 
+    /**
+     * Método para cadastrar um novo instrutor.
+     */
     public static void cadastrarNovoInstrutor() {
         System.out.println(OpcoesClientesEnum.MENU_DO_CADASTRO_INFORMATIVO.getMensagem());
 
@@ -120,10 +125,16 @@ public class AdmControlller {
         }
     }
 
+    /**
+     * Método para gerar o relatório da academia, como quantos planos vendidos.
+     */
     public static void gerarRelatorioDaAcademia() {
         admService.gerarRelatorioAcademia();
     }
 
+    /**
+     * Método menu infinito do instrutor contendo todas as opções.
+     */
     public static void menuDoAdm() {
 
         System.out.println(OpcoesAdmEnum.MENU_INFORMATIVO_ADM.getMensagem());

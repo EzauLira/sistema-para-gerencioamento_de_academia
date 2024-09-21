@@ -8,7 +8,7 @@ public enum MensagemErroEnum {
 
     OPCAO_INVALIDA("Opção inválida! Digite uma opção válida."),
     LISTA_VAZIA("A lista está vazia!"),
-    IDADE_INVALIDA("A idade precisa ser maior que 15 anos."),
+    IDADE_INVALIDA("A idade precisa ser maior que 15 ano e menor que 150."),
     EMAIL_INVALIDO("Necessário que contenho um email valido."),
     DATA_INVALIDA("Data inválida. A data de agendamento não pode ser antes da data atual."),
     DATA_INVALIDA_MAIOR("A data de agendamento não pode ser superior a um ano a partir da data atual."),

@@ -15,7 +15,6 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensConstanteUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +25,9 @@ public class ClienteController {
     private static final ClienteService clienteService = new ClienteService();
     private static final AgendamentoService agendamentoService = new AgendamentoService();
 
+    /**
+     * Esté métodoto tem por sua finalidade cadastrar um cliente ou logar.
+     */
     public static void clienteLogarOuCadastrar() {
         System.out.println(OpcoesClientesEnum.OPCOES_CLIENTE_LOGIN_OU_CADASTRO.getMensagem());
         do {
@@ -49,6 +51,9 @@ public class ClienteController {
         } while (true);
     }
 
+    /**
+     * Métod para fazer login como cliente.
+     */
     public static void loginCliente() {
         System.out.println(OpcoesClientesEnum.MENU_LOGIN_CLIENTE.getMensagem());
         while (true) {
@@ -177,6 +182,10 @@ public class ClienteController {
         clienteLogarOuCadastrar();
     }
 
+    /**
+     * Método usado para Agendar um treino.2
+     * @param id é passado como parâmetro para agendar um treino.
+     */
     public static void agendatTreino(int id) {
 
         System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_AGENDADMENTO.getMensagem());
@@ -213,17 +222,29 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método usado para listar uma agenda ativa.
+     * @param id para listar uma agenda ativa.
+     */
     public static void listarAgendaAtiva(int id) {
         System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_LISTA_ATIVA.getMensagem());
         listarAgendamentoAtivo(id);
 
     }
 
+    /**
+     * Métodopara listar uma agenda inativa.
+     * @param id como parâmetro para listar a agenda inativa do cliente.
+     */
     public static void listarAgendaInativa(int id) {
         System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_LISTA_INATIVA.getMensagem());
         listarAgendamentoInativo(id);
     }
 
+    /**
+     * Método usado atualizar os treinos ativos do cliente.
+     * @param id usado como parâmetro para atualizar treinos ativo.
+     */
     public static void atualizarTreinoAtivo(int id) {
         while (true) {
             System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_TREINO_ATIVO.getMensagem());
@@ -263,6 +284,10 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método que cancela um treino especifico.
+     * @param id usado como parâmetro para atualizar treinos ativo.
+     */
     public static void cancelarTreino(int id) {
         while (true) {
             System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_CANCELAR_TREINO.getMensagem());
@@ -281,6 +306,9 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método que busca dados de um cliente passando o primeiro nome.
+     */
     public static void buscarDadosPessoaisPeloPrimeiroNome() {
         System.out.println(OpcoesClientesEnum.MENU_BUSCAR_CLIENTE_INFORMATIVO.getMensagem());
 
@@ -347,6 +375,9 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método que lista os treinos.
+     */
     public static void listarTreinos() {
         List<Treino> treinos = agendamentoService.listarTreinos();
         if (treinos == null) {
@@ -357,6 +388,10 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método para listar agendamentos ativos do cliente.
+     * @param id usado como parâmetro para listar o agendamento do cliente.
+     */
     public static void listarAgendamentoAtivo(int id) {
         List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosAtivos(id);
         if (treino == null) {
@@ -367,6 +402,10 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método para listar agendamentos inativos do cliente.
+     * @param id para buscar a lista do cliente expecífico.
+     */
     public static void listarAgendamentoInativo(int id) {
         List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosInativos(id);
         if (treino == null) {
@@ -377,6 +416,9 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método para listar os generos.
+     */
     public static void listarGenero() {
         List<GeneroDto> generos = clienteService.listarGenero();
         for (GeneroDto g : generos) {
@@ -384,6 +426,9 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método para listar os planos.
+     */
     public static void listarPlanos() {
         List<PlanosDto> planos = clienteService.listarplanos();
         for (PlanosDto p : planos) {
@@ -391,6 +436,10 @@ public class ClienteController {
         }
     }
 
+    /**
+     * Método para buscar os dados pessoais do cliente pessando o nome.
+     * @param nome é o parâmetro que será usado.
+     */
     public static void buscarDadosPessoaisPeloNome(String nome) {
         List<ClienteDto> clienteDto = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
         if (clienteDto == null) {

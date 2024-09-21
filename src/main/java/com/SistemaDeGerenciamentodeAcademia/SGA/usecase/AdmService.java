@@ -1,6 +1,7 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.AdmJdbcDaoImpl;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AdministradorDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.InstrutorDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
@@ -16,8 +17,10 @@ public class AdmService {
     private static final AdmJdbcDaoImpl admJadbcDaoImpl = new AdmJdbcDaoImpl();
 
     public boolean loginAdm(String usuario, String senha){
+
+        AdministradorDto administradorDto = new AdministradorDto(usuario, senha);
         try {
-            admJadbcDaoImpl.LoginAdm(usuario, senha);
+            admJadbcDaoImpl.LoginAdm(administradorDto);
             return true;
         }catch (SQLException e){
           SqlException.sqlException(e);

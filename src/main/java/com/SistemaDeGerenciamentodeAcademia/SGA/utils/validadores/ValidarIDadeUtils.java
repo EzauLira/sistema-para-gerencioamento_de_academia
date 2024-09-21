@@ -16,7 +16,7 @@ public class ValidarIDadeUtils {
      */
     public static void validarIdade(int idade){
 
-        if (idade < 15 ){
+        if (idade < 15 || idade > 150 ){
             throw new IdadeException(MensagemErroEnum.IDADE_INVALIDA.getMensagem());
         }
     }

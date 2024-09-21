@@ -44,6 +44,8 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
         return listarTreinos;
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------------------//
+
     /**
      * Agenda um treino na academia chamando a função (SELECT * FROM agendar_treino) no banco de dados.
      * A função recebe os dados do usuário e os insere conforme os parâmetros especificados.
@@ -67,6 +69,8 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
             ps.execute();
         }
     }
+
+    //--------------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      * Este método executa a consulta SQL (SELECT * FROM atualizar_agendamento) para atualizar um agendamento no banco de dados com base nos dados fornecidos.
@@ -93,6 +97,8 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
         }
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------------------//
+
     /**
      * Este método executa a consulta SQL (SELECT * FROM deletar_treino_ativo) para cancelar um treino ativo no banco de dados com base no ID do treino fornecido.
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
@@ -114,4 +120,6 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
 
         }
     }
+
+    //--------------------------------------------------------------------------------------------------------------------------------------//
 }

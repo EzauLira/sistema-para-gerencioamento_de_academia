@@ -9,12 +9,12 @@ public class Cliente {
     private String nome;
     private int idade;
     private String cpf;
-    private String genero;
+    private int genero;
     private String telefone;
     private String email;
     private int idPlano;
 
-    public Cliente( String nome, int idade, String cpf, String genero, String telefone, String email, int idPlano) {
+    public Cliente( String nome, int idade, String cpf, int genero, String telefone, String email, int idPlano) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
@@ -22,6 +22,13 @@ public class Cliente {
         this.telefone = telefone;
         this.email = email;
         this.idPlano = idPlano;
+    }
+
+    public Cliente(String nome, String cpf, String telefone, String email) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
     }
 
     public String getNome() {
@@ -48,11 +55,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getGenero() {
+    public int getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(int genero) {
         this.genero = genero;
     }
 
@@ -70,5 +77,17 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public int getIdPlano() {
+        return idPlano;
+    }
+
+    public void setIdPlano(int idPlano) {
+        this.idPlano = idPlano;
     }
 }

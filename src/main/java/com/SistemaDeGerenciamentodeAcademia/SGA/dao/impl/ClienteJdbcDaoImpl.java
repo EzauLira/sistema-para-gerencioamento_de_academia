@@ -43,6 +43,8 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
         return 0;
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
     /**
      * Este método executa a consulta SQL "SELECT * FROM cadastrar_cliente" para cadastrar um novo cliente no banco de dados.
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
@@ -72,6 +74,8 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
             ps.execute();
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      * Este método executa a consulta SQL (SELECT * FROM listar_treinos_ativos) para buscar treinos ativos no banco de dados com base na senha fornecida.
@@ -106,6 +110,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
         return treinosAtivos;
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      * Este método executa a consulta SQL (SELECT * FROM listar_treinos_inativos) para buscar treinos inativos no banco de dados com base na senha fornecida.
@@ -141,6 +146,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
         return treinosInativos;
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      * Este método executa a consulta SQL (SELECT * FROM genero) para listar todos os gêneros no banco de dados.
@@ -167,6 +173,8 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
         }
         return generos;
     }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      * Este método executa a consulta SQL (SELECT * FROM buscar_dados_pessoais_pelo_primeiro_nome) para buscar dados pessoais de clientes no banco de dados com base no primeiro nome fornecido.
@@ -203,4 +211,6 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
         }
         return cliente;
     }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 }

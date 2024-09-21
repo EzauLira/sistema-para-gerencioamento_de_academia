@@ -42,4 +42,8 @@ public class MensagensConstanteUtils {
 
     //-------------------------------------------------------------------MENU-LISTAR-TREINOS-DO-CLIENTE-ESPECIFICO-----------------------------------------------------------//
     public static final String BUSCAR_TREINOS_ATIVOS_NOME_DO_CLIENTE = ">> INFORME O NOME DO CLIENTE. O nome deve ser completo, caso não lembre vá em buscar dados.";
+
+    //--------------------------------------------------------------------------------ADMINISTRADOR--------------------------------------------------------------------------//
+    public static final String ADM_INFORME_SEU_USUARIO = ">> USUÁRIO";
+    public static final String ADM_INFORME_SUA_SENHA = ">> SENHA";
 }

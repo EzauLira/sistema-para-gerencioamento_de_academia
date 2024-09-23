@@ -3,6 +3,8 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.ICadastroClienteJdbcDao;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.*;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Cliente;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Genero;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,11 +52,11 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
      * Os dados do cliente são fornecidos pelo parâmetro (clienteDto) e armazenados no banco de dados.
      *
-     * @param clienteDto Parametro usando para pegar os dados de cadastro do usuário e armamazenar no banco de dados.
+     * @param cliente Parametro usando para pegar os dados de cadastro do usuário e armamazenar no banco de dados.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public void cadastrarCliente(ClienteDto clienteDto) throws SQLException {
+    public void cadastrarCliente(Cliente cliente) throws SQLException {
 
         String sql = "SELECT * FROM cadastrar_cliente(?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -62,14 +64,14 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
 
-            ps.setString(1, clienteDto.getNome());
-            ps.setInt(2, clienteDto.getIdade());
-            ps.setString(3, clienteDto.getCpf());
-            ps.setInt(4, clienteDto.getGenero());
-            ps.setString(5, clienteDto.getTelefone());
-            ps.setString(6, clienteDto.getEmail());
-            ps.setString(7, clienteDto.getSenha());
-            ps.setInt(8, clienteDto.getIdPlano());
+            ps.setString(1, cliente.getNome());
+            ps.setInt(2, cliente.getIdade());
+            ps.setString(3, cliente.getCpf());
+            ps.setInt(4, cliente.getGenero());
+            ps.setString(5, cliente.getTelefone());
+            ps.setString(6, cliente.getEmail());
+            ps.setString(7, cliente.getSenha());
+            ps.setInt(8, cliente.getIdPlano());
 
             ps.execute();
         }
@@ -157,8 +159,8 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<GeneroDto> listarGenero() throws SQLException {
-        List<GeneroDto> generos = new ArrayList<>();
+    public List<Genero> listarGenero() throws SQLException {
+        List<Genero> generos = new ArrayList<>();
         String sql = "SELECT * FROM genero";
 
         try (Connection connection = BancoDadosConfig.getConnection();
@@ -166,7 +168,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                GeneroDto genero = new GeneroDto(rs.getInt("id"), rs.getString("nome"));
+                Genero genero = new Genero(rs.getInt("id"), rs.getString("nome"));
 
                 generos.add(genero);
             }
@@ -186,8 +188,8 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<ClienteDto> buscarDadosPessoaisPeloPrimeiroNome(String nome) throws SQLException {
-        List<ClienteDto> cliente = new ArrayList<>();
+    public List<Cliente> buscarDadosPessoaisPeloPrimeiroNome(String nome) throws SQLException {
+        List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM buscar_dados_pessoais_pelo_primeiro_nome(?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();
@@ -198,7 +200,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ClienteDto clienteDto = new ClienteDto(
+                Cliente cliente = new Cliente(
                         rs.getString(1)
                         , rs.getString(2)
                         , rs.getString(3)
@@ -206,10 +208,10 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
                         , rs.getString(5)
                         , rs.getString(6));
 
-                cliente.add(clienteDto);
+                clientes.add(cliente);
             }
         }
-        return cliente;
+        return clientes;
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------//

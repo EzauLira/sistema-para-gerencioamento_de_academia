@@ -1,10 +1,10 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.AgendamentoJdbcDaoImpl;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
-import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarDataUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarHoraUtils;
 
@@ -73,10 +73,10 @@ public class AgendamentoService {
      */
     public void atualizarTreino(int treino, int novoTreino, String data, String hora){
         boolean sucesso = true;
-        AgendamentoDto agendamentoDto = new AgendamentoDto(treino, novoTreino, data, hora);
+        Agendamento agendamento = new Agendamento(treino, novoTreino, data, hora);
 
         try {
-            agendamentoJdbcDao.atualizarAgendamento(agendamentoDto);
+            agendamentoJdbcDao.atualizarAgendamento(agendamento);
         }catch (SQLException e){
             SqlException.sqlException(e);
             sucesso = false;

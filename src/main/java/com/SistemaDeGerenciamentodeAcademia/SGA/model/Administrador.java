@@ -1,4 +1,4 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.mdoel;
+package com.SistemaDeGerenciamentodeAcademia.SGA.model;
 
 public class Administrador {
 

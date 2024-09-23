@@ -1,15 +1,15 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.controller;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.Timer;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.GeneroDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.PlanosDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Cliente;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Genero;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.TreinosAtivosEInativosDto;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.OpcoesClientesEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.*;
-import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Planos;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Treino;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.AgendamentoService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensConstanteUtils;
@@ -420,8 +420,8 @@ public class ClienteController {
      * Método para listar os generos.
      */
     public static void listarGenero() {
-        List<GeneroDto> generos = clienteService.listarGenero();
-        for (GeneroDto g : generos) {
+        List<Genero> generos = clienteService.listarGenero();
+        for (Genero g : generos) {
             System.out.println("║" + "[" + g.getId() + "] - " + g.getNome());
         }
     }
@@ -430,8 +430,8 @@ public class ClienteController {
      * Método para listar os planos.
      */
     public static void listarPlanos() {
-        List<PlanosDto> planos = clienteService.listarplanos();
-        for (PlanosDto p : planos) {
+        List<Planos> planos = clienteService.listarplanos();
+        for (Planos p : planos) {
             System.out.println("║" + "[" + p.getId() + "] - " + p.getNome() + " - " + p.getDescricao() + " - " + p.getDuracao() + " - " + p.getPreco());
         }
     }
@@ -441,11 +441,11 @@ public class ClienteController {
      * @param nome é o parâmetro que será usado.
      */
     public static void buscarDadosPessoaisPeloNome(String nome) {
-        List<ClienteDto> clienteDto = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
-        if (clienteDto == null) {
+        List<Cliente> clientes = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
+        if (clientes == null) {
             return;
         }
-        for (ClienteDto c : clienteDto) {
+        for (Cliente c : clientes) {
             System.out.println(
                     "║ Nome: " + c.getNome() +
                             "\n║ CPF: " + c.getCpf() +

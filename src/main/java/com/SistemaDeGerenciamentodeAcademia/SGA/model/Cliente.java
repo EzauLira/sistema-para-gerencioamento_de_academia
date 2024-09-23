@@ -1,4 +1,4 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.mdoel;
+package com.SistemaDeGerenciamentodeAcademia.SGA.model;
 
 /**
  * Classe para representar um cliente na academia.
@@ -13,22 +13,35 @@ public class Cliente {
     private String telefone;
     private String email;
     private int idPlano;
-
-    public Cliente( String nome, int idade, String cpf, int genero, String telefone, String email, int idPlano) {
-        this.nome = nome;
-        this.idade = idade;
-        this.cpf = cpf;
-        this.genero = genero;
-        this.telefone = telefone;
-        this.email = email;
-        this.idPlano = idPlano;
-    }
+    private String senha;
+    private String plano_nome;
 
     public Cliente(String nome, String cpf, String telefone, String email) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
+    }
+
+    public Cliente(String nome, int idade, String cpf, int genero, String telefone, String email, String senha, int idPlano) {
+        this.nome = nome;
+        this.idade = idade;
+        this.cpf = cpf;
+        this.genero = genero;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+        this.idPlano = idPlano;
+
+    }
+
+    public Cliente(String nome, String cpf, String telefone, String email, String senha, String plano_nome) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+        this.plano_nome = plano_nome;
     }
 
     public String getNome() {
@@ -89,5 +102,21 @@ public class Cliente {
 
     public void setIdPlano(int idPlano) {
         this.idPlano = idPlano;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getPlano_nome() {
+        return plano_nome;
+    }
+
+    public void setPlano_nome(String plano_nome) {
+        this.plano_nome = plano_nome;
     }
 }

@@ -1,7 +1,7 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dao;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Treino;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -29,7 +29,7 @@ public interface IAgendamentoJdbcDao {
     /**
      * Agenda um novo treino na academia com base nos dados fornecidos.
      *
-     * @param id/treino/data/hora Um objeto {@link AgendamentoDto} contendo os dados necessários para agendar o treino, como nome, tipo de treino, data e hora.
+     * @param id/treino/data/hora Um objeto {@link Agendamento} contendo os dados necessários para agendar o treino, como nome, tipo de treino, data e hora.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     void agendarTreino(int id, int treino, String data, String hora) throws SQLException;
@@ -40,10 +40,10 @@ public interface IAgendamentoJdbcDao {
     /**
      * Busca uma lista de agendamentos ativos e atualiza eles.
      *
-     * @param agendamento Um objeto {@link AgendamentoDto} contendo os dados necessários para atualizarar o agendamento, como treino, data e hora.
+     * @param agendamento Um objeto {@link Agendamento} contendo os dados necessários para atualizarar o agendamento, como treino, data e hora.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    void atualizarAgendamento(AgendamentoDto agendamento) throws SQLException;
+    void atualizarAgendamento(Agendamento agendamento) throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//

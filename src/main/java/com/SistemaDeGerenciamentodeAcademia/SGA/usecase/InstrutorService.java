@@ -1,7 +1,7 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.InstrutorJdbcDaoImpl;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 
 import java.sql.SQLException;
@@ -20,9 +20,9 @@ public class InstrutorService {
         return false;
     }
 
-    public List<AgendamentoDto> listarAgendamentosDeHoje(){
+    public List<Agendamento> listarAgendamentosDeHoje(){
         try {
-            List<AgendamentoDto> agendamentoHoje = instrutorJdbcDaoImpl.listarAgendamentosDeHoje();
+            List<Agendamento> agendamentoHoje = instrutorJdbcDaoImpl.listarAgendamentosDeHoje();
             return agendamentoHoje;
         }catch (SQLException e){
             SqlException.sqlException(e);
@@ -30,9 +30,9 @@ public class InstrutorService {
         return null;
     }
 
-    public List<AgendamentoDto> listarTreinosDeUmClienteEspecifico(String nome){
+    public List<Agendamento> listarTreinosDeUmClienteEspecifico(String nome){
         try {
-            List<AgendamentoDto> listarTreinos = instrutorJdbcDaoImpl.listarTreinosDeUmClienteEspecifico(nome);
+            List<Agendamento> listarTreinos = instrutorJdbcDaoImpl.listarTreinosDeUmClienteEspecifico(nome);
             return listarTreinos;
         }catch (SQLException e){
             SqlException.sqlException(e);
@@ -40,9 +40,9 @@ public class InstrutorService {
         return null;
     }
 
-    public List<AgendamentoDto> buscarHistoricoDeUmClienteEspecifico(String nome){
+    public List<Agendamento> buscarHistoricoDeUmClienteEspecifico(String nome){
         try {
-            List<AgendamentoDto> listarHistoricoTreinos = instrutorJdbcDaoImpl.buscarHistoricoDeUmClienteEspecifico(nome);
+            List<Agendamento> listarHistoricoTreinos = instrutorJdbcDaoImpl.buscarHistoricoDeUmClienteEspecifico(nome);
             return listarHistoricoTreinos;
         }catch (SQLException e){
             SqlException.sqlException(e);

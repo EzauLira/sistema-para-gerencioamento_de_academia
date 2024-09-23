@@ -5,6 +5,9 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.PlanoJdbcDaoImpl;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Cliente;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Genero;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Planos;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.*;
 
 import java.sql.SQLException;
@@ -42,10 +45,10 @@ public class ClienteService {
      * Exibe o ‘ID’, nome, descrição, duração e preço de cada plano.
      * Trata os erros vindo do banco de dados, mantados pela DAO através do (THROWS SQLEXCEPTION).
      */
-    public List<PlanosDto> listarplanos() {
+    public List<Planos> listarplanos() {
         try {
-            List<PlanosDto> planos = planoJdbcDaoImpl.listarPlanos();
-            return planos;
+            List<Planos> plano = planoJdbcDaoImpl.listarPlanos();
+            return plano;
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
@@ -75,10 +78,10 @@ public class ClienteService {
         ValidarTelefoneUtils.validarTelefone(telefone);
         ValidarEmailUtils.validarEmail(email);
 
-        ClienteDto clienteDto = new ClienteDto(nome, idade, cpf, genero, telefone, email, senha, plano);
+        Cliente cliente = new Cliente(nome, idade, cpf, genero, telefone, email, senha, plano);
 
         try {
-            clienteJdbcDaoImpl.cadastrarCliente(clienteDto);
+            clienteJdbcDaoImpl.cadastrarCliente(cliente);
         } catch (SQLException e) {
             SqlException.sqlException(e);
             sucesso = false;
@@ -109,9 +112,9 @@ public class ClienteService {
         return null;
     }
 
-    public List<GeneroDto> listarGenero() {
+    public List<Genero> listarGenero() {
         try {
-            List<GeneroDto> generos = clienteJdbcDaoImpl.listarGenero();
+            List<Genero> generos = clienteJdbcDaoImpl.listarGenero();
             return generos;
         } catch (SQLException e) {
             SqlException.sqlException(e);
@@ -119,10 +122,10 @@ public class ClienteService {
         return null;
     }
 
-    public List<ClienteDto> buscarDadosPessoaisPeloPrimeiroNome(String nome) {
+    public List<Cliente> buscarDadosPessoaisPeloPrimeiroNome(String nome) {
         try {
-            List<ClienteDto> clienteDto = clienteJdbcDaoImpl.buscarDadosPessoaisPeloPrimeiroNome(nome);
-            return clienteDto;
+            List<Cliente> clientes = clienteJdbcDaoImpl.buscarDadosPessoaisPeloPrimeiroNome(nome);
+            return clientes;
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }

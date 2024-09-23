@@ -1,6 +1,8 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dao;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.*;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Cliente;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Genero;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -29,10 +31,10 @@ public interface ICadastroClienteJdbcDao {
     /**
      * Cadastra um novo cliente na academia com base nos dados fornecidos.
      *
-     * @param clienteDto Um objeto {@link ClienteDto} contendo os dados necessários para o cadastro do cliente, como nome, e-mail, telefone, etc.
+     * @param cliente Um objeto {@link Cliente} contendo os dados necessários para o cadastro do cliente, como nome, e-mail, telefone, etc.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    void cadastrarCliente(ClienteDto clienteDto) throws SQLException;
+    void cadastrarCliente(Cliente cliente) throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//
@@ -64,7 +66,7 @@ public interface ICadastroClienteJdbcDao {
      * Lista gêneros disponíveis.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    List<GeneroDto> listarGenero() throws SQLException;
+    List<Genero> listarGenero() throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//
@@ -74,7 +76,7 @@ public interface ICadastroClienteJdbcDao {
      * Busca os dados do cliente através do primeiro nome.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    List<ClienteDto> buscarDadosPessoaisPeloPrimeiroNome(String nome) throws SQLException;
+    List<Cliente> buscarDadosPessoaisPeloPrimeiroNome(String nome) throws SQLException;
 
 
     //--------------------------------------------------------------------------------------------------------------------------------------//

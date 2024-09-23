@@ -2,7 +2,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IPlanoJdbcDao;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.PlanosDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Planos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,8 +22,8 @@ public class PlanoJdbcDaoImpl implements IPlanoJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<PlanosDto> listarPlanos() throws SQLException {
-        List<PlanosDto> listarPlanos = new ArrayList<>();
+    public List<Planos> listarPlanos() throws SQLException {
+        List<Planos> listarPlanos = new ArrayList<>();
 
         String sql = "SELECT * FROM plano";
 
@@ -32,7 +32,7 @@ public class PlanoJdbcDaoImpl implements IPlanoJdbcDao {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                PlanosDto planosDto = new PlanosDto(rs.getInt("id")
+                Planos planosDto = new Planos(rs.getInt("id")
                         , rs.getString("nome")
                         , rs.getString("descricao")
                         , rs.getInt("duracao")

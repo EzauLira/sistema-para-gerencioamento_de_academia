@@ -1,6 +1,6 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dao;
 
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -35,7 +35,7 @@ public interface IInstrutorJdbcDao {
      * @return Lista de agendamentos de hoje.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    List<AgendamentoDto> listarAgendamentosDeHoje() throws SQLException;
+    List<Agendamento> listarAgendamentosDeHoje() throws SQLException;
 
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -49,7 +49,7 @@ public interface IInstrutorJdbcDao {
      * @return Lista de treinos do cliente específico.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    List<AgendamentoDto> listarTreinosDeUmClienteEspecifico(String nome) throws SQLException;
+    List<Agendamento> listarTreinosDeUmClienteEspecifico(String nome) throws SQLException;
 
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -63,7 +63,7 @@ public interface IInstrutorJdbcDao {
      * @return Lista de histórico de treinos do cliente específico.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
-    List<AgendamentoDto> buscarHistoricoDeUmClienteEspecifico(String nome) throws SQLException;
+    List<Agendamento> buscarHistoricoDeUmClienteEspecifico(String nome) throws SQLException;
 
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------//

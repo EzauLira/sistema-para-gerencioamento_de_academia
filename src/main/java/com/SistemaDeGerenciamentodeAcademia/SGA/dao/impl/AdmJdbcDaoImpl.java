@@ -2,8 +2,8 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IAdmJdbcDao;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AdministradorDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.InstrutorDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Administrador;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Instrutor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,17 +16,17 @@ public class AdmJdbcDaoImpl implements IAdmJdbcDao {
      * Método que executa a consulta SQL "SELECT * FROM login_admin" para efetuar o login do administrador no sistema.
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
      * Os dados do administrador são fornecidos pelos parâmetros (USUÁRIO e SENHA) e são consultados no banco de dados. Se existir, efetua o login.
-     * @param administradorDto para logar com usuario e senha.
+     * @param administrador para logar com usuario e senha.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public void LoginAdm(AdministradorDto administradorDto) throws SQLException {
+    public void LoginAdm(Administrador administrador) throws SQLException {
         String sql = "SELECT * FROM login_admin(?,?)";
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, administradorDto.getUsuario());
-            ps.setString(2, administradorDto.getSenha());
+            ps.setString(1, administrador.getUsuario());
+            ps.setString(2, administrador.getSenha());
 
             ps.execute();
         }
@@ -38,22 +38,22 @@ public class AdmJdbcDaoImpl implements IAdmJdbcDao {
      * Método que executa a consulta SQL "SELECT * FROM cadastrar_instrutor(?, ?, ?, ?, ?, ?)" para cadastrar um novo instrutor no sistema.
      * Utiliza o bloco (try-with-resources) para garantir que a conexão com o banco de dados e outros recursos sejam fechados corretamente após o uso.
      * Os dados do instrutor são fornecidos pelo objeto InstrutorDto e são inseridos no banco de dados.
-     * @param instrutorDto objeto que contém os dados do instrutor a ser cadastrado.
+     * @param instrutor objeto que contém os dados do instrutor a ser cadastrado.
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public void cadastrarNovoInstrutor(InstrutorDto instrutorDto) throws SQLException {
+    public void cadastrarNovoInstrutor(Instrutor instrutor) throws SQLException {
         String sql = "SELECT * FROM cadastrar_instrutor(?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, instrutorDto.getNome());
-            ps.setString(2, instrutorDto.getCpf());
-            ps.setInt(3, instrutorDto.getGenero());
-            ps.setString(4, instrutorDto.getTelefone());
-            ps.setString(5, instrutorDto.getEmail());
-            ps.setString(6, instrutorDto.getSenha());
+            ps.setString(1, instrutor.getNome());
+            ps.setString(2, instrutor.getCpf());
+            ps.setInt(3, instrutor.getGenero());
+            ps.setString(4, instrutor.getTelefone());
+            ps.setString(5, instrutor.getEmail());
+            ps.setString(6, instrutor.getSenha());
 
             ps.execute();
 

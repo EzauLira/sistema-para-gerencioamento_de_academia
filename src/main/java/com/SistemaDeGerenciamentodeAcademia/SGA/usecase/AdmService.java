@@ -1,10 +1,10 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.usecase;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl.AdmJdbcDaoImpl;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AdministradorDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.InstrutorDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Administrador;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemSucessoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Instrutor;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarCpfUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarEmailUtils;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarNomeUtils;
@@ -18,9 +18,9 @@ public class AdmService {
 
     public boolean loginAdm(String usuario, String senha){
 
-        AdministradorDto administradorDto = new AdministradorDto(usuario, senha);
+        Administrador administrador = new Administrador(usuario, senha);
         try {
-            admJadbcDaoImpl.LoginAdm(administradorDto);
+            admJadbcDaoImpl.LoginAdm(administrador);
             return true;
         }catch (SQLException e){
           SqlException.sqlException(e);
@@ -31,7 +31,7 @@ public class AdmService {
     public void cadastrarNovoInstrutor(String nome, String cpf, int genero, String telefone, String email, String senha){
         boolean sucesso = true;
 
-        InstrutorDto instrutorDto = new InstrutorDto(nome, cpf, genero, telefone, email, senha);
+        Instrutor instrutor = new Instrutor(nome, cpf, genero, telefone, email, senha);
 
         ValidarNomeUtils.validarNome(nome);
         ValidarCpfUtils.validarCpf(cpf);
@@ -39,7 +39,7 @@ public class AdmService {
         ValidarEmailUtils.validarEmail(email);
 
         try {
-            admJadbcDaoImpl.cadastrarNovoInstrutor(instrutorDto);
+            admJadbcDaoImpl.cadastrarNovoInstrutor(instrutor);
         }catch (SQLException e){
             sucesso = false;
             SqlException.sqlException(e);

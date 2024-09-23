@@ -2,7 +2,7 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IInstrutorJdbcDao;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,19 +47,19 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<AgendamentoDto> listarAgendamentosDeHoje() throws SQLException {
-        List<AgendamentoDto> agendamentosHoje = new ArrayList<>();
+    public List<Agendamento> listarAgendamentosDeHoje() throws SQLException {
+        List<Agendamento> agendamentosHoje = new ArrayList<>();
         String sql = "SELECT * FROM listar_agendamentos_hoje()";
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                AgendamentoDto agendamentoDtoHoje = new AgendamentoDto(
+                Agendamento agendamentoHoje = new Agendamento(
                         rs.getString("cliente_nome")
                         , rs.getString("treino_nome"));
 
-                agendamentosHoje.add(agendamentoDtoHoje);
+                agendamentosHoje.add(agendamentoHoje);
             }
 
         }
@@ -77,8 +77,8 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<AgendamentoDto> listarTreinosDeUmClienteEspecifico(String nome) throws SQLException {
-        List<AgendamentoDto> listarTreinosEspecifico = new ArrayList<>();
+    public List<Agendamento> listarTreinosDeUmClienteEspecifico(String nome) throws SQLException {
+        List<Agendamento> listarTreinosEspecifico = new ArrayList<>();
 
         String sql = "SELECT * FROM listar_treinos_de_um_cliente_especifico(?)";
 
@@ -90,7 +90,7 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                AgendamentoDto listarAgendamentosEspecifico = new AgendamentoDto(
+                Agendamento listarAgendamentosEspecifico = new Agendamento(
                         rs.getString("treino_nome")
                         , rs.getString("data")
                         , rs.getString("hora")
@@ -112,8 +112,8 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public List<AgendamentoDto> buscarHistoricoDeUmClienteEspecifico(String nome) throws SQLException {
-        List<AgendamentoDto> listarHistoricoTreinosEspecifico = new ArrayList<>();
+    public List<Agendamento> buscarHistoricoDeUmClienteEspecifico(String nome) throws SQLException {
+        List<Agendamento> listarHistoricoTreinosEspecifico = new ArrayList<>();
 
         String sql = "SELECT * FROM listar_todos_treinos_por_cliente(?)";
 
@@ -125,7 +125,7 @@ public class InstrutorJdbcDaoImpl implements IInstrutorJdbcDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                AgendamentoDto listarHistoricoAgendamentosEspecifico = new AgendamentoDto(
+                Agendamento listarHistoricoAgendamentosEspecifico = new Agendamento(
                         rs.getString("treino_nome")
                         , rs.getString("data")
                         , rs.getString("hora")

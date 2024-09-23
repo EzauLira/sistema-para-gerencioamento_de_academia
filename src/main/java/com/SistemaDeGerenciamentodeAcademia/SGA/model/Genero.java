@@ -1,11 +1,11 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
+package com.SistemaDeGerenciamentodeAcademia.SGA.model;
 
-public class GeneroDto {
+public class Genero {
 
     private int id;
     private String nome;
 
-    public GeneroDto(int id, String nome) {
+    public Genero(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }

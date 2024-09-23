@@ -2,8 +2,8 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IAgendamentoJdbcDao;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.mdoel.Treino;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Treino;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -81,7 +81,7 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
      * @throws SQLException Lança uma SQLException que será tratada na service.
      */
     @Override
-    public void atualizarAgendamento(AgendamentoDto agendamento) throws SQLException {
+    public void atualizarAgendamento(Agendamento agendamento) throws SQLException {
         String sql = "SELECT * FROM atualizar_agendamento(?,?,?,?)";
 
         try (Connection connection = BancoDadosConfig.getConnection();

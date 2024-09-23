@@ -1,11 +1,11 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.controller;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.Timer;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.AgendamentoDto;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dto.ClienteDto;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemErroEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.MensagemExcecaoEnum;
 import com.SistemaDeGerenciamentodeAcademia.SGA.enuns.OpcoesInstrutorEnum;
+import com.SistemaDeGerenciamentodeAcademia.SGA.model.Cliente;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.ClienteService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.usecase.InstrutorService;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensConstanteUtils;
@@ -127,11 +127,11 @@ public class InstrutorController {
     public static void listarAgendamentosDeHoje() {
         System.out.println(OpcoesInstrutorEnum.OP_ESCOLHIDA_AGENDADMENTO_DO_DIA.getMensagem());
         System.out.println(" ");
-        List<AgendamentoDto> agendamentoDtoHoje = instrutorService.listarAgendamentosDeHoje();
-        if (agendamentoDtoHoje == null) {
+        List<Agendamento> agendamentoHoje = instrutorService.listarAgendamentosDeHoje();
+        if (agendamentoHoje == null) {
             return;
         }
-        for (AgendamentoDto a : agendamentoDtoHoje) {
+        for (Agendamento a : agendamentoHoje) {
             System.out.println("║" + a.getNome() + " - " + a.getTreinoNome());
         }
     }
@@ -164,11 +164,11 @@ public class InstrutorController {
      */
     public static void imprimelistarTreinosAtivosDeUmClienteEspecifico(String nome) {
         System.out.println(" ");
-        List<AgendamentoDto> listarTreinos = instrutorService.listarTreinosDeUmClienteEspecifico(nome);
+        List<Agendamento> listarTreinos = instrutorService.listarTreinosDeUmClienteEspecifico(nome);
         if (listarTreinos == null) {
             return;
         }
-        for (AgendamentoDto a : listarTreinos) {
+        for (Agendamento a : listarTreinos) {
             System.out.println("║" + a.getTreinoNome() + " - " + a.getData() + " - " + a.getHora());
         }
     }
@@ -202,12 +202,12 @@ public class InstrutorController {
      */
     public static void imprimeHistoricoTreinosDeUmClienteEspecifico(String nome) {
         System.out.println(" ");
-        List<AgendamentoDto> listarHistoricoTreinos = instrutorService.buscarHistoricoDeUmClienteEspecifico(nome);
+        List<Agendamento> listarHistoricoTreinos = instrutorService.buscarHistoricoDeUmClienteEspecifico(nome);
         if (listarHistoricoTreinos == null) {
             return;
         }
         System.out.println(" ");
-        for (AgendamentoDto a : listarHistoricoTreinos) {
+        for (Agendamento a : listarHistoricoTreinos) {
             System.out.println("║" + a.getTreinoNome() + " - " + a.getData() + " - " + a.getHora());
         }
     }
@@ -242,11 +242,11 @@ public class InstrutorController {
      * Ele verifica se a lista está vazia se estiver ele retorna um "Erro" informativo que vem do bando de dados
      */
     public static void imprimeBuscarDadosPessoaisPeloPrimeiroNome(String nome) {
-        List<ClienteDto> clienteDto = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
-        if (clienteDto == null) {
+        List<Cliente> clientes = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
+        if (clientes == null) {
             return;
         }
-        for (ClienteDto c : clienteDto) {
+        for (Cliente c : clientes) {
             System.out.println(
                     "║ Nome: " + c.getNome() +
                             "\n║ CPF: " + c.getCpf() +

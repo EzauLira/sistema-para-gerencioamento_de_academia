@@ -1,11 +1,11 @@
-package com.SistemaDeGerenciamentodeAcademia.SGA.dto;
+package com.SistemaDeGerenciamentodeAcademia.SGA.model;
 
 
 /**
- * Data Transfer Object (DTO) para representar os dados de um plano na academia.
- * Este objeto é utilizado para transferir informações sobre planos disponíveis.
+ * Classe para representar um plano na academia.
+ * Esta classe é usada para armazenar as informações do plano.
  */
-public class PlanosDto {
+public class Planos {
 
     private int id;
     private String nome;
@@ -14,7 +14,7 @@ public class PlanosDto {
     private int preco;
 
 
-    public PlanosDto(int id, String nome, String descricao, int duracao, int preco) {
+    public Planos(int id, String nome, String descricao, int duracao, int preco) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;

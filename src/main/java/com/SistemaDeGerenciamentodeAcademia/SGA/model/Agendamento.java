@@ -17,12 +17,6 @@ public class Agendamento {
     private String hora;
     private String senha;
 
-    public void Agendamento(String nome, int treino, String data, String hora){
-        this.nome = nome;
-        this.treino = treino;
-        this.data = data;
-        this.hora = hora;
-    }
 
     public Agendamento(String nome, String treinoNome) {
         this.nome = nome;
@@ -38,9 +32,9 @@ public class Agendamento {
     public Agendamento(int treino, int novoTreino, String data, String hora) {
         this.treino = treino;
         this.novoTreino = novoTreino;
+        this.data = data;
         this.hora = hora;
     }
-
 
     public String getNome() {
         return nome;

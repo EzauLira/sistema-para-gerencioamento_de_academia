@@ -184,6 +184,7 @@ public class ClienteController {
 
     /**
      * Método usado para Agendar um treino.2
+     *
      * @param id é passado como parâmetro para agendar um treino.
      */
     public static void agendatTreino(int id) {
@@ -224,6 +225,7 @@ public class ClienteController {
 
     /**
      * Método usado para listar uma agenda ativa.
+     *
      * @param id para listar uma agenda ativa.
      */
     public static void listarAgendaAtiva(int id) {
@@ -234,6 +236,7 @@ public class ClienteController {
 
     /**
      * Métodopara listar uma agenda inativa.
+     *
      * @param id como parâmetro para listar a agenda inativa do cliente.
      */
     public static void listarAgendaInativa(int id) {
@@ -246,6 +249,8 @@ public class ClienteController {
      * @param id usado como parâmetro para atualizar treinos ativo.
      */
     public static void atualizarTreinoAtivo(int id) {
+        boolean sucesso = true;
+
         while (true) {
             System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_TREINO_ATIVO.getMensagem());
 
@@ -272,20 +277,28 @@ public class ClienteController {
                 System.out.println(MensagensConstanteUtils.ATUALIZAR_ESCOLHA_DATA_TREINO);
                 data = input.nextLine();
                 if (data.equals("0"))
+                    sucesso = false;
                     break;
             } while (agendamentoService.validarData(data));
 
-            System.out.println(MensagensConstanteUtils.ATUALIZAR_ESCOLHA_HORA_TREINO);
-            hora = input.nextLine();
-            if (hora.equals("0"))
+            do {
+                System.out.println(MensagensConstanteUtils.ATUALIZAR_ESCOLHA_HORA_TREINO);
+                hora = input.nextLine();
+                if (hora.equals("0"))
+                    sucesso = false;
+                    break;
+            } while (!agendamentoService.validarHora(hora));
+            if (sucesso){
+                agendamentoService. atualizarTreino(trieinoEscolhido, novoTreino, data, hora);
+            }else {
                 break;
-            agendamentoService.atualizarTreino(trieinoEscolhido, novoTreino, data, hora);
-            break;
+            }
         }
     }
 
     /**
      * Método que cancela um treino especifico.
+     *
      * @param id usado como parâmetro para atualizar treinos ativo.
      */
     public static void cancelarTreino(int id) {
@@ -390,6 +403,7 @@ public class ClienteController {
 
     /**
      * Método para listar agendamentos ativos do cliente.
+     *
      * @param id usado como parâmetro para listar o agendamento do cliente.
      */
     public static void listarAgendamentoAtivo(int id) {
@@ -404,6 +418,7 @@ public class ClienteController {
 
     /**
      * Método para listar agendamentos inativos do cliente.
+     *
      * @param id para buscar a lista do cliente expecífico.
      */
     public static void listarAgendamentoInativo(int id) {
@@ -438,6 +453,7 @@ public class ClienteController {
 
     /**
      * Método para buscar os dados pessoais do cliente pessando o nome.
+     *
      * @param nome é o parâmetro que será usado.
      */
     public static void buscarDadosPessoaisPeloNome(String nome) {

@@ -73,6 +73,7 @@ public class AgendamentoService {
      */
     public void atualizarTreino(int treino, int novoTreino, String data, String hora){
         boolean sucesso = true;
+
         Agendamento agendamento = new Agendamento(treino, novoTreino, data, hora);
 
         try {

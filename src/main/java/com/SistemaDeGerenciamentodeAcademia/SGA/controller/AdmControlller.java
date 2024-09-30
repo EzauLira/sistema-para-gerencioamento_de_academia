@@ -8,7 +8,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensC
 import com.SistemaDeGerenciamentodeAcademia.SGA.view.Main;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.Scanner;git 
 
 public class AdmControlller {
 

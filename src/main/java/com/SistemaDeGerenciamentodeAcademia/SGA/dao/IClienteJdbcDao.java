@@ -12,7 +12,7 @@ import java.util.List;
  * ‘Interface’ para operações relacionadas ao cadastro de clientes na academia.
  * Define os métodos para cadastrar um novo cliente e buscar clientes pelo primeiro nome.
  */
-public interface ICadastroClienteJdbcDao {
+public interface IClienteJdbcDao {
 
     //--------------------------------------------------------------------------------------------------------------------------------------//
 

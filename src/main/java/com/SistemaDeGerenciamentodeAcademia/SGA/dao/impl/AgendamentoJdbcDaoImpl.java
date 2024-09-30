@@ -27,7 +27,7 @@ public class AgendamentoJdbcDaoImpl implements IAgendamentoJdbcDao {
     public List<Treino> listarTreinos() throws SQLException {
         List<Treino> listarTreinos = new ArrayList<>();
 
-        String sql = "SELECT * FROM treino";
+        String sql = "SELECT * FROM listar_treinos()";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);

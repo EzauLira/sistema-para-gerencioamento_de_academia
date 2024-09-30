@@ -25,7 +25,7 @@ public class PlanoJdbcDaoImpl implements IPlanoJdbcDao {
     public List<Planos> listarPlanos() throws SQLException {
         List<Planos> listarPlanos = new ArrayList<>();
 
-        String sql = "SELECT * FROM plano";
+        String sql = "SELECT * FROM listar_planos()";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);

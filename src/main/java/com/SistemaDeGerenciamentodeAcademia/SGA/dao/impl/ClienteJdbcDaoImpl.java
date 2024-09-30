@@ -1,10 +1,11 @@
 package com.SistemaDeGerenciamentodeAcademia.SGA.dao.impl;
 
 import com.SistemaDeGerenciamentodeAcademia.SGA.config.BancoDadosConfig;
-import com.SistemaDeGerenciamentodeAcademia.SGA.dao.ICadastroClienteJdbcDao;
+import com.SistemaDeGerenciamentodeAcademia.SGA.dao.IClienteJdbcDao;
 import com.SistemaDeGerenciamentodeAcademia.SGA.dto.*;
 import com.SistemaDeGerenciamentodeAcademia.SGA.model.Cliente;
 import com.SistemaDeGerenciamentodeAcademia.SGA.model.Genero;
+import com.SistemaDeGerenciamentodeAcademia.SGA.utils.constantesUtils.MensagensConstanteUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
+public class ClienteJdbcDaoImpl implements IClienteJdbcDao {
 
 
     /**
@@ -28,6 +29,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
     @Override
     public int fazerLoginCliente(String cpf, String senha) throws SQLException {
         String sql = "SELECT * FROM login_cliente(?,?)";
+
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -42,7 +44,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
                 }
             }
         }
-        return 0;
+        return MensagensConstanteUtils.ID_NAO_ENCONTRADO;
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -161,7 +163,7 @@ public class ClienteJdbcDaoImpl implements ICadastroClienteJdbcDao {
     @Override
     public List<Genero> listarGenero() throws SQLException {
         List<Genero> generos = new ArrayList<>();
-        String sql = "SELECT * FROM genero";
+        String sql = "SELECT * FROM listar_generos()";
 
         try (Connection connection = BancoDadosConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);

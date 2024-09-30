@@ -72,7 +72,7 @@ public class ClienteController {
 
             int id = clienteService.fazerLoginCliente(cpf, senha);
 
-            if (id != 0) {
+            if (id != MensagensConstanteUtils.ID_NAO_ENCONTRADO) {
                 menuDoCliente(id);
                 break;
             } else {
@@ -215,7 +215,7 @@ public class ClienteController {
                 hora = input.nextLine();
                 if (hora.equals("0"))
                     break;
-            } while (!agendamentoService.validarHora(hora));
+            } while (agendamentoService.validarHora(hora));
 
 
             agendamentoService.agendarTreino(id, treino, data, hora);
@@ -231,7 +231,6 @@ public class ClienteController {
     public static void listarAgendaAtiva(int id) {
         System.out.println(OpcoesClientesEnum.OP_ESCOLHIDA_LISTA_ATIVA.getMensagem());
         listarAgendamentoAtivo(id);
-
     }
 
     /**
@@ -287,7 +286,7 @@ public class ClienteController {
                 if (hora.equals("0"))
                     sucesso = false;
                     break;
-            } while (!agendamentoService.validarHora(hora));
+            } while (agendamentoService.validarHora(hora));
             if (sucesso){
                 agendamentoService. atualizarTreino(trieinoEscolhido, novoTreino, data, hora);
             }else {
@@ -393,9 +392,6 @@ public class ClienteController {
      */
     public static void listarTreinos() {
         List<Treino> treinos = agendamentoService.listarTreinos();
-        if (treinos == null) {
-            return;
-        }
         for (Treino t : treinos) {
             System.out.println("║" + t.getId() + " - " + t.getNome() + " - " + t.getDescricao());
         }
@@ -408,9 +404,6 @@ public class ClienteController {
      */
     public static void listarAgendamentoAtivo(int id) {
         List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosAtivos(id);
-        if (treino == null) {
-            return;
-        }
         for (TreinosAtivosEInativosDto t : treino) {
             System.out.println("║" + "[" + t.getId() + "] - " + t.getNome() + " - " + t.getData() + " - " + t.getHora());
         }
@@ -423,9 +416,6 @@ public class ClienteController {
      */
     public static void listarAgendamentoInativo(int id) {
         List<TreinosAtivosEInativosDto> treino = clienteService.listarAgendamentosInativos(id);
-        if (treino == null) {
-            return;
-        }
         for (TreinosAtivosEInativosDto t : treino) {
             System.out.println("║" + "[" + t.getId() + "] - " + t.getNome() + " - " + t.getData() + " - " + t.getHora());
         }
@@ -458,9 +448,6 @@ public class ClienteController {
      */
     public static void buscarDadosPessoaisPeloNome(String nome) {
         List<Cliente> clientes = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
-        if (clientes == null) {
-            return;
-        }
         for (Cliente c : clientes) {
             System.out.println(
                     "║ Nome: " + c.getNome() +

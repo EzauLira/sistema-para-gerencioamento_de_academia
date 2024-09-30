@@ -46,4 +46,7 @@ public class MensagensConstanteUtils {
     //--------------------------------------------------------------------------------ADMINISTRADOR--------------------------------------------------------------------------//
     public static final String ADM_INFORME_SEU_USUARIO = ">> USUÁRIO";
     public static final String ADM_INFORME_SUA_SENHA = ">> SENHA";
+
+    //----------------------------------------------------------------------RETORNO-PARA-ID-DO-BANCO--------------------------------------------------------------------------//
+    public static final int ID_NAO_ENCONTRADO = 0;
 }

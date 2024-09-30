@@ -11,6 +11,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.model.Planos;
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.*;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,12 +48,11 @@ public class ClienteService {
      */
     public List<Planos> listarplanos() {
         try {
-            List<Planos> plano = planoJdbcDaoImpl.listarPlanos();
-            return plano;
+            return planoJdbcDaoImpl.listarPlanos();
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -94,41 +94,38 @@ public class ClienteService {
 
     public List<TreinosAtivosEInativosDto> listarAgendamentosAtivos(int id) {
         try {
-            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosAtivos(id);
-            return treinos;
+            return clienteJdbcDaoImpl.listaTreinosAtivos(id);
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<TreinosAtivosEInativosDto> listarAgendamentosInativos(int id) {
         try {
-            List<TreinosAtivosEInativosDto> treinos = clienteJdbcDaoImpl.listaTreinosInativos(id);
-            return treinos;
+            return clienteJdbcDaoImpl.listaTreinosInativos(id);
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Genero> listarGenero() {
         try {
-            List<Genero> generos = clienteJdbcDaoImpl.listarGenero();
-            return generos;
+            return clienteJdbcDaoImpl.listarGenero();
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Cliente> buscarDadosPessoaisPeloPrimeiroNome(String nome) {
         try {
-            List<Cliente> clientes = clienteJdbcDaoImpl.buscarDadosPessoaisPeloPrimeiroNome(nome);
-            return clientes;
+            return clienteJdbcDaoImpl.buscarDadosPessoaisPeloPrimeiroNome(nome);
+
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 }

@@ -5,6 +5,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.model.Agendamento;
 import com.SistemaDeGerenciamentodeAcademia.SGA.exception.SqlException;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class InstrutorService {
@@ -22,31 +23,30 @@ public class InstrutorService {
 
     public List<Agendamento> listarAgendamentosDeHoje(){
         try {
-            List<Agendamento> agendamentoHoje = instrutorJdbcDaoImpl.listarAgendamentosDeHoje();
-            return agendamentoHoje;
+            return instrutorJdbcDaoImpl.listarAgendamentosDeHoje();
         }catch (SQLException e){
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Agendamento> listarTreinosDeUmClienteEspecifico(String nome){
         try {
-            List<Agendamento> listarTreinos = instrutorJdbcDaoImpl.listarTreinosDeUmClienteEspecifico(nome);
-            return listarTreinos;
+            return instrutorJdbcDaoImpl.listarTreinosDeUmClienteEspecifico(nome);
+
         }catch (SQLException e){
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Agendamento> buscarHistoricoDeUmClienteEspecifico(String nome){
         try {
-            List<Agendamento> listarHistoricoTreinos = instrutorJdbcDaoImpl.buscarHistoricoDeUmClienteEspecifico(nome);
-            return listarHistoricoTreinos;
+            return instrutorJdbcDaoImpl.buscarHistoricoDeUmClienteEspecifico(nome);
+
         }catch (SQLException e){
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 }

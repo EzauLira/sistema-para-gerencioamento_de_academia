@@ -9,6 +9,7 @@ import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarDataUti
 import com.SistemaDeGerenciamentodeAcademia.SGA.utils.validadores.ValidarHoraUtils;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,14 +27,11 @@ public class AgendamentoService {
      */
     public List<Treino> listarTreinos() {
         try {
-            List<Treino> treinos = agendamentoJdbcDao.listarTreinos();
-
-            return treinos;
-
+            return agendamentoJdbcDao.listarTreinos();
         } catch (SQLException e) {
             SqlException.sqlException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -118,6 +116,6 @@ public class AgendamentoService {
     }
 
     public boolean validarHora(String hora){
-        return ValidarHoraUtils.validarHora(hora);
+        return !ValidarHoraUtils.validarHora(hora);
     }
 }

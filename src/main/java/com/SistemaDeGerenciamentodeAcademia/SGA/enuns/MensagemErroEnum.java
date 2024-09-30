@@ -7,7 +7,6 @@ package com.SistemaDeGerenciamentodeAcademia.SGA.enuns;
 public enum MensagemErroEnum {
 
     OPCAO_INVALIDA("Opção inválida! Digite uma opção válida."),
-    LISTA_VAZIA("A lista está vazia!"),
     IDADE_INVALIDA("A idade precisa ser maior que 15 ano e menor que 150."),
     EMAIL_INVALIDO("Necessário que contenho um email valido."),
     HORA_INVALIDA("A hora precisa ser futuras."),

@@ -13,7 +13,7 @@ public class BancoDadosConfig {
      */
     public static Connection getConnection() {
         try {
-             return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "admin");
+             return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?ApplicationName=SGA", "postgres", "admin");
         } catch (SQLException e) {
            throw new RuntimeException("Erro ao conectar com o banco de dados");
         }

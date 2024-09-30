@@ -243,9 +243,6 @@ public class InstrutorController {
      */
     public static void imprimeBuscarDadosPessoaisPeloPrimeiroNome(String nome) {
         List<Cliente> clientes = clienteService.buscarDadosPessoaisPeloPrimeiroNome(nome);
-        if (clientes == null) {
-            return;
-        }
         for (Cliente c : clientes) {
             System.out.println(
                     "║ Nome: " + c.getNome() +
